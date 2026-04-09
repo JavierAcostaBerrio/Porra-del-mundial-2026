@@ -184,3 +184,24 @@ canvas {
     border-radius: 10px;
     transition: width 0.4s ease;
 }
+
+/* ===========================
+   ICONOS DE TENDENCIA
+   =========================== */
+
+.tendencia {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.tendencia.sube {
+    color: var(--verde);
+}
+
+.tendencia.baja {
+    color: var(--rojo);
+}
+
+.tendencia.igual {
+    color: var(--amarillo);
+}
