@@ -20,8 +20,6 @@ async function cargarCSV(url) {
 // Crear tabla de clasificación
 // -------------------------------
 function generarTablaClasificacion(datos) {
-    // datos = array de arrays
-    // Primera fila = encabezados
     const encabezados = datos[0];
     const filas = datos.slice(1);
 
@@ -30,27 +28,34 @@ function generarTablaClasificacion(datos) {
 
     // Crear tabla HTML
     let html = "<table>";
-    html += "<tr><th>#</th>";
 
+    // Encabezado
+    html += "<tr><th>#</th>";
     encabezados.forEach(col => {
         html += `<th>${col}</th>`;
     });
     html += "</tr>";
 
+    // Filas
     filas.forEach((fila, index) => {
         html += "<tr>";
-        html += `<td><strong>${index + 1}</strong></td>`;
+
+        // Posición
+        html += `<td><span class="badge badge-azul">${index + 1}</span></td>`;
+
+        // Jugador y puntos
         fila.forEach(col => {
             html += `<td>${col}</td>`;
         });
+
         html += "</tr>";
     });
 
     html += "</table>";
 
-    // Insertar en la web
     document.getElementById("tabla-clasificacion").innerHTML = html;
 }
+
 
 // -------------------------------
 // Inicializar clasificación
