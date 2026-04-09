@@ -26,6 +26,9 @@ function generarTablaClasificacion(datos) {
     // Ordenar por puntos (columna 2)
     filas.sort((a, b) => Number(b[1]) - Number(a[1]));
 
+    // Puntos máximos (para calcular porcentaje)
+    const maxPuntos = Number(filas[0][1]);
+
     // Crear tabla HTML
     let html = "<table>";
 
@@ -34,19 +37,33 @@ function generarTablaClasificacion(datos) {
     encabezados.forEach(col => {
         html += `<th>${col}</th>`;
     });
-    html += "</tr>";
+    html += "<th>Progreso</th></tr>";
 
     // Filas
     filas.forEach((fila, index) => {
+        const jugador = fila[0];
+        const puntos = Number(fila[1]);
+        const porcentaje = (puntos / maxPuntos) * 100;
+
         html += "<tr>";
 
         // Posición
         html += `<td><span class="badge badge-azul">${index + 1}</span></td>`;
 
-        // Jugador y puntos
-        fila.forEach(col => {
-            html += `<td>${col}</td>`;
-        });
+        // Jugador
+        html += `<td>${jugador}</td>`;
+
+        // Puntos
+        html += `<td>${puntos}</td>`;
+
+        // Barra de progreso
+        html += `
+            <td>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: ${porcentaje}%"></div>
+                </div>
+            </td>
+        `;
 
         html += "</tr>";
     });
@@ -55,6 +72,7 @@ function generarTablaClasificacion(datos) {
 
     document.getElementById("tabla-clasificacion").innerHTML = html;
 }
+
 
 
 // -------------------------------
