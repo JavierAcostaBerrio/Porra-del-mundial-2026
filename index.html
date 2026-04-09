@@ -1,18 +1,51 @@
-<header class="header">
-    <h1>🌍 Porra Mundial 2026</h1>
-</header>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Porra Mundial 2026</title>
 
-<section class="card" id="clasificacion">
-    <h2>Clasificación General</h2>
-    <div id="tabla-clasificacion"></div>
-</section>
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
 
-<section class="card" id="goleadores">
-    <h2>Goleadores</h2>
-    <canvas id="goleadoresChart"></canvas>
-</section>
+    <!-- Tipografía deportiva -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
 
-<section class="card" id="estadisticas">
-    <h2>Estadísticas</h2>
-    <div id="stats"></div>
-</section>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1>🌍 Porra Mundial 2026</h1>
+    </header>
+
+    <!-- CLASIFICACIÓN GENERAL -->
+    <section class="card" id="clasificacion">
+        <h2>Clasificación General</h2>
+        <div id="tabla-clasificacion">
+            <!-- Aquí insertaremos la tabla desde main.js -->
+        </div>
+    </section>
+
+    <!-- GOLEADORES -->
+    <section class="card" id="goleadores">
+        <h2>Goleadores</h2>
+        <canvas id="goleadoresChart"></canvas>
+    </section>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="card" id="estadisticas">
+        <h2>Estadísticas</h2>
+
+        <div id="stats">
+            <!-- Aquí insertaremos tarjetas de estadísticas -->
+        </div>
+    </section>
+
+    <!-- Librería Chart.js (gráficos) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Tu archivo JS -->
+    <script src="js/main.js"></script>
+
+</body>
+</html>
