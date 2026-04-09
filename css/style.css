@@ -1,0 +1,167 @@
+/* ===========================
+   PALETA MUNDIAL COLORIDO
+   =========================== */
+
+:root {
+    --verde: #2ECC71;
+    --azul: #3498DB;
+    --rojo: #E74C3C;
+    --amarillo: #F1C40F;
+    --gris-fondo: #F4F4F4;
+    --gris-texto: #333;
+    --sombra: rgba(0,0,0,0.12);
+}
+
+/* ===========================
+   ESTILO GENERAL
+   =========================== */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: var(--gris-fondo);
+    color: var(--gris-texto);
+}
+
+/* ===========================
+   HEADER
+   =========================== */
+
+.header {
+    background: linear-gradient(90deg, var(--verde), var(--azul));
+    color: white;
+    padding: 25px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px var(--sombra);
+}
+
+/* ===========================
+   TARJETAS
+   =========================== */
+
+.card {
+    background: white;
+    margin: 20px;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px var(--sombra);
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--azul);
+    border-left: 6px solid var(--verde);
+    padding-left: 10px;
+}
+
+/* ===========================
+   TABLAS
+   =========================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    background: var(--azul);
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+tr:nth-child(even) {
+    background: #fafafa;
+}
+
+/* ===========================
+   BADGES / ETIQUETAS
+   =========================== */
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+}
+
+.badge-verde { background: var(--verde); }
+.badge-azul { background: var(--azul); }
+.badge-rojo { background: var(--rojo); }
+.badge-amarillo { background: var(--amarillo); }
+
+/* ===========================
+   GRÁFICOS (Chart.js)
+   =========================== */
+
+canvas {
+    margin-top: 20px;
+}
+
+/* ===========================
+   TARJETAS DE ESTADÍSTICAS
+   =========================== */
+
+.stat-box {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px var(--sombra);
+    display: inline-block;
+    margin: 10px;
+    min-width: 150px;
+    text-align: center;
+}
+
+.stat-box h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--rojo);
+}
+
+.stat-box p {
+    font-size: 28px;
+    font-weight: 900;
+    margin: 5px 0 0 0;
+    color: var(--azul);
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 600px) {
+    .card {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .header {
+        font-size: 24px;
+        padding: 15px;
+    }
+
+    .stat-box {
+        width: 100%;
+    }
+}
