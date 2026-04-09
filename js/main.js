@@ -19,25 +19,34 @@ async function cargarCSV(url) {
 // -------------------------------
 // Crear tabla de clasificación
 // -------------------------------
-function generarTablaClasificacion(datos) {
+async function generarTablaClasificacion(datos) {
     const encabezados = datos[0];
     const filas = datos.slice(1);
 
-    // Ordenar por puntos (columna 2)
+    // Ordenar por puntos
     filas.sort((a, b) => Number(b[1]) - Number(a[1]));
 
-    // Puntos máximos (para calcular porcentaje)
+    // Cargar posiciones anteriores
+    let posicionesPrevias = {};
+    try {
+        const res = await fetch("data/posiciones.json");
+        posicionesPrevias = await res.json();
+    } catch (e) {
+        posicionesPrevias = {};
+    }
+
+    // Guardar nuevas posiciones
+    const nuevasPosiciones = {};
+
+    // Puntos máximos para barra de progreso
     const maxPuntos = Number(filas[0][1]);
 
-    // Crear tabla HTML
     let html = "<table>";
 
     // Encabezado
     html += "<tr><th>#</th>";
-    encabezados.forEach(col => {
-        html += `<th>${col}</th>`;
-    });
-    html += "<th>Progreso</th></tr>";
+    encabezados.forEach(col => html += `<th>${col}</th>`);
+    html += "<th>Progreso</th><th>Tendencia</th></tr>";
 
     // Filas
     filas.forEach((fila, index) => {
@@ -45,18 +54,29 @@ function generarTablaClasificacion(datos) {
         const puntos = Number(fila[1]);
         const porcentaje = (puntos / maxPuntos) * 100;
 
+        // Tendencia
+        const posicionActual = index + 1;
+        const posicionAnterior = posicionesPrevias[jugador] ?? posicionActual;
+
+        let icono = "➖";
+        let clase = "igual";
+
+        if (posicionActual < posicionAnterior) {
+            icono = "🔼";
+            clase = "sube";
+        } else if (posicionActual > posicionAnterior) {
+            icono = "🔽";
+            clase = "baja";
+        }
+
+        nuevasPosiciones[jugador] = posicionActual;
+
         html += "<tr>";
 
-        // Posición
-        html += `<td><span class="badge badge-azul">${index + 1}</span></td>`;
-
-        // Jugador
+        html += `<td><span class="badge badge-azul">${posicionActual}</span></td>`;
         html += `<td>${jugador}</td>`;
-
-        // Puntos
         html += `<td>${puntos}</td>`;
 
-        // Barra de progreso
         html += `
             <td>
                 <div class="progress-container">
@@ -65,13 +85,23 @@ function generarTablaClasificacion(datos) {
             </td>
         `;
 
+        html += `<td><span class="tendencia ${clase}">${icono}</span></td>`;
+
         html += "</tr>";
     });
 
     html += "</table>";
 
     document.getElementById("tabla-clasificacion").innerHTML = html;
+
+    // Guardar nuevas posiciones
+    fetch("data/posiciones.json", {
+        method: "PUT",
+        body: JSON.stringify(nuevasPosiciones),
+        headers: { "Content-Type": "application/json" }
+    }).catch(() => {});
 }
+
 
 
 
