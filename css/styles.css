@@ -65,29 +65,10 @@ body {
    TABLAS
    =========================== */
 
-table {
-    width: 100%;
+#tabla, #tabla td, #tabla th {
+    border: 1px solid black;
     border-collapse: collapse;
-    margin-top: 15px;
-}
-
-th {
-    background: var(--azul);
-    color: white;
-    padding: 12px;
-    text-align: left;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    font-size: 16px;
-}
-
-tr:nth-child(even) {
-    background: #fafafa;
+    padding: 4px;
 }
 
 /* ===========================
