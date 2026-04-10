@@ -4,20 +4,11 @@
     <meta charset="UTF-8">
     <title>Porra del Mundial de fútbol 2026</title>
 
-    <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
-
-    <!-- Tipografía deportiva -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<table id="tabla"></table>
-<script src="js/sheet.js"></script>
-
-<table id="tabla"></table>
-
-
 
     <!-- HEADER -->
     <header class="header">
@@ -27,9 +18,9 @@
     <!-- CLASIFICACIÓN GENERAL -->
     <section class="card" id="clasificacion">
         <h2>Clasificación General</h2>
-        <div id="tabla-clasificacion">
-            <!-- Aquí insertaremos la tabla desde main.js -->
-        </div>
+
+        <!-- AQUÍ SE PINTA LA TABLA -->
+        <table id="tabla"></table>
     </section>
 
     <!-- GOLEADORES -->
@@ -41,16 +32,13 @@
     <!-- ESTADÍSTICAS -->
     <section class="card" id="estadisticas">
         <h2>Estadísticas</h2>
-
-        <div id="stats">
-            <!-- Aquí insertaremos tarjetas de estadísticas -->
-        </div>
+        <div id="stats"></div>
     </section>
 
-    <!-- Librería Chart.js (gráficos) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Tu archivo JS -->
+    <!-- Tus scripts -->
+    <script src="js/sheet.js"></script>
     <script src="js/main.js"></script>
 
 </body>
