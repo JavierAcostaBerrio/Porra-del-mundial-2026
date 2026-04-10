@@ -73,7 +73,7 @@ table {
 
 /* Cabeceras más compactas */
 #tabla th {
-    font-size: 0.75rem;
+    font-size: 12px;
     font-weight: 600;
     white-space: normal;
     max-width: 120px;
