@@ -98,6 +98,12 @@ table {
     width: 120px;
 }
 
+/* Columna 3: número */
+#tabla th:nth-child(3),
+#tabla td:nth-child(3) {
+    width: 60px;
+    text-align: center;
+}
 /* Columna MVP Mundial (columna 13) */
 #tabla th:nth-child(13),
 #tabla td:nth-child(13) {
