@@ -79,6 +79,8 @@ th {
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
+    white-space: normal;
+    max-width: 120px;
 }
 
 td {
