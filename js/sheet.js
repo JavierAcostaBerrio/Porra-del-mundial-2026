@@ -3,13 +3,13 @@
 <script>
 const columnas = [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
-fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/gviz/tq?gid=52755414&tqx=out:json")
+fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=52755414&tqx=out:json")
   .then(res => res.text())
   .then(text => {
     const json = JSON.parse(text.substring(47, text.length - 2));
     const table = document.getElementById("tabla");
 
-    // Crear cabecera
+    // Cabecera
     const header = document.createElement("tr");
     columnas.forEach(i => {
       const th = document.createElement("th");
@@ -18,7 +18,7 @@ fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Po
     });
     table.appendChild(header);
 
-    // Crear filas
+    // Filas
     json.table.rows.forEach(row => {
       const tr = document.createElement("tr");
       columnas.forEach(i => {
@@ -29,4 +29,5 @@ fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Po
       table.appendChild(tr);
     });
   });
+
 </script>
