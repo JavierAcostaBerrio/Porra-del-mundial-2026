@@ -76,14 +76,14 @@ th {
     color: white;
     padding: 12px;
     text-align: left;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
 }
 
 td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 tr:nth-child(even) {
