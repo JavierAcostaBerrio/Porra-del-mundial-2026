@@ -1,6 +1,3 @@
-<table id="tabla"></table>
-
-<script>
 const columnas = [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=52755414&tqx=out:json")
@@ -29,5 +26,3 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
       table.appendChild(tr);
     });
   });
-
-</script>
