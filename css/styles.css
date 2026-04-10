@@ -71,37 +71,23 @@ table {
     margin-top: 15px;
 }
 
-/* Cabeceras más compactas */
-#tabla th {
+th {
+    background: var(--azul);
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
     font-size: 12px;
-    font-weight: 600;
-    white-space: normal;
-    max-width: 120px;
-    text-align: center;
 }
 
-/* Celdas normales sin saltos */
-#tabla td {
-    white-space: nowrap;
-}
-
-/* Columna 1: número */
-#tabla th:nth-child(1),
-#tabla td:nth-child(1) {
-    width: 40px;
-    text-align: center;
-}
-
-/* Columna usuario */
-#tabla th:nth-child(2),
-#tabla td:nth-child(2) {
-    width: 120px;
-}
-
-/* Columna MVP Mundial (columna 13) */
-#tabla th:nth-child(13),
-#tabla td:nth-child(13) {
-    width: 140px;
+tr:nth-child(even) {
+    background: #fafafa;
 }
 
 /* ===========================
