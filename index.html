@@ -13,6 +13,39 @@
 
 <body>
 
+    <table id="tabla"></table>
+
+<script>
+const columnas = [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/gviz/tq?gid=52755414&tqx=out:json")
+  .then(res => res.text())
+  .then(text => {
+    const json = JSON.parse(text.substring(47, text.length - 2));
+    const table = document.getElementById("tabla");
+
+    // Crear cabecera
+    const header = document.createElement("tr");
+    columnas.forEach(i => {
+      const th = document.createElement("th");
+      th.textContent = json.table.cols[i].label;
+      header.appendChild(th);
+    });
+    table.appendChild(header);
+
+    // Crear filas
+    json.table.rows.forEach(row => {
+      const tr = document.createElement("tr");
+      columnas.forEach(i => {
+        const td = document.createElement("td");
+        td.textContent = row.c[i] ? row.c[i].v : "";
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
+    });
+  });
+</script>
+
     <!-- HEADER -->
     <header class="header">
         <h1>🌍 Porra Mundial 2026</h1>
