@@ -30,7 +30,7 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
 // -------------------------------
 // Crea grafico goles primera fase
 // -------------------------------
-async function cargarEstadisticas() {
+async function cargarGoles() {
     const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
 
     const respuesta = await fetch(url);
