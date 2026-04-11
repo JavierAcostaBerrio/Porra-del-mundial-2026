@@ -14,63 +14,41 @@
 
 /* ===========================
    CABECERA
-   =========================== */
+=========================== */
 .cabecera-mundial {
-  position: relative;
-  background-color: #000; /* fondo negro */
-  background-image: url('images/cabecera-mundial.jpg');
+  width: 100vw;
+  height: 500px;
+  background-image: url('images/cabecera-mundial-2026-ultra.jpg');
   background-size: cover;
   background-position: center;
-  height: 250px; 
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
-.cabecera-contenido {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 1200px;
-}
-
-.cabecera-contenido h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.2rem;
+.cabecera-mundial h1 {
+  position: absolute;
+  top: 40%;
+  left: 8%;
+  font-size: 3rem;
   font-weight: 700;
-  margin: 0;
+  color: #F2F2F2;
 }
 
-/* Responsivo para móvil */
-@media (max-width: 768px) {
-  .cabecera-mundial {
-    height: 180px;
-  }
-
-  .cabecera-contenido {
-    flex-direction: column;
-    text-align: center;
-  }
-
-    .cabecera-contenido h1 {
-    font-size: 1.6rem;
-  }
+.cabecera-mundial h1 span {
+  color: #D4AF37; /* dorado metálico */
 }
-
 /* ===========================
-   ESTILO GENERAL
-   =========================== */
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background: var(--gris-fondo);
-    color: var(--gris-texto);
+   ESTILO GLOBAL
+=========================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #0A0A0A; /* fondo carbón profundo */
+  color: #F2F2F2; /* texto principal */
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
 /* ===========================
@@ -90,78 +68,132 @@ body {
 }
 
 /* ===========================
+   SECCIONES Y TITULOS
+=========================== */
+section {
+  padding: 40px 10%;
+}
+
+h2 {
+  color: #D4AF37;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #C8C8C8;
+  line-height: 1.6;
+}
+/* ===========================
    TARJETAS
    =========================== */
 
 .card {
-    background: white;
-    margin: 20px;
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px var(--sombra);
+  background-color: #111;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  color: #F2F2F2;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
 }
 
-.card h2 {
-    margin-top: 0;
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--azul);
-    border-left: 6px solid var(--verde);
-    padding-left: 10px;
+.card:hover {
+  border-color: #D4AF37;
+  box-shadow: 0 0 25px rgba(212,175,55,0.3);
 }
 
+.card h3 {
+  color: #D4AF37;
+  margin-bottom: 10px;
+}
+/* ===========================
+   BOTONES
+=========================== */
+.btn {
+  background-color: #0E3A6F;
+  color: #F2F2F2;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #4A90E2;
+}
 /* ===========================
    TABLAS
-   =========================== */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+=========================== */
+.table-wrapper {
+  margin-top: 20px;
+  overflow-x: auto;
 }
 
-th {
-    background: var(--azul);
-    color: white;
-    padding: 12px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    white-space: normal;
-    word-wrap: break-word;
-    max-width: 120px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #111;
+  border: 1px solid #222;
+  color: #F2F2F2;
+  font-size: 0.95rem;
+}
+
+thead {
+  background: linear-gradient(90deg, #0E3A6F, #4A90E2);
+}
+
+thead th {
+  padding: 10px;
+  text-align: left;
+  color: #F2F2F2;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #151515;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #101010;
+}
+
+tbody tr:hover {
+  background-color: #1b1b1b;
 }
 
 td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    font-size: 12px;
-    text-align: center;
+  padding: 8px 10px;
+  border-top: 1px solid #222;
 }
 
-tr:nth-child(even) {
-    background: #fafafa;
+td.resultado-correcto {
+  color: #3CCB5A;
+  font-weight: 600;
 }
 
+td.resultado-fallo {
+  color: #D64545;
+  font-weight: 600;
+}
 /* ===========================
    BADGES / ETIQUETAS
-   =========================== */
-
+=========================== */
 .badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    color: white;
-    text-transform: uppercase;
+  display: inline-block;
+  background-color: #1E7A3C;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: 600;
 }
 
-.badge-verde { background: var(--verde); }
-.badge-azul { background: var(--azul); }
-.badge-rojo { background: var(--rojo); }
-.badge-amarillo { background: var(--amarillo); }
+.badge:hover {
+  background-color: #3CCB5A;
+}
 
 /* ===========================
    GRÁFICOS (Chart.js)
@@ -202,22 +234,25 @@ canvas {
 
 /* ===========================
    RESPONSIVE
-   =========================== */
+=========================== */
+@media (max-width: 768px) {
+  .cabecera-mundial {
+    height: 300px;
+  }
 
-@media (max-width: 600px) {
-    .card {
-        margin: 10px;
-        padding: 15px;
-    }
+  .cabecera-mundial h1 {
+    font-size: 2rem;
+    top: 35%;
+    left: 5%;
+  }
 
-    .header {
-        font-size: 24px;
-        padding: 15px;
-    }
+  section {
+    padding: 20px 5%;
+  }
 
-    .stat-box {
-        width: 100%;
-    }
+  .card {
+    margin: 10px 0;
+  }
 }
 
 /* ===========================
@@ -278,4 +313,29 @@ canvas {
 .tabla-scroll td {
     white-space: nowrap;
 }
+/* ===========================
+   ALERTAS / AVISOS
+=========================== */
+.alert {
+  background-color: #111;
+  border-left: 5px solid #FF8C42;
+  color: #F2F2F2;
+  padding: 15px 20px;
+  margin: 20px 0;
+  font-weight: 500;
+}
 
+.alert strong {
+  color: #D64545;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  background-color: #0A0A0A;
+  color: #C8C8C8;
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #222;
+}
