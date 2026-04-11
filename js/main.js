@@ -132,10 +132,9 @@ async function dibujarGraficoGoles() {
         data: {
             labels: labels,
             datasets: [{
-                label: "Valores",
                 data: values,
-                backgroundColor: "rgba(52, 152, 219, 0.6)",
-                borderColor: "rgba(52, 152, 219, 1)",
+                backgroundColor: "#D4AF37",
+                borderColor: "#D4AF37",
                 borderWidth: 1
             }]
         },
@@ -153,7 +152,7 @@ async function dibujarGraficoGoles() {
             },
             plugins: {
                 legend: {
-                    labels: { color: "#F2F2F2" }
+                    display: false
                 }
             }
         }
