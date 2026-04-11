@@ -195,6 +195,16 @@ p {
   color: #D4AF37;
   margin-bottom: 10px;
 }
+.fila-cards {
+  display: flex;
+  gap: 20px;
+  padding: 0 5%;
+}
+
+.fila-cards .card {
+  flex: 1;              /* ambas ocupan el mismo ancho */
+  height: 100%;         /* se igualan automáticamente */
+}
 
 /* ===========================
    BOTONES
