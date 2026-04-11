@@ -13,6 +13,65 @@
 }
 
 /* ===========================
+   CABECERA
+   =========================== */
+.cabecera-mundial {
+  position: relative;
+  background-image: url('images/cabecera-mundial-2026.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.cabecera-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.cabecera-contenido h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.logo-fifa {
+  height: 100px;
+  width: auto;
+  margin-left: 20px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Responsivo para móvil */
+@media (max-width: 768px) {
+  .cabecera-mundial {
+    height: 180px;
+  }
+
+  .cabecera-contenido {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo-fifa {
+    margin: 10px 0 0;
+    height: 70px;
+  }
+
+  .cabecera-contenido h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* ===========================
    ESTILO GENERAL
    =========================== */
 
