@@ -125,10 +125,11 @@
 .cabecera-mundial {
   width: 100%;
   height: 250px;
+  background-image: url('images/cabecera-mundial.jpg'); /* nombre correcto */
+  background-size: cover;      /* se adapta sin deformar */
+  background-position: center; /* centrada */
+  background-repeat: no-repeat;
   overflow: hidden;
-  background-image: url('images/cabecera-mundial-2026-ultra.jpg');
-  background-size: cover;
-  background-position: center;
 }
 
 .cabecera-img {
