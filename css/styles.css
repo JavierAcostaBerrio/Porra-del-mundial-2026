@@ -151,9 +151,7 @@ table {
   line-height: 1.2;        /* más compacto */
 }
 
-#tabla td {
-  max-width: 140px;
-}
+
 thead {
   background: linear-gradient(90deg, #0E3A6F, #4A90E2);
 }
@@ -178,6 +176,9 @@ tbody tr:hover {
   background-color: #1b1b1b;
 }
 
+#tabla td {
+  max-width: 140px;
+}
 td {
   padding: 8px 10px;
   border-top: 1px solid #222;
