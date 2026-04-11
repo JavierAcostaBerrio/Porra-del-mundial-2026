@@ -116,4 +116,47 @@ async function iniciarClasificacion() {
 // Ejecutar
 iniciarClasificacion();
 
+// -------------------------------
+// Inicializar clasificación
+// -------------------------------
+async function dibujarGraficoGoles() {
+    const datos = await cargarGoles();
+
+    const labels = datos.map(f => f.colA);
+    const values = datos.map(f => Number(f.colB));
+
+    const ctx = document.getElementById("golesChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Valores",
+                data: values,
+                backgroundColor: "rgba(52, 152, 219, 0.6)",
+                borderColor: "rgba(52, 152, 219, 1)",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    ticks: { color: "#F2F2F2" },
+                    grid: { color: "#333" }
+                },
+                y: {
+                    ticks: { color: "#F2F2F2" },
+                    grid: { color: "#333" }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: "#F2F2F2" }
+                }
+            }
+        }
+    });
+}
 
