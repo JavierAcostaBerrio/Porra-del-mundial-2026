@@ -117,7 +117,7 @@ async function iniciarClasificacion() {
 iniciarClasificacion();
 
 // -------------------------------
-// Inicializar clasificación
+// Grafico goles
 // -------------------------------
 async function dibujarGraficoGoles() {
     const datos = await cargarGoles();
