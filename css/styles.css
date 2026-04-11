@@ -101,7 +101,7 @@
 .cabecera-mundial {
   width: 100%;
   height: 250px;
-  background-image: url('images/cabecera-mundial.jpg');
+  background-image: url('images/cabecera-mundial.jpg'); /* ESTA ES LA CORRECTA */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -109,7 +109,7 @@
 }
 
 .cabecera-img {
-  display: none;
+  display: none; /* ya no se usa la etiqueta <img> */
 }
 
 .cabecera-mundial h1 {
