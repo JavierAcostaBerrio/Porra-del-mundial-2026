@@ -143,11 +143,12 @@ async function dibujarGraficoGoles() {
             scales: {
                 x: {
                     ticks: { color: "#D4AF37" },
-                    grid: { color: "#333" }
+                    grid: { display: false },
+                    
                 },
                 y: {
                     ticks: { color: "#D4AF37" },
-                    grid: { color: "#333" }
+                    grid: { display: false }
                 }
             },
             plugins: {
