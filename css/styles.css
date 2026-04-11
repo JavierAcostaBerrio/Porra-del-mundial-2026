@@ -184,6 +184,7 @@ p {
   color: #F2F2F2;
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
   transition: all 0.3s ease;
+  margin-bottom: 30px; /* separación entre tarjetas */
 }
 
 .card:hover {
@@ -204,6 +205,7 @@ p {
 .fila-cards .card {
   flex: 1;              /* ambas ocupan el mismo ancho */
   height: 100%;         /* se igualan automáticamente */
+  margin-bottom: 30px; /* separación entre tarjetas */
 }
 
 /* ===========================
