@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>La Porra del Mundial 2026</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="cabecera-mundial"></header>
+<nav class="menu">
+  <ul>
+    <li><a href="#clasificacion">Clasificación</a></li>
+    <li><a href="#pronosticos">Pronósticos</a></li>
+    <li><a href="#eliminatorias">Eliminatorias</a></li>
+    <li><a href="#estadisticas">Estadísticas</a></li>
+    <li><a href="#ficha">Ficha</a></li>
+    <li><a href="#comentarios">Comentarios</a></li>
+    <li><a href="#chat">Chat</a></li>
+    <li><a href="#base">Base participación</a></li>
+    <li><a href="#mundial">Mundial</a></li>
+  </ul>
+</nav>
+
+<!-- SECCIÓN BIENVENIDA -->
+  <section>
+    <h2>Comprueba tu evolución en la porra del Mundial 2026</h2>
+    <p>
+      Las puntuaciones se actualizan al finalizar todos los partido del día.
+    </p>
+  </section>
+
+    <!-- CLASIFICACIÓN GENERAL -->
+    <section class="card" id="clasificacion">
+        <h2>Clasificación General</h2>
+
+        <!-- AQUÍ SE PINTA LA TABLA -->
+        <div class="tabla-scroll">
+        <table id="tabla"></table>
+        </div>
+    </section>
+
+    <!-- GOLEADORES -->
+    <section class="card" id="goleadores">
+        <h2>Goleadores</h2>
+        <canvas id="goleadoresChart"></canvas>
+    </section>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="card" id="estadisticas">
+        <h2>Estadísticas</h2>
+        <div id="stats"></div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Tus scripts -->
+    <script src="js/sheet.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- FOOTER -->
+  <footer>
+    La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
+  </footer>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const secciones = document.querySelectorAll("section[id]");
+    const enlacesMenu = document.querySelectorAll(".menu a");
+
+    function activarEnlace() {
+        let scrollPos = window.scrollY + 150; // margen para activar antes
+
+        secciones.forEach(sec => {
+            const top = sec.offsetTop;
+            const height = sec.offsetHeight;
+            const id = sec.getAttribute("id");
+
+            if (scrollPos >= top && scrollPos < top + height) {
+                enlacesMenu.forEach(a => a.classList.remove("activo"));
+                const enlaceActivo = document.querySelector(`.menu a[href="#${id}"]`);
+                if (enlaceActivo) enlaceActivo.classList.add("activo");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", activarEnlace);
+    activarEnlace(); // activar al cargar
+});
+</script>
+
+
+</body>
+</html>
