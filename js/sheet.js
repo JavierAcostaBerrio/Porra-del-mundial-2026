@@ -26,3 +26,24 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
       table.appendChild(tr);
     });
   });
+
+// -------------------------------
+// Crea grafico goles primera fase
+// -------------------------------
+async function cargarEstadisticas() {
+    const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
+
+    const respuesta = await fetch(url);
+    const texto = await respuesta.text();
+
+    // Google devuelve basura antes y después del JSON → limpiamos
+    const json = JSON.parse(texto.substring(47, texto.length - 2));
+
+    // Convertimos filas en objetos {colA, colB}
+    const filas = json.table.rows.map(fila => ({
+        colA: fila.c[0]?.v ?? "",
+        colB: fila.c[1]?.v ?? 0
+    }));
+
+    return filas;
+}
