@@ -1,7 +1,6 @@
 /* ===========================
    PALETA MUNDIAL COLORIDO
-   =========================== */
-
+=========================== */
 :root {
     --verde: #2ECC71;
     --azul: #3498DB;
@@ -11,6 +10,7 @@
     --gris-texto: #333;
     --sombra: rgba(0,0,0,0.12);
 }
+
 /* ===========================
    MENÚ FIJO GLASS + SOMBRA DORADA
 =========================== */
@@ -19,7 +19,6 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-
   padding: 12px 0;
 
   /* Glass */
@@ -78,25 +77,6 @@
 }
 
 /* ===========================
-   ENLACE ACTIVO
-=========================== */
-.menu a.activo {
-  color: #D4AF37;
-}
-
-/* Línea dorada debajo del activo */
-.menu a.activo::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background-color: #D4AF37;
-  border-radius: 2px;
-}
-
-/* ===========================
    MÓVIL
 =========================== */
 @media (max-width: 768px) {
@@ -115,25 +95,21 @@
   }
 }
 
-
-/* ===========================
-   CABECERA
-=========================== */
 /* ===========================
    CABECERA LIMPIA Y FIJA A 250PX
 =========================== */
 .cabecera-mundial {
   width: 100%;
   height: 250px;
-  background-image: url('images/cabecera-mundial.jpg'); /* nombre correcto */
-  background-size: cover;      /* se adapta sin deformar */
-  background-position: center; /* centrada */
+  background-image: url('images/cabecera-mundial.jpg');
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
 }
 
 .cabecera-img {
-  display: none; /* ya no se usa la etiqueta <img> */
+  display: none;
 }
 
 .cabecera-mundial h1 {
@@ -146,23 +122,24 @@
 }
 
 .cabecera-mundial h1 span {
-  color: #D4AF37; /* dorado metálico */
+  color: #D4AF37;
 }
+
 /* ===========================
    ESTILO GLOBAL
 =========================== */
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #0A0A0A; /* fondo carbón profundo */
-  color: #F2F2F2; /* texto principal */
+  overflow-x: hidden;
+  background-color: #0A0A0A;
+  color: #F2F2F2;
   font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
 /* ===========================
    HEADER
-   =========================== */
-
+=========================== */
 .header {
     background: linear-gradient(90deg, var(--verde), var(--azul));
     color: white;
@@ -193,10 +170,10 @@ p {
   color: #C8C8C8;
   line-height: 1.6;
 }
+
 /* ===========================
    TARJETAS
-   =========================== */
-
+=========================== */
 .card {
   background-color: #111;
   border: 1px solid #D4AF37;
@@ -218,6 +195,7 @@ p {
   color: #D4AF37;
   margin-bottom: 10px;
 }
+
 /* ===========================
    BOTONES
 =========================== */
@@ -235,6 +213,7 @@ p {
 .btn:hover {
   background-color: #4A90E2;
 }
+
 /* ===========================
    TABLAS
 =========================== */
@@ -251,25 +230,20 @@ table {
   color: #F2F2F2;
   font-size: 0.95rem;
 }
+
 #tabla th {
-  white-space: normal;     /* permite saltos de línea */
-  word-wrap: break-word;   /* fuerza el salto si es necesario */
+  white-space: normal;
+  word-wrap: break-word;
   text-align: left;
   padding: 10px;
-  color: #D4AF37;          /* dorado metálico */
+  color: #D4AF37;
   font-weight: 700;
-  line-height: 1.2;        /* más compacto */
-}
-
-
-thead {
-  background: linear-gradient(90deg, #0E3A6F, #4A90E2);
+  line-height: 1.2;
 }
 
 #tabla thead th {
-  background-color: #111;       /* fondo oscuro elegante */
-  color: #D4AF37;               /* dorado metálico */
-  font-weight: 700;
+  background-color: #111;
+  color: #D4AF37;
   padding: 12px;
   border-bottom: 2px solid #D4AF37;
 }
@@ -289,6 +263,7 @@ tbody tr:hover {
 #tabla td {
   max-width: 140px;
 }
+
 td {
   padding: 8px 10px;
   border-top: 1px solid #222;
@@ -303,8 +278,9 @@ td.resultado-fallo {
   color: #D64545;
   font-weight: 600;
 }
+
 /* ===========================
-   BADGES / ETIQUETAS
+   BADGES
 =========================== */
 .badge {
   display: inline-block;
@@ -320,17 +296,15 @@ td.resultado-fallo {
 }
 
 /* ===========================
-   GRÁFICOS (Chart.js)
-   =========================== */
-
+   GRÁFICOS
+=========================== */
 canvas {
     margin-top: 20px;
 }
 
 /* ===========================
    TARJETAS DE ESTADÍSTICAS
-   =========================== */
-
+=========================== */
 .stat-box {
     background: white;
     padding: 20px;
@@ -381,8 +355,7 @@ canvas {
 
 /* ===========================
    BARRAS DE PROGRESO
-   =========================== */
-
+=========================== */
 .progress-container {
     background: #e6e6e6;
     border-radius: 10px;
@@ -400,8 +373,7 @@ canvas {
 
 /* ===========================
    ICONOS DE TENDENCIA
-   =========================== */
-
+=========================== */
 .tendencia {
     font-size: 18px;
     font-weight: 900;
@@ -421,8 +393,7 @@ canvas {
 
 /* ===========================
    SCROLL EN TABLA CLASIFICACION
-   =========================== */
-
+=========================== */
 .tabla-scroll {
     overflow-x: auto;
     padding-bottom: 10px;
@@ -437,8 +408,9 @@ canvas {
 .tabla-scroll td {
     white-space: nowrap;
 }
+
 /* ===========================
-   ALERTAS / AVISOS
+   ALERTAS
 =========================== */
 .alert {
   background-color: #111;
