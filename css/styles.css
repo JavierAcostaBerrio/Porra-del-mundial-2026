@@ -150,6 +150,10 @@ table {
   font-weight: 700;
   line-height: 1.2;        /* más compacto */
 }
+
+#tabla td {
+  max-width: 140px;
+}
 thead {
   background: linear-gradient(90deg, #0E3A6F, #4A90E2);
 }
