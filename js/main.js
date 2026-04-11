@@ -115,3 +115,13 @@ async function iniciarClasificacion() {
 
 // Ejecutar
 iniciarClasificacion();
+
+// -------------------------------
+// Crea grafico goles primera fase
+// -------------------------------
+async function cargarEstadisticas() {
+  const url = '1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/'; // la URL que devuelve la hoja "Estadisticas" en JSON
+  const respuesta = await fetch(url);
+  const datos = await respuesta.json();
+  return datos;
+}
