@@ -43,13 +43,6 @@
   margin: 0;
 }
 
-.logo-fifa {
-  height: 100px;
-  width: auto;
-  margin-left: 20px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-}
-
 /* Responsivo para móvil */
 @media (max-width: 768px) {
   .cabecera-mundial {
@@ -61,12 +54,7 @@
     text-align: center;
   }
 
-  .logo-fifa {
-    margin: 10px 0 0;
-    height: 70px;
-  }
-
-  .cabecera-contenido h1 {
+    .cabecera-contenido h1 {
     font-size: 1.6rem;
   }
 }
