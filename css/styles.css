@@ -12,15 +12,24 @@
     --sombra: rgba(0,0,0,0.12);
 }
 /* ===========================
-   MENÚ DE NAVEGACIÓN
+   MENÚ FIJO CON EFECTO GLASS + SOMBRA DORADA + ACTIVO
 =========================== */
 .menu {
   width: 100%;
-  background-color: #0D0D0D;
-  border-bottom: 1px solid #222;
   position: sticky;
   top: 0;
   z-index: 1000;
+
+  /* Fondo glass */
+  background: rgba(15, 15, 15, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Borde inferior dorado suave */
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+
+  /* Sombra dorada suave */
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
 }
 
 .menu ul {
@@ -42,16 +51,39 @@
   text-decoration: none;
   font-weight: 600;
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 6px;
   transition: 0.3s ease;
+  position: relative;
 }
 
+/* Hover elegante */
 .menu a:hover {
-  background-color: #1A1A1A;
-  color: #D4AF37; /* dorado */
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #D4AF37;
 }
 
-/* Versión móvil */
+/* ===========================
+   ENLACE ACTIVO
+=========================== */
+.menu a.activo {
+  color: #D4AF37;
+}
+
+/* Línea dorada debajo del activo */
+.menu a.activo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background-color: #D4AF37;
+  border-radius: 2px;
+}
+
+/* ===========================
+   MÓVIL
+=========================== */
 @media (max-width: 768px) {
   .menu ul {
     flex-direction: column;
@@ -62,7 +94,12 @@
     display: block;
     width: 100%;
   }
+
+  .menu a.activo::after {
+    bottom: 0;
+  }
 }
+
 
 /* ===========================
    CABECERA
