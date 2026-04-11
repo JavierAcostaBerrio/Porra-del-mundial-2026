@@ -141,16 +141,25 @@ table {
   color: #F2F2F2;
   font-size: 0.95rem;
 }
-
+#tabla th {
+  white-space: normal;     /* permite saltos de línea */
+  word-wrap: break-word;   /* fuerza el salto si es necesario */
+  text-align: left;
+  padding: 10px;
+  color: #D4AF37;          /* dorado metálico */
+  font-weight: 700;
+  line-height: 1.2;        /* más compacto */
+}
 thead {
   background: linear-gradient(90deg, #0E3A6F, #4A90E2);
 }
 
-thead th {
-  padding: 10px;
-  text-align: left;
-  color: #F2F2F2;
-  font-weight: 600;
+#tabla thead th {
+  background-color: #111;       /* fondo oscuro elegante */
+  color: #D4AF37;               /* dorado metálico */
+  font-weight: 700;
+  padding: 12px;
+  border-bottom: 2px solid #D4AF37;
 }
 
 tbody tr:nth-child(even) {
