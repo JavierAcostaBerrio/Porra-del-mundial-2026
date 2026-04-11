@@ -17,6 +17,7 @@
    =========================== */
 .cabecera-mundial {
   position: relative;
+  background-color: #000; /* fondo negro */
   background-image: url('images/cabecera-mundial.jpg');
   background-size: cover;
   background-position: center;
