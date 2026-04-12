@@ -126,14 +126,52 @@ async function dibujarGraficoGoles() {
     const values = datos.map(f => Number(f.colB));
 
     const ctx = document.getElementById("golesChart").getContext("2d");
+    // Crear degradado dorado metálico
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, "#F7E7A1");
+    gradient.addColorStop(0.5, "#D4AF37");
+    gradient.addColorStop(1, "#B8860B");
 
+    // Plugin para esquinas redondeadas
+    const roundedBars = {
+        id: "roundedBars2",
+        beforeDraw(chart) {
+            const { ctx } = chart;
+
+            chart.data.datasets.forEach((dataset, i) => {
+                const meta = chart.getDatasetMeta(i);
+                meta.data.forEach(bar => {
+                    const { x, y, base } = bar;
+
+                    const width = bar.width;
+                    const height = base - y;
+                    const radius = 8;
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(x - width / 2, base);
+                    ctx.lineTo(x - width / 2, y + radius);
+                    ctx.quadraticCurveTo(x - width / 2, y, x - width / 2 + radius, y);
+                    ctx.lineTo(x + width / 2 - radius, y);
+                    ctx.quadraticCurveTo(x + width / 2, y, x + width / 2, y + radius);
+                    ctx.lineTo(x + width / 2, base);
+                    ctx.closePath();
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                    ctx.restore();
+                });
+            });
+
+            return false;
+        }
+    };
     new Chart(ctx, {
         type: "bar",
         data: {
             labels: labels,
             datasets: [{
                 data: values,
-                backgroundColor: "#C9B037",
+                backgroundColor: "gradient",
                 borderColor: "#D4AF37",
                 borderWidth: 1
             }]
