@@ -1,6 +1,10 @@
 // ===============================
 //   Porra Mundial 2026 - main.js
 // ===============================
+document.addEventListener("DOMContentLoaded", () => {
+    dibujarGraficoGoles();
+    dibujarGraficoCampeon();
+});
 
 console.log("Porra Mundial 2026 iniciada correctamente");
 
@@ -320,5 +324,3 @@ async function dibujarGraficoCampeon() {
 }
 
 
-dibujarGraficoGoles();
-dibujarGraficoCampeon();
