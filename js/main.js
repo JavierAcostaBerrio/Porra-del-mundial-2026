@@ -154,7 +154,8 @@ async function dibujarGraficoGoles() {
             labels,
             datasets: [{
                 data: values,
-                backgroundColor: "#D4AF37" // se sobrescribe con el degradado
+                backgroundColor: "#D4AF37", // se sobrescribe con el degradado
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
             }]
         },
         options: {
