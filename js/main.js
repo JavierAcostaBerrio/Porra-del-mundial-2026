@@ -120,7 +120,7 @@ iniciarClasificacion();
 // Grafico goles
 // -------------------------------
 async function dibujarGraficoGoles() {
-    const datos = await cargarEstadisticas();
+    const datos = await cargarGoles();
 
     const labels = datos.map(f => f.colA);
     const values = datos.map(f => Number(f.colB));
