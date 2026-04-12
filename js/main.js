@@ -120,40 +120,7 @@ async function iniciarClasificacion() {
 // Ejecutar
 iniciarClasificacion();
 
-// Plugin unificado para barras redondeadas + degradado
-const roundedBarsPlugin = {
-    id: "roundedBarsPlugin",
-    afterDatasetsDraw(chart) {
-        const { ctx } = chart;
-        const meta = chart.getDatasetMeta(0);
 
-        meta.data.forEach(bar => {
-            const { x, y, base } = bar;
-            const width = bar.width;
-            const radius = 8;
-
-            ctx.save();
-            ctx.beginPath();
-            ctx.moveTo(x - width / 2, base);
-            ctx.lineTo(x - width / 2, y + radius);
-            ctx.quadraticCurveTo(x - width / 2, y, x - width / 2 + radius, y);
-            ctx.lineTo(x + width / 2 - radius, y);
-            ctx.quadraticCurveTo(x + width / 2, y, x + width / 2, y + radius);
-            ctx.lineTo(x + width / 2, base);
-            ctx.closePath();
-            ctx.fillStyle = chart.$goldGradient;
-            ctx.fill();
-            ctx.restore();
-        });
-    }
-};
-function crearDegradadoDorado(ctx) {
-    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, "#F7E7A1");
-    gradient.addColorStop(0.5, "#D4AF37");
-    gradient.addColorStop(1, "#B8860B");
-    return gradient;
-}
 async function cargarGoles() {
     const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
 
@@ -180,79 +147,31 @@ async function dibujarGraficoGoles() {
     const values = datos.map(f => Number(f.colB));
 
     const ctx = document.getElementById("golesChart").getContext("2d");
-    
-    // Crear degradado dorado metálico
-    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, "#F7E7A1");
-    gradient.addColorStop(0.5, "#D4AF37");
-    gradient.addColorStop(1, "#B8860B");
 
-    // Plugin para esquinas redondeadas (EL BUENO)
-    const roundedBars = {
-        id: "roundedBarsGoles",
-        beforeDraw(chart) {
-            const { ctx } = chart;
-
-            chart.data.datasets.forEach((dataset, i) => {
-                const meta = chart.getDatasetMeta(i);
-                meta.data.forEach(bar => {
-                    const { x, y, base } = bar;
-
-                    const width = bar.width;
-                    const radius = 8;
-
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.moveTo(x - width / 2, base);
-                    ctx.lineTo(x - width / 2, y + radius);
-                    ctx.quadraticCurveTo(x - width / 2, y, x - width / 2 + radius, y);
-                    ctx.lineTo(x + width / 2 - radius, y);
-                    ctx.quadraticCurveTo(x + width / 2, y, x + width / 2, y + radius);
-                    ctx.lineTo(x + width / 2, base);
-                    ctx.closePath();
-                    ctx.fillStyle = gradient;
-                    ctx.fill();
-                    ctx.restore();
-                });
-            });
-
-            return false; // NECESARIO para que Chart.js NO dibuje sus barras
-        }
-    };
-    
-    
     new Chart(ctx, {
         type: "bar",
         data: {
-            labels: labels,
+            labels,
             datasets: [{
+                label: "Goles",
                 data: values,
-                backgroundColor: gradient,
-                borderColor: "#D4AF37",
-                borderWidth: 1
+                backgroundColor: "#D4AF37"
             }]
         },
         options: {
             responsive: true,
             scales: {
                 x: {
-                    ticks: { color: "#D4AF37" },
-                    grid: { display: false },
-                    border:{ color: "#D4AF37" }
+                    ticks: { color: "#D4AF37" }
                 },
                 y: {
-                    ticks: { color: "#D4AF37" },
-                    grid: { display: false },
-                    border:{ color: "#D4AF37" }
+                    ticks: { color: "#D4AF37" }
                 }
-            },
-            plugins: {
-                legend: { display: false }
             }
-        },
-        plugins: [roundedBars]
+        }
     });
 }
+
 
 // -------------------------------
 // Grafico campeon
@@ -264,78 +183,30 @@ async function dibujarGraficoCampeon() {
     const values = datos.map(f => Number(f.colD));
 
     const ctx = document.getElementById("campeonChart").getContext("2d");
-    
-    // Crear degradado dorado metálico
-    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, "#F7E7A1");
-    gradient.addColorStop(0.5, "#D4AF37");
-    gradient.addColorStop(1, "#B8860B");
 
-    // Plugin para esquinas redondeadas (EL MISMO)
-    const roundedBars = {
-        id: "roundedBarsCampeon",
-        beforeDraw(chart) {
-            const { ctx } = chart;
-
-            chart.data.datasets.forEach((dataset, i) => {
-                const meta = chart.getDatasetMeta(i);
-                meta.data.forEach(bar => {
-                    const { x, y, base } = bar;
-
-                    const width = bar.width;
-                    const radius = 8;
-
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.moveTo(x - width / 2, base);
-                    ctx.lineTo(x - width / 2, y + radius);
-                    ctx.quadraticCurveTo(x - width / 2, y, x - width / 2 + radius, y);
-                    ctx.lineTo(x + width / 2 - radius, y);
-                    ctx.quadraticCurveTo(x + width / 2, y, x + width / 2, y + radius);
-                    ctx.lineTo(x + width / 2, base);
-                    ctx.closePath();
-                    ctx.fillStyle = gradient;
-                    ctx.fill();
-                    ctx.restore();
-                });
-            });
-
-            return false;
-        }
-    };
-    
-    
     new Chart(ctx, {
         type: "bar",
         data: {
-            labels: labels,
+            labels,
             datasets: [{
+                label: "Campeón",
                 data: values,
-                backgroundColor: gradient,
-                borderColor: "#D4AF37",
-                borderWidth: 1
+                backgroundColor: "#D4AF37"
             }]
         },
         options: {
             responsive: true,
             scales: {
                 x: {
-                    ticks: { color: "#D4AF37" },
-                    grid: { display: false },
-                    border:{ color: "#D4AF37" }
+                    ticks: { color: "#D4AF37" }
                 },
                 y: {
-                    ticks: { color: "#D4AF37" },
-                    grid: { display: false },
-                    border:{ color: "#D4AF37" }
+                    ticks: { color: "#D4AF37" }
                 }
-            },
-            plugins: {
-                legend: { display: false }
             }
-        },
-        plugins: [roundedBars]
+        }
     });
 }
+
 
 
