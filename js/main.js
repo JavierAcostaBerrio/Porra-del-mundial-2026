@@ -133,7 +133,7 @@ async function dibujarGraficoGoles() {
             labels: labels,
             datasets: [{
                 data: values,
-                backgroundColor: "#D4AF37",
+                backgroundColor: "#C9B037",
                 borderColor: "#D4AF37",
                 borderWidth: 1
             }]
