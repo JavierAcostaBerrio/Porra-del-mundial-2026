@@ -205,7 +205,15 @@ async function dibujarGraficoCampeon() {
             },
             scales: {
                 x: { ticks: { color: "#D4AF37" } },
-                y: { ticks: { color: "#D4AF37" } }
+                y: {
+    beginAtZero: true,
+    ticks: {
+        color: "#D4AF37",
+        stepSize: 1,              // 👈 SOLO ENTEROS
+        precision: 0,             // 👈 SIN DECIMALES
+        callback: value => value  // 👈 Muestra el número tal cual
+    }
+}
             }
         }
     });
