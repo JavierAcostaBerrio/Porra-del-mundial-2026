@@ -154,7 +154,22 @@ function crearDegradadoDorado(ctx) {
     gradient.addColorStop(1, "#B8860B");
     return gradient;
 }
+async function cargarGoles() {
+    const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
 
+    const respuesta = await fetch(url);
+    const texto = await respuesta.text();
+    const json = JSON.parse(texto.substring(47, texto.length - 2));
+
+    const filas = json.table.rows.map(fila => ({
+        colA: fila.c[0]?.v ?? "",
+        colB: fila.c[1]?.v ?? 0,
+        colC: fila.c[2]?.v ?? "",
+        colD: fila.c[3]?.v ?? 0
+    }));
+
+    return filas;
+}
 // -------------------------------
 // Grafico goles
 // -------------------------------
