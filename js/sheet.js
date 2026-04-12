@@ -47,3 +47,24 @@ async function cargarGoles() {
 
     return filas;
 }
+// -------------------------------
+// Crea grafico campeon
+// -------------------------------
+
+async function cargarGoles() {
+    const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
+
+    const respuesta = await fetch(url);
+    const texto = await respuesta.text();
+
+    // Google devuelve basura antes y después del JSON → limpiamos
+    const json = JSON.parse(texto.substring(47, texto.length - 2));
+
+    // Convertimos filas en objetos {colC, colD}
+    const filas = json.table.rows.map(fila => ({
+        colC: fila.c[2]?.v ?? "",
+        colD: fila.c[3]?.v ?? 0
+    }));
+
+    return filas;
+}
