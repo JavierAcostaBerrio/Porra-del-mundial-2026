@@ -153,27 +153,23 @@ async function dibujarGraficoGoles() {
         data: {
             labels,
             datasets: [{
-                label:"goles",
                 data: values,
                 backgroundColor: "#D4AF37"
             }]
         },
         options: {
             responsive: true,
+            plugins: {
+                legend: { display: false }   // 👈 LEYENDA OCULTA
+            },
             scales: {
-                x: {
-                    ticks: { color: "#D4AF37" }
-                },
-                y: {
-                    ticks: { color: "#D4AF37" }
-                }
+                x: { ticks: { color: "#D4AF37" } },
+                y: { ticks: { color: "#D4AF37" } }
             }
-        plugins: {
-    legend: { display: false }
-}
-}
+        }
     });
 }
+
 
 
 // -------------------------------
@@ -192,24 +188,23 @@ async function dibujarGraficoCampeon() {
         data: {
             labels,
             datasets: [{
-                label: "Campeón",
                 data: values,
                 backgroundColor: "#D4AF37"
             }]
         },
         options: {
             responsive: true,
+            plugins: {
+                legend: { display: false }   // 👈 LEYENDA OCULTA
+            },
             scales: {
-                x: {
-                    ticks: { color: "#D4AF37" }
-                },
-                y: {
-                    ticks: { color: "#D4AF37" }
-                }
+                x: { ticks: { color: "#D4AF37" } },
+                y: { ticks: { color: "#D4AF37" } }
             }
         }
     });
 }
+
 
 
 
