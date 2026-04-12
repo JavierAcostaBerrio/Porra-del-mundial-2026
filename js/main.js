@@ -215,7 +215,8 @@ async function dibujarGraficoCampeon() {
             labels,
             datasets: [{
                 data: values,
-                backgroundColor: "#D4AF37"
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
             }]
         },
         options: {
