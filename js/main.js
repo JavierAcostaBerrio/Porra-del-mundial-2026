@@ -142,10 +142,8 @@ async function cargarGoles() {
 // -------------------------------
 async function dibujarGraficoGoles() {
     const datos = await cargarGoles();
-
     const labels = datos.map(f => f.colA);
     const values = datos.map(f => Number(f.colB));
-
     const ctx = document.getElementById("golesChart").getContext("2d");
 
     new Chart(ctx, {
@@ -164,12 +162,8 @@ async function dibujarGraficoGoles() {
             },
             scales: {
                 x: { ticks: { color: "#D4AF37" } },
-                y: {
-    y: {
-    ticks: {
-        color: "#D4AF37",
-        callback: value => Number(value).toFixed(0)   // 👈 SIN DECIMALES
-    }
+                y: {ticks: { color: "#D4AF37" } }
+    
 }
 
             }
