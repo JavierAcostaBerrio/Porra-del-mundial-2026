@@ -154,29 +154,48 @@ async function dibujarGraficoGoles() {
             labels,
             datasets: [{
                 data: values,
-                backgroundColor: "#D4AF37"
+                backgroundColor: "#D4AF37" // se sobrescribe con el degradado
             }]
         },
         options: {
             responsive: true,
             plugins: {
-                legend: { display: false }   // 👈 LEYENDA OCULTA
+                legend: { display: false }
             },
             scales: {
                 x: { ticks: { color: "#D4AF37" } },
                 y: {
-    beginAtZero: true,
-    ticks: {
-        color: "#D4AF37",
-        stepSize: 1,              // 👈 SOLO ENTEROS
-        precision: 0,             // 👈 SIN DECIMALES
-        callback: value => value  // 👈 Muestra el número tal cual
-    }
-}
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
             }
-        }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
     });
 }
+
 
 // -------------------------------
 // Grafico campeon
