@@ -165,11 +165,16 @@ async function dibujarGraficoGoles() {
             scales: {
                 x: { ticks: { color: "#D4AF37" } },
                 y: {
+    y: {
+    beginAtZero: true,
     ticks: {
         color: "#D4AF37",
-        callback: value => Number(value).toFixed(0)   // 👈 SIN DECIMALES
+        stepSize: 1,              // 👈 SOLO ENTEROS
+        precision: 0,             // 👈 SIN DECIMALES
+        callback: value => value  // 👈 Muestra el número tal cual
     }
 }
+
             }
         }
     });
@@ -205,11 +210,15 @@ async function dibujarGraficoCampeon() {
             scales: {
                 x: { ticks: { color: "#D4AF37" } },
                 y: {
+    beginAtZero: true,
     ticks: {
         color: "#D4AF37",
-        callback: value => Number(value).toFixed(0)   // 👈 SIN DECIMALES
+        stepSize: 1,              // 👈 SOLO ENTEROS
+        precision: 0,             // 👈 SIN DECIMALES
+        callback: value => value  // 👈 Muestra el número tal cual
     }
 }
+
             }
         }
     });
