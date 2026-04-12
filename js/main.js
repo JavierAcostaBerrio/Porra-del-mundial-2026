@@ -164,7 +164,12 @@ async function dibujarGraficoGoles() {
             },
             scales: {
                 x: { ticks: { color: "#D4AF37" } },
-                y: { ticks: { color: "#D4AF37" } }
+                y: {
+    ticks: {
+        color: "#D4AF37",
+        callback: value => Number(value).toFixed(0)   // 👈 SIN DECIMALES
+    }
+}
             }
         }
     });
