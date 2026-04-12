@@ -161,3 +161,48 @@ async function dibujarGraficoGoles() {
 }
 
 dibujarGraficoGoles();
+// -------------------------------
+// Grafico campeon
+// -------------------------------
+async function dibujarGraficoCampeon() {
+    const datos = await cargarCampeon();
+
+    const labels = datos.map(f => f.colC);
+    const values = datos.map(f => Number(f.colD));
+
+    const ctx = document.getElementById("campeonChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderColor: "#D4AF37",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    ticks: { color: "#D4AF37" },
+                    grid: { display: false },
+                    
+                },
+                y: {
+                    ticks: { color: "#D4AF37" },
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+dibujarGraficoCampeon();
