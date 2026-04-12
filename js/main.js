@@ -153,7 +153,7 @@ async function dibujarGraficoGoles() {
         data: {
             labels,
             datasets: [{
-                label:label,
+                label:"goles",
                 data: values,
                 backgroundColor: "#D4AF37"
             }]
@@ -168,7 +168,10 @@ async function dibujarGraficoGoles() {
                     ticks: { color: "#D4AF37" }
                 }
             }
-        }
+        plugins: {
+    legend: { display: false }
+}
+}
     });
 }
 
