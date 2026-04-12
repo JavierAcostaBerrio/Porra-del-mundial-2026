@@ -171,7 +171,7 @@ async function dibujarGraficoGoles() {
             labels: labels,
             datasets: [{
                 data: values,
-                backgroundColor: "gradient",
+                backgroundColor: gradient,
                 borderColor: "#D4AF37",
                 borderWidth: 1
             }]
