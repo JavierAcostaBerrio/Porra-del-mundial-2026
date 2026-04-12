@@ -182,11 +182,12 @@ async function dibujarGraficoGoles() {
                 x: {
                     ticks: { color: "#D4AF37" },
                     grid: { display: false },
-                    
+                    border:{ color: "#D4AF37" }
                 },
                 y: {
                     ticks: { color: "#D4AF37" },
-                    grid: { display: false }
+                    grid: { display: false },
+                    border:{ color: "#D4AF37" }
                 }
             },
             plugins: {
@@ -194,7 +195,8 @@ async function dibujarGraficoGoles() {
                     display: false
                 }
             }
-        }
+        },
+        plugins: [roundedBars]
     });
 }
 
