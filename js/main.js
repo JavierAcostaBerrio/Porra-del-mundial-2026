@@ -161,8 +161,6 @@ async function dibujarGraficoGoles() {
                     ctx.restore();
                 });
             });
-
-            return false;
         }
     };
     new Chart(ctx, {
@@ -171,23 +169,31 @@ async function dibujarGraficoGoles() {
             labels: labels,
             datasets: [{
                 data: values,
-                backgroundColor: gradient,
+                backgroundColor: "transparent",
                 borderColor: "#D4AF37",
-                borderWidth: 1
+                borderWidth: 0
             }]
         },
         options: {
             responsive: true,
             scales: {
                 x: {
-                    ticks: { color: "#D4AF37" },
+                    ticks: {
+                        color: "#D4AF37",
+                        font: { size: 14 },
+                        padding: 10
+                    },
                     grid: { display: false },
-                    border:{ color: "#D4AF37" }
+                    border: { display: false }
                 },
                 y: {
-                    ticks: { color: "#D4AF37" },
+                    ticks: {
+                        color: "#D4AF37",
+                        font: { size: 14 },
+                        padding: 10
+                    },
                     grid: { display: false },
-                    border:{ color: "#D4AF37" }
+                    border: { display: false }
                 }
             },
             plugins: {
