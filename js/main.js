@@ -139,8 +139,7 @@ async function cargarGoles() {
         colE: fila.c[4]?.v ?? "",
         colF: fila.c[5]?.v ?? 0,
         colG: fila.c[6]?.v ?? "",
-        colH: fila.c[7]?.v ?? 0
-        
+        colH: fila.c[7]?.v ?? 0  
     }));
 
     return filas;
