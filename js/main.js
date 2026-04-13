@@ -4,6 +4,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     dibujarGraficoGoles();
     dibujarGraficoCampeon();
+    dibujarGraficoMVP();
+    dibujarGraficoPichichi();
+    
 });
 
 console.log("Porra Mundial 2026 iniciada correctamente");
@@ -132,7 +135,12 @@ async function cargarGoles() {
         colA: fila.c[0]?.v ?? "",
         colB: fila.c[1]?.v ?? 0,
         colC: fila.c[2]?.v ?? "",
-        colD: fila.c[3]?.v ?? 0
+        colD: fila.c[3]?.v ?? 0,
+        colE: fila.c[4]?.v ?? "",
+        colF: fila.c[5]?.v ?? 0,
+        colG: fila.c[6]?.v ?? "",
+        colH: fila.c[7]?.v ?? 0
+        
     }));
 
     return filas;
@@ -257,3 +265,123 @@ async function dibujarGraficoCampeon() {
         }]
     });
 }
+
+// -------------------------------
+// Grafico MVP
+// -------------------------------
+async function dibujarGraficoMVP() {
+    const datos = await cargarGoles();
+
+    const labels = datos.map(f => f.colE);
+    const values = datos.map(f => Number(f.colF));
+
+    const ctx = document.getElementById("MVPChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
+}
+// -------------------------------
+// Grafico Pichichi
+// -------------------------------
+async function dibujarGraficoPichichi() {
+    const datos = await cargarGoles();
+
+    const labels = datos.map(f => f.colG);
+    const values = datos.map(f => Number(f.colH));
+
+    const ctx = document.getElementById("PichichiChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
+}
+
