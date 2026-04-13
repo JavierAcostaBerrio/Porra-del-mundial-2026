@@ -45,6 +45,10 @@ async function cargarGoles() {
         colB: fila.c[1]?.v ?? 0,
         colC: fila.c[2]?.v ?? "",
         colD: fila.c[3]?.v ?? 0
+        colE: fila.c[4]?.v ?? "",
+        colF: fila.c[5]?.v ?? 0
+        colG: fila.c[6]?.v ?? "",
+        colH: fila.c[7]?.v ?? 0
     }));
 
     return filas;
