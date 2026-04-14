@@ -436,6 +436,19 @@ canvas {
   font-weight: 500;
 }
 
+/* ===========================
+   COMENTARIO JORNADA
+=========================== */
+.comentario-jornada {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #D4AF37;
+    padding: 20px;
+    background: #ffffff10;
+    border-left: 4px solid #D4AF37;
+    border-radius: 8px;
+}
+
 .alert strong {
   color: #D64545;
 }
