@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
     dibujarGraficoCampeon();
     dibujarGraficoMVP();
     dibujarGraficoPichichi();
+    dibujarGraficoPichichiEspana();
+    dibujarGraficoGolesPichichiEspana();
+    dibujarGraficoTarjetaEspana();
+    dibujarGraficoCapitanEspana();
     
 });
 
@@ -383,4 +387,242 @@ async function dibujarGraficoPichichi() {
         }]
     });
 }
+// -------------------------------
+// Grafico Pichichi España
+// -------------------------------
+async function dibujarGraficoPichichiEspana() {
+    const datos = await cargarGoles();
 
+    const labels = datos.map(f => f.colI);
+    const values = datos.map(f => Number(f.colJ));
+
+    const ctx = document.getElementById("PichichiEspanaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
+}
+
+// -------------------------------
+// Grafico Goles Pichichi España
+// -------------------------------
+async function dibujarGraficoGolesPichichiEspana() {
+    const datos = await cargarGoles();
+
+    const labels = datos.map(f => f.colK);
+    const values = datos.map(f => Number(f.colL));
+
+    const ctx = document.getElementById("GolesPichichiEspanaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
+}
+
+// -------------------------------
+// Grafico Primera Tarjeta España
+// -------------------------------
+async function dibujarGraficoTarjeta() {
+    const datos = await cargarGoles();
+
+    const labels = datos.map(f => f.colM);
+    const values = datos.map(f => Number(f.colN));
+
+    const ctx = document.getElementById("TarjetaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
+}
+
+// -------------------------------
+// Grafico Capitan España
+// -------------------------------
+async function dibujarGraficoCapitanEspana() {
+    const datos = await cargarGoles();
+
+    const labels = datos.map(f => f.colO);
+    const values = datos.map(f => Number(f.colP));
+
+    const ctx = document.getElementById("CapitanEspanaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
+}
