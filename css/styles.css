@@ -191,7 +191,10 @@ p {
   border-color: #D4AF37;
   box-shadow: 0 0 25px rgba(212,175,55,0.3);
 }
-
+.card h2 {
+    color: #D4AF37;   /* 👈 ORO METÁLICO */
+    font-weight: 900;
+}
 .card h3 {
   color: #D4AF37;
   margin-bottom: 10px;
