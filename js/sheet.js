@@ -30,7 +30,7 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
 // -------------------------------
 // Crea grafico goles primera fase
 // -------------------------------
-async function cargarGoles() {
+async function cargarEstadisticas() {
     const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
 
     const respuesta = await fetch(url);
@@ -44,17 +44,17 @@ async function cargarGoles() {
         colA: fila.c[0]?.v ?? "",
         colB: fila.c[1]?.v ?? 0,
         colC: fila.c[2]?.v ?? "",
-        colD: fila.c[3]?.v ?? 0
+        colD: fila.c[3]?.v ?? 0,
         colE: fila.c[4]?.v ?? "",
-        colF: fila.c[5]?.v ?? 0
+        colF: fila.c[5]?.v ?? 0,
         colG: fila.c[6]?.v ?? "",
-        colH: fila.c[7]?.v ?? 0
+        colH: fila.c[7]?.v ?? 0,
         colI: fila.c[8]?.v ?? "",
-        colJ: fila.c[9]?.v ?? 0
+        colJ: fila.c[9]?.v ?? 0,
         colK: fila.c[10]?.v ?? "",
-        colL: fila.c[11]?.v ?? 0
+        colL: fila.c[11]?.v ?? 0,
         colM: fila.c[12]?.v ?? "",
-        colN: fila.c[13]?.v ?? 0
+        colN: fila.c[13]?.v ?? 0,
         colO: fila.c[14]?.v ?? "",
         colP: fila.c[15]?.v ?? 0
     }));
