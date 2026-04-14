@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dibujarGraficoPichichi();
     dibujarGraficoPichichiEspana();
     dibujarGraficoGolesPichichiEspana();
-    dibujarGraficoTarjetaEspana();
+    dibujarGraficoTarjeta();
     dibujarGraficoCapitanEspana();
     
 });
@@ -128,7 +128,7 @@ async function iniciarClasificacion() {
 iniciarClasificacion();
 
 
-async function cargarGoles() {
+async function cargarEstadisticas() {
     const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
 
     const respuesta = await fetch(url);
@@ -143,7 +143,15 @@ async function cargarGoles() {
         colE: fila.c[4]?.v ?? "",
         colF: fila.c[5]?.v ?? 0,
         colG: fila.c[6]?.v ?? "",
-        colH: fila.c[7]?.v ?? 0  
+        colH: fila.c[7]?.v ?? 0,
+        colI: fila.c[8]?.v ?? "",
+        colJ: fila.c[9]?.v ?? 0,
+        colK: fila.c[10]?.v ?? "",
+        colL: fila.c[11]?.v ?? 0,
+        colM: fila.c[12]?.v ?? "",
+        colN: fila.c[13]?.v ?? 0,
+        colO: fila.c[14]?.v ?? "",
+        colP: fila.c[15]?.v ?? 0
     }));
 
     return filas;
@@ -152,7 +160,7 @@ async function cargarGoles() {
 // Grafico goles
 // -------------------------------
 async function dibujarGraficoGoles() {
-    const datos = await cargarGoles();
+    const datos = await cargarEstadisticas();
 
     const labels = datos.map(f => f.colA);
     const values = datos.map(f => Number(f.colB));
@@ -213,7 +221,7 @@ async function dibujarGraficoGoles() {
 // Grafico campeon
 // -------------------------------
 async function dibujarGraficoCampeon() {
-    const datos = await cargarGoles();
+    const datos = await cargarEstadisticas();
 
     const labels = datos.map(f => f.colC);
     const values = datos.map(f => Number(f.colD));
@@ -273,7 +281,7 @@ async function dibujarGraficoCampeon() {
 // Grafico MVP
 // -------------------------------
 async function dibujarGraficoMVP() {
-    const datos = await cargarGoles();
+    const datos = await cargarEstadisticas();
 
     const labels = datos.map(f => f.colE);
     const values = datos.map(f => Number(f.colF));
@@ -332,7 +340,7 @@ async function dibujarGraficoMVP() {
 // Grafico Pichichi
 // -------------------------------
 async function dibujarGraficoPichichi() {
-    const datos = await cargarGoles();
+    const datos = await cargarEstadisticas();
 
     const labels = datos.map(f => f.colG);
     const values = datos.map(f => Number(f.colH));
@@ -391,7 +399,7 @@ async function dibujarGraficoPichichi() {
 // Grafico Pichichi España
 // -------------------------------
 async function dibujarGraficoPichichiEspana() {
-    const datos = await cargarGoles();
+    const datos = await cargarEstadisticas();
 
     const labels = datos.map(f => f.colI);
     const values = datos.map(f => Number(f.colJ));
@@ -451,7 +459,7 @@ async function dibujarGraficoPichichiEspana() {
 // Grafico Goles Pichichi España
 // -------------------------------
 async function dibujarGraficoGolesPichichiEspana() {
-    const datos = await cargarGoles();
+    const datos = await cargarEstadisticas();
 
     const labels = datos.map(f => f.colK);
     const values = datos.map(f => Number(f.colL));
@@ -511,7 +519,7 @@ async function dibujarGraficoGolesPichichiEspana() {
 // Grafico Primera Tarjeta España
 // -------------------------------
 async function dibujarGraficoTarjeta() {
-    const datos = await cargarGoles();
+    const datos = await cargarEstadisticas();
 
     const labels = datos.map(f => f.colM);
     const values = datos.map(f => Number(f.colN));
@@ -571,7 +579,7 @@ async function dibujarGraficoTarjeta() {
 // Grafico Capitan España
 // -------------------------------
 async function dibujarGraficoCapitanEspana() {
-    const datos = await cargarGoles();
+    const datos = await cargarEstadisticas();
 
     const labels = datos.map(f => f.colO);
     const values = datos.map(f => Number(f.colP));
