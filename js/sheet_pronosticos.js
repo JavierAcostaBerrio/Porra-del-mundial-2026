@@ -7,41 +7,27 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
     // 1. Obtener la primera fila (cabecera real)
     const headerRow = json.table.rows[0].c;
 
-    // 2. Crear cabecera automática
+    // 2. Crear cabecera automática (todas las columnas excepto la 0)
     const header = document.createElement("tr");
-
-    // Primera columna: "Encuentro"
-    const thEncuentro = document.createElement("th");
-    thEncuentro.textContent = "Encuentro";
-    header.appendChild(thEncuentro);
-
-    // Resto de columnas: nombres de jugadores
-    headerRow.slice(2).forEach(col => {
+    headerRow.slice(1).forEach(col => {
       const th = document.createElement("th");
-      th.textContent = col ? col.v : "";
+      th.textContent = col && col.v ? col.v : "";
       header.appendChild(th);
     });
-
     table.appendChild(header);
 
     // 3. Pintar filas (saltamos la primera fila)
     json.table.rows.slice(1).forEach(row => {
       const tr = document.createElement("tr");
 
-      // Columna 1 → Encuentro
-      const tdEncuentro = document.createElement("td");
-      tdEncuentro.textContent = row.c[1] ? row.c[1].v : "";
-      tr.appendChild(tdEncuentro);
-
-      // Columnas 2 en adelante → pronósticos
-      row.c.slice(2).forEach(cell => {
+      // Pintar todas las columnas excepto la 0
+      row.c.slice(1).forEach(cell => {
         const td = document.createElement("td");
-        td.textContent = cell ? cell.v : "";
+        td.textContent = cell && cell.v ? cell.v : "";
         tr.appendChild(td);
       });
 
       table.appendChild(tr);
     });
   });
-
 
