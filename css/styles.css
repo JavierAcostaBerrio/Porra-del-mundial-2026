@@ -293,14 +293,33 @@ td.resultado-fallo {
   color: #D64545;
   font-weight: 600;
 }
-/* ===========================
-   TABLA PRONOSTICOS
-=========================== */
+/* ================================
+   ESTILOS SOLO PARA PRONÓSTICOS
+   ================================ */
+
+/* Tamaño de letra más pequeño */
+#pronosticos #tabla {
+    font-size: 0.8rem;
+}
+
+/* Cabecera ligeramente más pequeña */
+#pronosticos #tabla th {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Primera columna (Encuentro) más ancha */
 #pronosticos #tabla td:nth-child(1),
 #pronosticos #tabla th:nth-child(1) {
-    min-width: 220px;   /* Ajusta a tu gusto */
-    white-space: normal;
+    min-width: 220px;   /* Ajusta si quieres más ancho */
+    white-space: normal; /* Permite saltos de línea */
 }
+
+/* Celdas más compactas */
+#pronosticos #tabla td {
+    padding: 4px 6px;
+}
+
 
 /* ===========================
    BADGES
