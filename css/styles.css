@@ -297,38 +297,58 @@ td.resultado-fallo {
    ESTILOS SOLO PARA PRONÓSTICOS
    ================================ */
 
+/* Contenedor con scroll */
+#pronosticos .tabla-scroll {
+    max-height: 600px;         /* Ajusta según tu diseño */
+    overflow: auto;            /* Scroll vertical + horizontal */
+    position: relative;
+    border: 1px solid #ddd;
+}
+
 /* Tamaño de letra más pequeño */
 #pronosticos #tabla {
     font-size: 0.8rem;
-    border-collapse: collapse;
+    border-collapse: separate; /* Necesario para sticky */
+    border-spacing: 0;
 }
 
-/* Cabecera ligeramente más pequeña y fija */
+/* Cabecera fija arriba */
 #pronosticos #tabla th {
     font-size: 0.75rem;
     font-weight: 700;
     position: sticky;
     top: 0;
-    background: #ffffff;   /* Fondo para que no se mezcle al hacer scroll */
-    z-index: 5;            /* Para que quede por encima de las filas */
+    background: #ffffff;
+    z-index: 10;
     border-bottom: 2px solid #ddd;
+    padding: 6px 8px;
 }
 
-/* Primera columna (Encuentro) más ancha */
-#pronosticos #tabla td:nth-child(1),
-#pronosticos #tabla th:nth-child(1) {
-    min-width: 220px;   /* Ajusta si quieres más ancho */
+/* Primera columna fija a la izquierda */
+#pronosticos #tabla th:nth-child(1),
+#pronosticos #tabla td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    background: #ffffff;
+    z-index: 9; /* Menor que la cabecera */
+    min-width: 220px;
     white-space: normal;
 }
 
 /* Celdas más compactas */
 #pronosticos #tabla td {
     padding: 4px 6px;
+    border-bottom: 1px solid #eee;
 }
 
-/* Opcional: filas zebra para mejorar lectura */
-#pronosticos #tabla tr:nth-child(even) {
+/* Filas zebra */
+#pronosticos #tabla tr:nth-child(even) td {
     background-color: #f7f7f7;
+}
+
+/* Hover suave */
+#pronosticos #tabla tr:hover td {
+    background-color: #eaeaea;
 }
 
 
