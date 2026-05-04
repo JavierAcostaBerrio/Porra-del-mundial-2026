@@ -1,4 +1,4 @@
-const columnas = [1, 2, 3, 4, 5]; // AJUSTA ESTO según columnas de pron_jugadores
+const columnas = [0, 1, 2, 3, 4];
 
 fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=444190468&tqx=out:json")
   .then(res => res.text())
@@ -6,17 +6,17 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
     const json = JSON.parse(text.substring(47, text.length - 2));
     const table = document.getElementById("tabla");
 
-    // Cabecera
+    // Cabecera manual (porque en Sheets están vacías)
     const header = document.createElement("tr");
-    columnas.forEach(i => {
+    ["Partido", "Encuentro", "Javi", "Yoly", "Pepe"].forEach(label => {
       const th = document.createElement("th");
-      th.textContent = json.table.cols[i].label;
+      th.textContent = label;
       header.appendChild(th);
     });
     table.appendChild(header);
 
-    // Filas
-    json.table.rows.forEach(row => {
+    // Filas (saltamos la primera fila del JSON)
+    json.table.rows.slice(1).forEach(row => {
       const tr = document.createElement("tr");
       columnas.forEach(i => {
         const td = document.createElement("td");
