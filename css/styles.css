@@ -299,10 +299,10 @@ td.resultado-fallo {
 
 /* Contenedor con scroll */
 #pronosticos .tabla-scroll {
-    max-height: 500px;     /* Scroll vertical */
+    max-height: 500px;
     overflow: auto;        /* Scroll vertical + horizontal */
     position: relative;
-    border: 1px solid #ddd;
+    border: 1px solid #000; /* Borde negro */
 }
 
 /* Tabla */
@@ -311,17 +311,20 @@ td.resultado-fallo {
     border-collapse: separate;
     border-spacing: 0;
     font-size: 0.8rem;
+    background: #000;      /* Fondo negro general */
+    color: #fff;           /* Texto blanco */
 }
 
 /* Cabecera fija arriba */
 #pronosticos #tabla th {
     position: sticky;
     top: 0;
-    background: #ffffff;
+    background: #111;      /* Negro suave */
+    color: #fff;
     z-index: 10;
     font-size: 0.75rem;
     font-weight: 700;
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid #000; /* Línea negra */
     padding: 6px 8px;
 }
 
@@ -330,29 +333,30 @@ td.resultado-fallo {
 #pronosticos #tabla td:nth-child(1) {
     position: sticky;
     left: 0;
-    background: #ffffff;
-    color: #000000;
+    background: #111;      /* Fondo oscuro */
+    color: #fff;
     z-index: 9;
     min-width: 220px;
     white-space: normal;
+    border-right: 2px solid #000; /* Línea negra */
 }
 
 /* Celdas */
 #pronosticos #tabla td {
     padding: 4px 6px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #000; /* Línea negra */
 }
 
 /* Fila zebra en gris oscuro */
 #pronosticos #tabla tr:nth-child(even) td {
-    background-color: #3a3a3a;
-    color: #ffffff;
+    background-color: #333; /* Gris oscuro */
+    color: #fff;
 }
 
 /* Hover */
 #pronosticos #tabla tr:hover td {
-    background-color: #555555;
-    color: #ffffff;
+    background-color: #444; /* Gris un poco más claro */
+    color: #fff;
 }
 
 
