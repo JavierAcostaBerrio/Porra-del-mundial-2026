@@ -343,7 +343,7 @@ td.resultado-fallo {
 
 /* Filas zebra */
 #pronosticos #tabla tr:nth-child(even) td {
-    background-color: #f7f7f7;
+    background-color: #3a3a3a;
 }
 
 /* Hover suave */
