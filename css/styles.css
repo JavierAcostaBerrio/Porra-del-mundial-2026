@@ -310,7 +310,7 @@ td.resultado-fallo {
     width: max-content;    /* Permite scroll horizontal */
     border-collapse: separate;
     border-spacing: 0;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     background: #000;      /* Fondo negro general */
     color: #fff;           /* Texto blanco */
 }
@@ -323,7 +323,7 @@ td.resultado-fallo {
     color: #fff;
     z-index: 10;
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 600;
     border-bottom: 2px solid #000; /* Línea negra */
     padding: 6px 8px;
 }
