@@ -300,24 +300,35 @@ td.resultado-fallo {
 /* Tamaño de letra más pequeño */
 #pronosticos #tabla {
     font-size: 0.8rem;
+    border-collapse: collapse;
 }
 
-/* Cabecera ligeramente más pequeña */
+/* Cabecera ligeramente más pequeña y fija */
 #pronosticos #tabla th {
     font-size: 0.75rem;
     font-weight: 700;
+    position: sticky;
+    top: 0;
+    background: #ffffff;   /* Fondo para que no se mezcle al hacer scroll */
+    z-index: 5;            /* Para que quede por encima de las filas */
+    border-bottom: 2px solid #ddd;
 }
 
 /* Primera columna (Encuentro) más ancha */
 #pronosticos #tabla td:nth-child(1),
 #pronosticos #tabla th:nth-child(1) {
     min-width: 220px;   /* Ajusta si quieres más ancho */
-    white-space: normal; /* Permite saltos de línea */
+    white-space: normal;
 }
 
 /* Celdas más compactas */
 #pronosticos #tabla td {
     padding: 4px 6px;
+}
+
+/* Opcional: filas zebra para mejorar lectura */
+#pronosticos #tabla tr:nth-child(even) {
+    background-color: #f7f7f7;
 }
 
 
