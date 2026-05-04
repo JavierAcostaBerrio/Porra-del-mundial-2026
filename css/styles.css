@@ -293,6 +293,14 @@ td.resultado-fallo {
   color: #D64545;
   font-weight: 600;
 }
+/* ===========================
+   TABLA PRONOSTICOS
+=========================== */
+#pronosticos #tabla td:nth-child(1),
+#pronosticos #tabla th:nth-child(1) {
+    min-width: 220px;   /* Ajusta a tu gusto */
+    white-space: normal;
+}
 
 /* ===========================
    BADGES
