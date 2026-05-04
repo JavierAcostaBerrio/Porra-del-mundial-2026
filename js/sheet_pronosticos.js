@@ -1,29 +1,47 @@
-const columnas = [ 1, 2, 3, 4];
-
 fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=444190468&tqx=out:json")
   .then(res => res.text())
   .then(text => {
     const json = JSON.parse(text.substring(47, text.length - 2));
     const table = document.getElementById("tabla");
 
-    // Cabecera manual (porque en Sheets están vacías)
+    // 1. Obtener la primera fila (cabecera real)
+    const headerRow = json.table.rows[0].c;
+
+    // 2. Crear cabecera automática
     const header = document.createElement("tr");
-    ["Partido", "Encuentro", "Javi", "Yoly", "Pepe"].forEach(label => {
+
+    // Primera columna: "Encuentro"
+    const thEncuentro = document.createElement("th");
+    thEncuentro.textContent = "Encuentro";
+    header.appendChild(thEncuentro);
+
+    // Resto de columnas: nombres de jugadores
+    headerRow.slice(2).forEach(col => {
       const th = document.createElement("th");
-      th.textContent = label;
+      th.textContent = col ? col.v : "";
       header.appendChild(th);
     });
+
     table.appendChild(header);
 
-    // Filas (saltamos la primera fila del JSON)
+    // 3. Pintar filas (saltamos la primera fila)
     json.table.rows.slice(1).forEach(row => {
       const tr = document.createElement("tr");
-      columnas.forEach(i => {
+
+      // Columna 1 → Encuentro
+      const tdEncuentro = document.createElement("td");
+      tdEncuentro.textContent = row.c[1] ? row.c[1].v : "";
+      tr.appendChild(tdEncuentro);
+
+      // Columnas 2 en adelante → pronósticos
+      row.c.slice(2).forEach(cell => {
         const td = document.createElement("td");
-        td.textContent = row.c[i] ? row.c[i].v : "";
+        td.textContent = cell ? cell.v : "";
         tr.appendChild(td);
       });
+
       table.appendChild(tr);
     });
   });
+
 
