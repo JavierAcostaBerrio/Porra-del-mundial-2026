@@ -297,6 +297,26 @@ td.resultado-fallo {
 /* ================================
    ESTILOS SOLO PARA PRONÓSTICOS
    ================================ */
+#contenedor-pronosticos {
+    max-height: 500px;      /* Ajusta la altura que quieras */
+    overflow-y: auto;       /* Scroll vertical */
+    overflow-x: auto;       /* Scroll horizontal */
+    border: 1px solid #333; /* Opcional, para delimitar */
+    padding: 0;
+    margin-top: 10px;
+}
+
+#contenedor-pronosticos table {
+    border-collapse: collapse;
+    width: max-content;     /* Evita que la tabla se aplaste */
+}
+
+#contenedor-pronosticos th,
+#contenedor-pronosticos td {
+    white-space: nowrap;    /* Mantiene las celdas en una sola línea */
+    padding: 6px 10px;
+    border: 1px solid #444;
+}
 
 
 
