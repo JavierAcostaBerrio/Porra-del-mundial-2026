@@ -355,7 +355,7 @@ td.resultado-fallo {
 
 /* Hover */
 #pronosticos #tabla tr:hover td {
-    background-color: #444; /* Gris un poco más claro */
+    background-color: #D4AF37; /* Gris un poco más claro */
     color: #fff;
 }
 
