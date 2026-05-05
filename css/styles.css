@@ -321,7 +321,7 @@ td.resultado-fallo {
     top: 0;
     background: #111;      /* Negro suave */
     color: #D4AF37;
-    z-index: 10;
+    z-index: 20;
     font-size: 0.75rem;
     font-weight: 600;
     border-bottom: 2px solid #000; /* Línea negra */
