@@ -4,23 +4,23 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
     const json = JSON.parse(text.substring(47, text.length - 2));
     const table = document.getElementById("tabla");
 
-    // 1. Obtener la primera fila (cabecera real)
+    // 1. Cabecera automática desde Google Sheets (desde columna B)
     const headerRow = json.table.rows[0].c;
-
-    // 2. Crear cabecera automática (todas las columnas excepto la 0)
     const header = document.createElement("tr");
+
     headerRow.slice(1).forEach(col => {
       const th = document.createElement("th");
       th.textContent = col && col.v ? col.v : "";
       header.appendChild(th);
     });
+
     table.appendChild(header);
 
-    // 3. Pintar filas (saltamos la primera fila)
+    // 2. Pintar filas (saltamos la primera fila)
     json.table.rows.slice(1).forEach(row => {
       const tr = document.createElement("tr");
 
-      // Pintar todas las columnas excepto la 0
+      // Pintar columnas desde la B en adelante
       row.c.slice(1).forEach(cell => {
         const td = document.createElement("td");
         td.textContent = cell && cell.v ? cell.v : "";
@@ -30,4 +30,5 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
       table.appendChild(tr);
     });
   });
+
 
