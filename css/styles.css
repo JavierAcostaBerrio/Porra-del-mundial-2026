@@ -298,63 +298,6 @@ td.resultado-fallo {
    ESTILOS SOLO PARA PRONÓSTICOS
    ================================ */
 
-/* CONTENEDOR */
-#pronosticos .tabla-scroll {
-    max-height: 500px;
-    overflow: auto;
-    border: 1px solid #000;
-}
-
-/* TABLA */
-#pronosticos #tabla {
-    width: max-content;
-    border-collapse: separate;
-    border-spacing: 0;
-    background: #000;
-    color: #fff;
-    font-size: 0.8rem;
-}
-
-/* CABECERA */
-#pronosticos #tabla thead th {
-    position: sticky;
-    top: 0;
-    background: #000;      /* FONDO NEGRO */
-    color: #D4AF37;        /* TEXTO DORADO */
-    font-weight: 700;
-    padding: 6px 8px;
-    z-index: 30;
-    border-bottom: 2px solid #000;
-}
-
-/* PRIMERA COLUMNA (cabecera + datos) */
-#pronosticos #tabla thead th:first-child,
-#pronosticos #tabla tbody td:first-child {
-    position: sticky;
-    left: 0;
-    z-index: 40;
-}
-
-/* ESQUINA SUPERIOR IZQUIERDA (B1) */
-#pronosticos #tabla thead th:first-child {
-    z-index: 50;
-}
-
-/* CELDAS */
-#pronosticos #tabla tbody td {
-    padding: 4px 6px;
-    border-bottom: 1px solid #000;
-}
-
-/* ZEBRA */
-#pronosticos #tabla tbody tr:nth-child(even) td {
-    background: #333;
-}
-
-/* HOVER */
-#pronosticos #tabla tbody tr:hover td {
-    background: #444;
-}
 
 
 
