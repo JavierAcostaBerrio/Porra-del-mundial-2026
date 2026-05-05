@@ -1,29 +1,51 @@
-const columnas = [0, 1, 3, 4];
-fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=444190468&tqx=out:json")
-  .then(res => res.text())
-  .then(text => {
-    const json = JSON.parse(text.substring(47, text.length - 2));
-    const table = document.getElementById("tabla");
+// URL publicada de tu hoja como CSV (cambia SPREADSHEET_ID por el tuyo real)
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/export?format=csv&gid=444190468";
 
-    // Cabecera
-    const header = document.createElement("tr");
-    columnas.forEach(i => {
-      const th = document.createElement("th");
-      th.textContent = json.table.cols[i].label;
-      header.appendChild(th);
-    });
-    table.appendChild(header);
+// Columnas A–E → 5 columnas
+const NUM_COLUMNAS = 5;
 
-    
-    // Filas
-    json.table.rows.forEach(row => {
-      const tr = document.createElement("tr");
-      columnas.forEach(i => {
-        const td = document.createElement("td");
-        td.textContent = row.c[i] ? row.c[i].v : "";
-        tr.appendChild(td);
-      });
-      table.appendChild(tr);
+// ID del <table> donde se pintará
+const TABLE_ID = "tabla";
+
+function parseCSV(texto) {
+  return texto
+    .split("\n")
+    .map(fila => fila.trim())
+    .filter(fila => fila.length > 0)
+    .map(fila =>
+      fila
+        .split(",")
+        .map(celda => celda.replace(/^"|"$/g, "")) // quitar comillas externas
+    );
+}
+
+function pintarTablaDesdeCSV(csvTexto) {
+  const filas = parseCSV(csvTexto);
+  const tabla = document.getElementById(TABLE_ID);
+
+  if (!tabla) {
+    console.error(`No existe una tabla con id="${TABLE_ID}"`);
+    return;
+  }
+
+  tabla.innerHTML = ""; // limpiar antes de pintar
+
+  filas.forEach((fila, index) => {
+    const tr = document.createElement("tr");
+
+    fila.slice(0, NUM_COLUMNAS).forEach(valor => {
+      const celda = index === 0 ? document.createElement("th") : document.createElement("td");
+      celda.textContent = valor;
+      tr.appendChild(celda);
     });
+
+    tabla.appendChild(tr);
   });
+}
+
+fetch(SHEET_URL)
+  .then(res => res.text())
+  .then(csv => pintarTablaDesdeCSV(csv))
+  .catch(err => console.error("Error cargando la hoja:", err));
+
 
