@@ -7,7 +7,7 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
     const thead = document.createElement("thead");
     const tbody = document.createElement("tbody");
 
-    // CABECERA: fila 1, columnas desde B en adelante
+    // CABECERA: fila 1 completa desde columna B
     const headerRow = json.table.rows[0].c.slice(1);
     const trHead = document.createElement("tr");
 
