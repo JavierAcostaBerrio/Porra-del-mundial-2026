@@ -4,23 +4,22 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
     const json = JSON.parse(text.substring(47, text.length - 2));
     const table = document.getElementById("tabla");
 
-    // Crear thead y tbody
     const thead = document.createElement("thead");
     const tbody = document.createElement("tbody");
 
-    // 1. Cabecera automática desde Google Sheets (desde columna B)
-    const headerRow = json.table.rows[0].c;
-    const headerTr = document.createElement("tr");
+    // CABECERA: fila 1, columnas desde B en adelante
+    const headerRow = json.table.rows[0].c.slice(1);
+    const trHead = document.createElement("tr");
 
-    headerRow.slice(1).forEach(col => {
+    headerRow.forEach(col => {
       const th = document.createElement("th");
       th.textContent = col && col.v ? col.v : "";
-      headerTr.appendChild(th);
+      trHead.appendChild(th);
     });
 
-    thead.appendChild(headerTr);
+    thead.appendChild(trHead);
 
-    // 2. Filas de datos (saltamos la primera fila)
+    // DATOS: filas desde la 2, columnas desde B
     json.table.rows.slice(1).forEach(row => {
       const tr = document.createElement("tr");
 
