@@ -2,7 +2,8 @@
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/export?format=csv&gid=444190468";
 
 // Columnas A–E → 5 columnas
-const NUM_COLUMNAS = 5;
+const COLUMNA_INICIO = 1; // Saltar columna A
+const COLUMNA_FIN = 5;    // Pintar hasta la E (sin incluir la 5)
 
 // ID del <table> donde se pintará
 const TABLE_ID = "tabla";
