@@ -297,85 +297,77 @@ td.resultado-fallo {
    ESTILOS SOLO PARA PRONÓSTICOS
    ================================ */
 
-/* Contenedor con scroll */
 #pronosticos .tabla-scroll {
-    max-height: 500px;        /* Scroll vertical */
-    overflow: auto;           /* Scroll vertical + horizontal */
+    max-height: 500px;
+    overflow: auto;           /* vertical + horizontal */
     position: relative;
-    border: 1px solid #000;   /* Borde negro */
+    border: 1px solid #000;
 }
 
-/* Tabla general */
+/* Tabla */
 #pronosticos #tabla {
-    width: max-content;       /* Permite scroll horizontal */
+    width: max-content;
     border-collapse: separate;
     border-spacing: 0;
     font-size: 0.8rem;
-    background: #000;         /* Fondo negro */
-    color: #fff;              /* Texto blanco */
+    background: #000;
+    color: #fff;
 }
 
-/* ================================
-   CABECERA (todas las columnas)
-   ================================ */
-#pronosticos #tabla th {
+/* CABECERA (todas las columnas) */
+#pronosticos #tabla thead th {
     position: sticky;
-    top: 0;                   /* Fija arriba */
-    background: #D4AF37;      /* Dorado */
-    color: #000;              /* Texto negro */
-    z-index: 10;
+    top: 0;
+    background: #D4AF37;      /* dorado */
+    color: #000;
+    z-index: 30;
     font-size: 0.75rem;
     font-weight: 700;
     border-bottom: 2px solid #000;
     padding: 6px 8px;
 }
 
-/* ==========================================
-   PRIMERA COLUMNA VISIBLE (columna B)
-   sticky arriba + izquierda
-   ========================================== */
-#pronosticos #tabla th:nth-child(1),
-#pronosticos #tabla td:nth-child(1) {
-    position: sticky;
-    left: 0;                  /* Fija a la izquierda */
-    z-index: 20;              /* Por encima del resto */
-    min-width: 220px;
-    white-space: normal;
-}
-
-/* Cabecera de la primera columna (columna B) */
-#pronosticos #tabla th:nth-child(1) {
-    top: 0;                   /* Fija arriba */
-    background: #D4AF37;      /* Dorado */
-    color: #000;
-}
-
-/* Celdas de la primera columna */
-#pronosticos #tabla td:nth-child(1) {
-    background: #111;         /* Gris muy oscuro */
-    color: #fff;
-    border-right: 2px solid #000;
-}
-
-/* ================================
-   CELDAS GENERALES
-   ================================ */
-#pronosticos #tabla td {
+/* CELDAS GENERALES */
+#pronosticos #tabla tbody td {
     padding: 4px 6px;
-    border-bottom: 1px solid #000; /* Línea negra */
+    border-bottom: 1px solid #000;
 }
 
-/* Fila zebra gris oscuro */
-#pronosticos #tabla tr:nth-child(even) td {
+/* FILAS ZEBRA */
+#pronosticos #tabla tbody tr:nth-child(even) td {
     background-color: #333;
     color: #fff;
 }
 
-/* Hover */
-#pronosticos #tabla tr:hover td {
-    background-color: #D4AF37;
-    color: #000;
+/* HOVER */
+#pronosticos #tabla tbody tr:hover td {
+    background-color: #444;
+    color: #fff;
 }
+
+/* PRIMERA COLUMNA (cabecera + datos) sticky a la izquierda */
+#pronosticos #tabla thead th:first-child,
+#pronosticos #tabla tbody td:first-child {
+    position: sticky;
+    left: 0;
+}
+
+/* Esquinas y z-index para que nada se tape */
+#pronosticos #tabla thead th:first-child {
+    z-index: 50;              /* esquina superior izquierda */
+}
+
+#pronosticos #tabla thead th {
+    z-index: 40;              /* resto de cabeceras */
+}
+
+#pronosticos #tabla tbody td:first-child {
+    z-index: 35;
+    background: #111;
+    color: #fff;
+    border-right: 2px solid #000;
+}
+
 
 
 
