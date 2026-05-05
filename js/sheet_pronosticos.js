@@ -5,34 +5,24 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
     const json = JSON.parse(text.substring(47, text.length - 2));
     const table = document.getElementById("tabla");
 
-    // --- CABECERA: fila 1, desde columna B en adelante ---
-    const headerRow = json.table.rows[0].c;   // Fila 1 completa
-    const headerTr = document.createElement("tr");
-
-    // Recorremos desde índice 1 (columna B) hasta el final
-    for (let i = 1; i < headerRow.length; i++) {
-      const cell = headerRow[i];
+    // Cabecera
+    const header = document.createElement("tr");
+    columnas.forEach(i => {
       const th = document.createElement("th");
-      th.textContent = cell && cell.v ? cell.v : "";
-      headerTr.appendChild(th);
-    }
+      th.textContent = json.table.cols[i].label;
+      header.appendChild(th);
+    });
+    table.appendChild(header);
 
-    table.appendChild(headerTr);
-
-    // --- FILAS DE DATOS: desde fila 2, columnas desde B ---
-    json.table.rows.slice(1).forEach(row => {
+    // Filas
+    json.table.rows.forEach(row => {
       const tr = document.createElement("tr");
-      const cells = row.c;
-
-      for (let i = 1; i < cells.length; i++) {
-        const cell = cells[i];
+      columnas.forEach(i => {
         const td = document.createElement("td");
-        td.textContent = cell && cell.v ? cell.v : "";
+        td.textContent = row.c[i] ? row.c[i].v : "";
         tr.appendChild(td);
-      }
-
+      });
       table.appendChild(tr);
     });
   });
-
 
