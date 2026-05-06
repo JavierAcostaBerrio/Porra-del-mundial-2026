@@ -1,4 +1,4 @@
-
+const columnas = [0, 1, 3, 4, 5];
 fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=444190468&tqx=out:json")
 .then(res => res.text())
   .then(text => {
