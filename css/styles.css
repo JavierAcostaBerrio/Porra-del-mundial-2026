@@ -327,8 +327,8 @@ td.resultado-fallo {
 #tabla-pronosticos th {
     position: sticky;
     top: 0;
-    background: #D4AF37;
-    color: #000;
+    background: #000;
+    color: #D4AF37;
     z-index: 30;
 }
 
