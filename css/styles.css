@@ -297,6 +297,60 @@ td.resultado-fallo {
 /* ================================
    ESTILOS SOLO PARA PRONÓSTICOS
    ================================ */
+/* Contenedor con scroll solo para esta tabla */
+#tabla-pronosticos-wrapper {
+    width: 100%;
+    max-height: 500px;
+    overflow: auto;
+    position: relative;
+    border: 2px solid #333;
+}
+
+/* Tabla específica */
+#tabla-pronosticos {
+    border-collapse: collapse;
+    width: max-content;
+    background: #111;
+    color: #fff;
+}
+
+/* Celdas */
+#tabla-pronosticos th,
+#tabla-pronosticos td {
+    padding: 8px 12px;
+    border: 1px solid #333;
+    white-space: nowrap;
+}
+
+/* Cabecera fija */
+#tabla-pronosticos th {
+    position: sticky;
+    top: 0;
+    background: #D4AF37;
+    color: #000;
+    z-index: 30;
+}
+
+/* Primera columna fija */
+#tabla-pronosticos th:nth-child(1),
+#tabla-pronosticos td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    z-index: 25;
+    background: #222;
+}
+
+/* Cabecera de la primera columna */
+#tabla-pronosticos th:nth-child(1) {
+    background: #D4AF37;
+    color: #000;
+    z-index: 40;
+}
+
+/* Zebra */
+#tabla-pronosticos tr:nth-child(even) td {
+    background: #181818;
+}
 
 
 
