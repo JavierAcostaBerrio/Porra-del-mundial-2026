@@ -274,7 +274,7 @@ tbody tr:nth-child(odd) {
   background-color: #101010;
 }
 
-#tabla.scroll tbody tr:hover td {
+#tabla tbody tr:hover td {
     background-color: #333333;   /* Color de resaltado */
     color: #ffffff;              /* Texto blanco */
     cursor: pointer;             /* Opcional: mano al pasar */
