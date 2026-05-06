@@ -272,8 +272,8 @@ tbody tr:nth-child(odd) {
 }
 
 tbody tr:hover {
-  background-color: #1b1b1b;
-  tect-color: #D4AF37; 
+  background-color: #D4AF37;
+  text-color: #fff; 
 }
 
 #tabla td {
