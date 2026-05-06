@@ -273,10 +273,10 @@ table {
   max-width: 140px;
 }
 
-td {
-  padding: 8px 10px;
-  border-top: 1px solid #222;
-}
+/*td {*/
+/*  padding: 8px 10px;*/
+/*  border-top: 1px solid #222;*/
+/*}*/
 
 td.resultado-correcto {
   color: #3CCB5A;
