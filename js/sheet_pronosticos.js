@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=444190468";
 
     // Columnas A–F → índices 0 a 5 (slice no incluye el final)
-    const COL_INICIO = 0;
+    const COL_INICIO = 1;
     const COL_FIN = 6;
 
     // Tabla donde se pintarán los datos
