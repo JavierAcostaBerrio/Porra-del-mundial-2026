@@ -277,11 +277,6 @@ tbody tr:nth-child(odd) {
     cursor: pointer;             /* Opcional: mano al pasar */
 }
 
-tbody tr:hover {
-  background-color: #000;
-  text-color: #D4AF37; 
-}
-
 #tabla td {
   max-width: 140px;
 }
