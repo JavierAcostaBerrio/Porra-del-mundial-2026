@@ -269,6 +269,10 @@ table {
     cursor: pointer;             /* Opcional: mano al pasar */
     max-width: 140px;
 }
+td {
+  padding: 8px 10px;
+  border-top: 1px solid #222;
+}
 
 /* Zebra */
 #tabla tr:nth-child(odd) td {
