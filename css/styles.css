@@ -264,7 +264,7 @@ table {
 }
 
 #tabla tr:hover td {
-    background-color: #333333;   /* Color de resaltado */
+    background-color: #333333 !important;   /* Color de resaltado */
     color: #ffffff;              /* Texto blanco */
     cursor: pointer;             /* Opcional: mano al pasar */
     max-width: 140px;
