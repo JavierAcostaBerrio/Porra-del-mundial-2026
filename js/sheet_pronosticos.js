@@ -5,7 +5,7 @@ const COL_INICIO = 1; // Columna B
 const COL_FIN = 6;    // Columna F (slice no incluye el final)
 
 function pintarTabla(datos) {
-  const tabla = document.getElementById("tabla");
+  const tabla = document.getElementById("tabla-pronosticos");
   tabla.innerHTML = "";
 
   const rows = datos.table.rows;
