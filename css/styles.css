@@ -267,25 +267,7 @@ table {
     background-color: #333333;   /* Color de resaltado */
     color: #ffffff;              /* Texto blanco */
     cursor: pointer;             /* Opcional: mano al pasar */
-}
-
-#tabla td {
-  max-width: 140px;
-}
-
-/*td {*/
-/*  padding: 8px 10px;*/
-/*  border-top: 1px solid #222;*/
-/*}*/
-
-td.resultado-correcto {
-  color: #3CCB5A;
-  font-weight: 600;
-}
-
-td.resultado-fallo {
-  color: #D64545;
-  font-weight: 600;
+    max-width: 140px;
 }
 
 /* Zebra */
