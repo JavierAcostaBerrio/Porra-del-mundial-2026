@@ -266,10 +266,7 @@ table {
 tbody tr:nth-child(even) {
   background-color: #151515;
 }
-tbody tr:hover {
-  background-color: #000;
-  text-color: #D4AF37; 
-}
+
 tbody tr:nth-child(odd) {
   background-color: #101010;
 }
