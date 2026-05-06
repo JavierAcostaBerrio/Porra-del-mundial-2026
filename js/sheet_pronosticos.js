@@ -1,34 +1,29 @@
 
 fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=444190468&tqx=out:json")
-const COLUMNA_INICIO = 1; // Saltar columna A
-const COLUMNA_FIN = 5;    // Pintar columnas B–E
+.then(res => res.text())
+  .then(text => {
+    const json = JSON.parse(text.substring(47, text.length - 2));
+    const table = document.getElementById("tabla");
 
-function pintarTabla(datos) {
-  const tabla = document.getElementById("tabla");
-  tabla.innerHTML = "";
-
-  const rows = datos.table.rows;
-
-  rows.forEach((row, index) => {
-    const tr = document.createElement("tr");
-
-    const celdas = row.c.slice(COLUMNA_INICIO, COLUMNA_FIN);
-
-    celdas.forEach(celda => {
-      const valor = celda ? celda.v : "";
-      const el = index === 0 ? document.createElement("th") : document.createElement("td");
-      el.textContent = valor;
-      tr.appendChild(el);
+    // Cabecera
+    const header = document.createElement("tr");
+    columnas.forEach(i => {
+      const th = document.createElement("th");
+      th.textContent = json.table.cols[i].label;
+      header.appendChild(th);
     });
+    table.appendChild(header);
 
-    tabla.appendChild(tr);
+    // Filas
+    json.table.rows.forEach(row => {
+      const tr = document.createElement("tr");
+      columnas.forEach(i => {
+        const td = document.createElement("td");
+        td.textContent = row.c[i] ? row.c[i].v : "";
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
+    });
   });
-}
 
-fetch(SHEET_URL)
-  .then(res => res.text())
-  .then(texto => {
-    const json = JSON.parse(texto.substring(47, texto.length - 2));
-    pintarTabla(json);
-  })
   .catch(err => console.error("Error cargando datos:", err));
