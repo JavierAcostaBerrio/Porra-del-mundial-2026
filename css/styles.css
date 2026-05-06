@@ -347,8 +347,8 @@ td.resultado-fallo {
 
 /* Cabecera de la primera columna */
 #tabla-pronosticos th:nth-child(1) {
-    background: #D4AF37;
-    color: #111;
+    background: #111;
+    color: #D4AF37;
     z-index: 40;
     font-size: 0.75rem;
 }
