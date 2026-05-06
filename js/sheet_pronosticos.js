@@ -1,6 +1,5 @@
-const SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/gviz/tq?gid=444190468";
 
+fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=444190468&tqx=out:json")
 const COLUMNA_INICIO = 1; // Saltar columna A
 const COLUMNA_FIN = 5;    // Pintar columnas B–E
 
