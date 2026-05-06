@@ -274,6 +274,12 @@ tbody tr:nth-child(odd) {
   background-color: #101010;
 }
 
+#tabla tbody tr:hover td {
+    background-color: #333333;   /* Color de resaltado */
+    color: #ffffff;              /* Texto blanco */
+    cursor: pointer;             /* Opcional: mano al pasar */
+}
+
 tbody tr:hover {
   background-color: #000;
   text-color: #D4AF37; 
