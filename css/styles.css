@@ -273,6 +273,7 @@ tbody tr:nth-child(odd) {
 
 tbody tr:hover {
   background-color: #1b1b1b;
+  tect-color: #D4AF37; 
 }
 
 #tabla td {
