@@ -357,6 +357,12 @@ td.resultado-fallo {
     font-size: 0.75rem;
 }
 
+#tabla-pronosticos tbody tr:hover td {
+    background-color: #333333;   /* Color de resaltado */
+    color: #ffffff;              /* Texto blanco */
+    cursor: pointer;             /* Opcional: mano al pasar */
+}
+
 /* Zebra */
 #tabla-pronosticos tr:nth-child(odd) td {
     background: #181818;
