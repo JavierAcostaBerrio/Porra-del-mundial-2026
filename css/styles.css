@@ -304,6 +304,7 @@ td.resultado-fallo {
     overflow: auto;
     position: relative;
     border: 2px solid #333;
+   font-size: 0.95rem;
 }
 
 /* Tabla específica */
