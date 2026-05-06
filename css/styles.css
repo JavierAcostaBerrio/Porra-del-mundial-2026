@@ -304,6 +304,11 @@ td.resultado-fallo {
   font-weight: 600;
 }
 
+/* Zebra */
+#tabla tr:nth-child(odd) td {
+    background: #181818;
+}
+
 /* ================================
    ESTILOS SOLO PARA PRONÓSTICOS
    ================================ */
