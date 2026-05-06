@@ -304,7 +304,7 @@ td.resultado-fallo {
     overflow: auto;
     position: relative;
     border: 2px solid #333;
-   font-size: 0.95rem;
+    font-size: 0.95rem;
 }
 
 /* Tabla específica */
@@ -313,6 +313,7 @@ td.resultado-fallo {
     width: max-content;
     background: #111;
     color: #fff;
+    font-size: 0.95rem;
 }
 
 /* Celdas */
@@ -321,6 +322,7 @@ td.resultado-fallo {
     padding: 8px 12px;
     border: 1px solid #333;
     white-space: nowrap;
+    font-size: 0.95rem;
 }
 
 /* Cabecera fija */
@@ -330,6 +332,7 @@ td.resultado-fallo {
     background: #000;
     color: #D4AF37;
     z-index: 30;
+    font-size: 0.95rem;
 }
 
 /* Primera columna fija */
@@ -339,6 +342,7 @@ td.resultado-fallo {
     left: 0;
     z-index: 25;
     background: #222;
+    font-size: 0.95rem;
 }
 
 /* Cabecera de la primera columna */
@@ -346,6 +350,7 @@ td.resultado-fallo {
     background: #D4AF37;
     color: #000;
     z-index: 40;
+    font-size: 0.95rem;
 }
 
 /* Zebra */
