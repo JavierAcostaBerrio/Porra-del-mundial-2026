@@ -354,7 +354,7 @@ td.resultado-fallo {
 }
 
 /* Zebra */
-#tabla-pronosticos tr:nth-child(even) td {
+#tabla-pronosticos tr:nth-child(odd) td {
     background: #181818;
 }
 
