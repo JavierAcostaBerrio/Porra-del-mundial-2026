@@ -263,14 +263,6 @@ table {
   border-bottom: 2px solid #D4AF37;
 }
 
-tbody tr:nth-child(even) {
-  background-color: #151515;
-}
-
-tbody tr:nth-child(odd) {
-  background-color: #101010;
-}
-
 #tabla tbody tr:hover td {
     background-color: #333333;   /* Color de resaltado */
     color: #ffffff;              /* Texto blanco */
