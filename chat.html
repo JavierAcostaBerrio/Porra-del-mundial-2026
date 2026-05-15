@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-</head>
 
 <style>    
 /* Fondo general */
@@ -98,6 +97,8 @@ button:hover {
     background: #F7E7A1;
 }
 </style>
+</head>
+
 <body>
 
 <header class="cabecera-mundial"></header>
@@ -109,51 +110,36 @@ button:hover {
     <li><a href="eliminatorias.html">Eliminatorias</a></li>
     <li><a href="estadisticas.html">Estadísticas</a></li>
     <li><a href="ficha.html">Ficha</a></li>
-    <li><a href="comentarios.html" class="activo">Comentario Jornada</a></li>
-    <li><a href="chat.html">Chat</a></li>
+    <li><a href="comentarios.html">Comentario Jornada</a></li>
+    <li><a href="chat.html" class="activo">Chat</a></li>
     <li><a href="base.html">Bases participación</a></li>
     <li><a href="#mundial">Mundial</a></li>
   </ul>
 </nav>
-<!-- SECCIÓN BIENVENIDA -->
-  <section>
+
+<section>
     <h2>Chat para los participantes de la porra del Mundial de fútbol 2026</h2>
     <p>
       Comenta con tus amigos la evolución de la Porra y el Mundial de futbol 2026, pero recuerda, SIEMPRE con RESPETO.
     </p>
-  </section>
+</section>
+
 <section class="card">
     <h2>Chat</h2>
-    
 
+    <div id="mensajes"></div>
 
-<div id="mensajes" style="height:300px; overflow-y:auto; border:1px solid #ccc; padding:10px;"></div>
-
-<input id="msg" placeholder="Escribe un mensaje..." style="width:70%; padding:10px;">
-<button onclick="enviarMensaje()">Enviar</button>
+    <div class="chat-input">
+        <input id="msg" placeholder="Escribe un mensaje...">
+        <button onclick="enviarMensaje()">Enviar</button>
+    </div>
 </section>
+
 <footer>
     La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
 </footer>
+
+<!-- ⭐ SCRIPT COMPLETO DEL CHAT (Firebase + Realtime Database) -->
 <script type="module">
-onChildAdded(ref(db, "chat"), (snapshot) => {
-  const data = snapshot.val();
-  const div = document.createElement("div");
-
-  // Si el usuario eres tú → burbuja dorada
-  const clase = data.usuario === "Javier" ? "javier" : "otro";
-
-  div.className = `mensaje ${clase}`;
-  div.textContent = `${data.usuario}: ${data.mensaje}`;
-
-  document.getElementById("mensajes").appendChild(div);
-
-  // Scroll automático al final
-  const cont = document.getElementById("mensajes");
-  cont.scrollTop = cont.scrollHeight;
-});
-
-</script>
-
-</body>
-</html>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getDatabase, ref, push, onChildAdded } from "https
