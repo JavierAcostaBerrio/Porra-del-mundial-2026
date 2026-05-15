@@ -20,7 +20,7 @@ body {
 /* Título */
 h2 {
     color: #D4AF37;
-    text-align: left;
+    text-align: center;
     margin-bottom: 20px;
     font-weight: 900;
 }
@@ -139,7 +139,56 @@ button:hover {
     La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
 </footer>
 
-<!-- ⭐ SCRIPT COMPLETO DEL CHAT (Firebase + Realtime Database) -->
+<!-- ⭐ SCRIPT COMPLETO DEL CHAT -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import { getDatabase, ref, push, onChildAdded } from "https
+import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+
+// Tu configuración de Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyBR2oAJfKqsEoa__LbrC4O5av1qPoYEjBU",
+    authDomain: "porra-mundial-2026-chat.firebaseapp.com",
+    databaseURL: "https://porra-mundial-2026-chat-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "porra-mundial-2026-chat",
+    storageBucket: "porra-mundial-2026-chat.firebasestorage.app",
+    messagingSenderId: "198752434882",
+    appId: "1:198752434882:web:2a7638da040246f247d95b"
+};
+
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// Enviar mensaje
+window.enviarMensaje = function () {
+    const texto = document.getElementById("msg").value;
+    if (!texto.trim()) return;
+
+    push(ref(db, "chat"), {
+        usuario: "Javier",
+        mensaje: texto,
+        fecha: Date.now()
+    });
+
+    document.getElementById("msg").value = "";
+};
+
+// Recibir mensajes en tiempo real
+onChildAdded(ref(db, "chat"), (snapshot) => {
+    const data = snapshot.val();
+    const div = document.createElement("div");
+
+    const clase = data.usuario === "Javier" ? "javier" : "otro";
+    div.className = `mensaje ${clase}`;
+    div.textContent = `${data.usuario}: ${data.mensaje}`;
+
+    document.getElementById("mensajes").appendChild(div);
+
+    // Scroll automático
+    const cont = document.getElementById("mensajes");
+    cont.scrollTop = cont.scrollHeight;
+});
+</script>
+
+</body>
+</html>
