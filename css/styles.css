@@ -209,7 +209,6 @@ p {
   flex: 1;              /* ambas ocupan el mismo ancho */
   height: 100%;         /* se igualan automáticamente */
   margin-bottom: 30px; /* separación entre tarjetas */
-   max-width: 48%;
 }
 .card-vacia {
     visibility: hidden;
