@@ -8,6 +8,96 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 
+<style>    
+/* Fondo general */
+body {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Título */
+h2 {
+    color: #D4AF37;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 900;
+}
+
+/* Contenedor de mensajes */
+#mensajes {
+    height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    border-radius: 12px;
+    background: #1a1a1a;
+    border: 2px solid #D4AF37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Burbujas de chat */
+.mensaje {
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 10px;
+    max-width: 75%;
+    line-height: 1.4;
+    font-size: 15px;
+}
+
+/* Mensajes del usuario */
+.mensaje.javier {
+    background: linear-gradient(135deg, #B8860B, #D4AF37, #F7E7A1);
+    color: #000;
+    margin-left: auto;
+    border: 1px solid #F7E7A1;
+}
+
+/* Mensajes de otros */
+.mensaje.otro {
+    background: #333;
+    border: 1px solid #555;
+}
+
+/* Input + botón */
+.chat-input {
+    display: flex;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+#msg {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #D4AF37;
+    background: #111;
+    color: #fff;
+    font-size: 16px;
+}
+
+#msg:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+button {
+    background: #D4AF37;
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #F7E7A1;
+}
+</style>
 <body>
 
 <header class="cabecera-mundial"></header>
@@ -46,45 +136,23 @@
     La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
 </footer>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
-
-// Tu configuración de Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyBR2oAJfKqsEoa__LbrC4O5av1qPoYEjBU",
-  authDomain: "porra-mundial-2026-chat.firebaseapp.com",
-  databaseURL: "https://porra-mundial-2026-chat-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "porra-mundial-2026-chat",
-  storageBucket: "porra-mundial-2026-chat.firebasestorage.app",
-  messagingSenderId: "198752434882",
-  appId: "1:198752434882:web:2a7638da040246f247d95b"
-};
-
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// Enviar mensaje
-window.enviarMensaje = function () {
-  const texto = document.getElementById("msg").value;
-  if (!texto.trim()) return;
-
-  push(ref(db, "chat"), {
-    usuario: "Javier",
-    mensaje: texto,
-    fecha: Date.now()
-  });
-
-  document.getElementById("msg").value = "";
-};
-
-// Recibir mensajes en tiempo real
 onChildAdded(ref(db, "chat"), (snapshot) => {
   const data = snapshot.val();
   const div = document.createElement("div");
+
+  // Si el usuario eres tú → burbuja dorada
+  const clase = data.usuario === "Javier" ? "javier" : "otro";
+
+  div.className = `mensaje ${clase}`;
   div.textContent = `${data.usuario}: ${data.mensaje}`;
+
   document.getElementById("mensajes").appendChild(div);
+
+  // Scroll automático al final
+  const cont = document.getElementById("mensajes");
+  cont.scrollTop = cont.scrollHeight;
 });
+
 </script>
 
 </body>
