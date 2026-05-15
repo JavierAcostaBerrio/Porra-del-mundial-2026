@@ -54,7 +54,12 @@ h2 {
 .mensaje .texto {
     color: #fff;
 }
-
+/* Fecha y hora del mensaje */
+.mensaje .fecha {
+    color: #888;
+    font-size: 12px;
+    margin-left: 8px;
+}
 /* Input + botón */
 .chat-input {
     display: flex;
@@ -172,10 +177,23 @@ window.enviarMensaje = function () {
 onChildAdded(ref(db, "chat"), (snapshot) => {
     const data = snapshot.val();
     const div = document.createElement("div");
+    div.className = "mensaje";
 
-    const clase = data.usuario === "Javier" ? "javier" : "otro";
-    div.className = `mensaje ${clase}`;
-    div.textContent = `${data.usuario}: ${data.mensaje}`;
+    // Convertir timestamp a fecha legible
+    const fecha = new Date(data.fecha);
+    const horaFormateada = fecha.toLocaleString("es-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+    div.innerHTML = `
+        <span class="nombre">${data.usuario}</span>
+        <span class="texto">${data.mensaje}</span>
+        <span class="fecha">${horaFormateada}</span>
+    `;
 
     document.getElementById("mensajes").appendChild(div);
 
@@ -183,6 +201,7 @@ onChildAdded(ref(db, "chat"), (snapshot) => {
     const cont = document.getElementById("mensajes");
     cont.scrollTop = cont.scrollHeight;
 });
+
 </script>
 
 </body>
