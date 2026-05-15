@@ -210,7 +210,9 @@ p {
   height: 100%;         /* se igualan automáticamente */
   margin-bottom: 30px; /* separación entre tarjetas */
 }
-
+.card-vacia {
+    visibility: hidden;
+}
 /* ===========================
    BOTONES
 =========================== */
