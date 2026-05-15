@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dibujarGraficoGolesPichichiEspana();
     dibujarGraficoTarjeta();
     dibujarGraficoCapitanEspana();
+    dibujarGraficoEstrategiaEspana();
     
 });
 
@@ -585,6 +586,65 @@ async function dibujarGraficoCapitanEspana() {
     const values = datos.map(f => Number(f.colP));
 
     const ctx = document.getElementById("CapitanEspanaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
+}
+// -------------------------------
+// Grafico Capitan España
+// -------------------------------
+async function dibujarGraficoEstrategiaEspana() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colQ);
+    const values = datos.map(f => Number(f.colR));
+
+    const ctx = document.getElementById("EstrategiaEspanaChart").getContext("2d");
 
     new Chart(ctx, {
         type: "bar",
