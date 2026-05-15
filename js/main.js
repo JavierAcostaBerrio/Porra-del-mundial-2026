@@ -636,7 +636,7 @@ async function dibujarGraficoCapitanEspana() {
     });
 }
 // -------------------------------
-// Grafico Capitan España
+// Grafico Estrategia España
 // -------------------------------
 async function dibujarGraficoEstrategiaEspana() {
     const datos = await cargarEstadisticas();
