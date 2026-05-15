@@ -152,7 +152,9 @@ async function cargarEstadisticas() {
         colM: fila.c[12]?.v ?? "",
         colN: fila.c[13]?.v ?? 0,
         colO: fila.c[14]?.v ?? "",
-        colP: fila.c[15]?.v ?? 0
+        colP: fila.c[15]?.v ?? 0,
+        colQ: fila.c[16]?.v ?? "",
+        colR: fila.c[17]?.v ?? 0
     }));
 
     return filas;
