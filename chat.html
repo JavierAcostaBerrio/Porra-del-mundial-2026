@@ -36,28 +36,23 @@ h2 {
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
-/* Burbujas de chat */
+/* Mensaje simple sin burbujas */
 .mensaje {
-    padding: 10px 14px;
-    margin: 8px 0;
-    border-radius: 10px;
-    max-width: 75%;
+    margin: 6px 0;
+    font-size: 16px;
     line-height: 1.4;
-    font-size: 15px;
 }
 
-/* Mensajes del usuario */
-.mensaje.javier {
-    background: linear-gradient(135deg, #B8860B, #D4AF37, #F7E7A1);
-    color: #000;
-    margin-left: auto;
-    border: 1px solid #F7E7A1;
+/* Nombre del usuario */
+.mensaje .nombre {
+    color: #D4AF37;
+    font-weight: bold;
+    margin-right: 6px;
 }
 
-/* Mensajes de otros */
-.mensaje.otro {
-    background: #333;
-    border: 1px solid #555;
+/* Texto del mensaje */
+.mensaje .texto {
+    color: #fff;
 }
 
 /* Input + botón */
