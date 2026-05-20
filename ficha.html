@@ -6,6 +6,98 @@
 
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Chart.js SOLO para esta página -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- ESTILOS ESPECÍFICOS DE LA FICHA -->
+    <style>
+      /* CONTENEDOR GENERAL */
+      .ficha-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 20px;
+      }
+      @media (max-width: 900px) {
+        .ficha-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* PANEL LATERAL */
+      .ficha-panel {
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 10px;
+        padding: 16px;
+        color: #eee;
+      }
+      .ficha-panel h3 {
+        margin-bottom: 10px;
+        color: #f5c451;
+      }
+      .ficha-panel select {
+        width: 100%;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #444;
+        background: #000;
+        color: #fff;
+      }
+
+      .extra-box {
+        margin-top: 20px;
+        padding: 10px;
+        background: #000;
+        border: 1px solid #333;
+        border-radius: 8px;
+      }
+      .extra-box div {
+        margin-bottom: 6px;
+      }
+
+      /* ZONA PRINCIPAL */
+      .ficha-main {
+        display: grid;
+        gap: 20px;
+      }
+      .ficha-card {
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 10px;
+        padding: 16px;
+        color: #eee;
+      }
+      .ficha-card h3 {
+        margin-bottom: 10px;
+        color: #f5c451;
+      }
+
+      /* TABLA */
+      .tabla-wrapper {
+        max-height: 350px;
+        overflow-y: auto;
+        border: 1px solid #333;
+        border-radius: 8px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #eee;
+      }
+      th, td {
+        padding: 8px;
+        border-bottom: 1px solid #333;
+      }
+      th {
+        background: #000;
+        color: #f5c451;
+        position: sticky;
+        top: 0;
+      }
+    </style>
 </head>
 
 <body>
@@ -27,21 +119,218 @@
 </nav>
 
 <!-- SECCIÓN BIENVENIDA -->
-  <section>
-    <h2>Ficha de jugador/a de la porra del Mundial 2026</h2>
-    <p>
-      Mira la ficha de cada participante de la porra del Mundial 2026.
-    </p>
-  </section>
+<section>
+  <h2>Ficha de jugador/a de la porra del Mundial 2026</h2>
+  <p>Mira la ficha de cada participante de la porra del Mundial 2026.</p>
+</section>
 
-    <!-- Tus scripts -->
-    <script src="js/sheet.js"></script>
-    <script src="js/main.js"></script>
+<!-- ============================= -->
+<!--   AQUI VA LA FICHA COMPLETA   -->
+<!-- ============================= -->
 
-    <!-- FOOTER -->
-  <footer>
-    La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
-  </footer>
+<div class="ficha-container">
+
+  <!-- PANEL LATERAL -->
+  <aside class="ficha-panel">
+    <h3>Selecciona jugador</h3>
+    <select id="jugadorSelect">
+      <option value="">Elige un jugador...</option>
+    </select>
+
+    <div class="extra-box">
+      <h4>Extras</h4>
+      <div><strong>Campeón:</strong> <span id="extraCampeon">—</span></div>
+      <div><strong>Subcampeón:</strong> <span id="extraSubcampeon">—</span></div>
+      <div><strong>Goleador:</strong> <span id="extraGoleador">—</span></div>
+      <div><strong>Sorpresa:</strong> <span id="extraSorpresa">—</span></div>
+    </div>
+  </aside>
+
+  <!-- ZONA PRINCIPAL -->
+  <main class="ficha-main">
+
+    <!-- EVOLUCIÓN -->
+    <div class="ficha-card">
+      <h3>Evolución en la clasificación</h3>
+      <canvas id="evolChart" height="120"></canvas>
+      <p><strong>Puntos totales:</strong> <span id="totalPoints">—</span></p>
+      <p><strong>Posición actual:</strong> <span id="posicionActual">—</span></p>
+    </div>
+
+    <!-- PRONÓSTICOS -->
+    <div class="ficha-card">
+      <h3>Pronósticos del jugador</h3>
+      <div class="tabla-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Partido</th>
+              <th>Pronóstico</th>
+              <th>Real</th>
+              <th>Puntos</th>
+            </tr>
+          </thead>
+          <tbody id="tablaPronosticos">
+            <tr><td colspan="4">Selecciona un jugador...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
+</footer>
+
+<!-- ============================= -->
+<!--   JAVASCRIPT DE LA FICHA     -->
+<!-- ============================= -->
+<script>
+/* CONFIGURA AQUÍ TUS DATOS */
+const SHEET_ID = "TU_SHEET_ID";
+const GID_JUGADORES = "111111111";
+const GID_EXTRAS    = "222222222";
+const GID_PUNTOS    = "333333333";
+const GID_PRONOS    = "444444444";
+
+/* FETCH GENÉRICO */
+async function fetchSheet(gid) {
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${gid}`;
+  const res = await fetch(url);
+  const text = await res.text();
+  const json = JSON.parse(text.substr(47).slice(0, -2));
+  return json.table.rows.map(r => r.c.map(c => c ? c.v : null));
+}
+
+/* ESTADO */
+let jugadores = [];
+let extras = [];
+let puntos = [];
+let pronos = [];
+
+let puntosByUser = new Map();
+let pronosByUser = new Map();
+let extrasByUser = new Map();
+
+/* INICIO */
+document.addEventListener("DOMContentLoaded", async () => {
+  [jugadores, extras, puntos, pronos] = await Promise.all([
+    fetchSheet(GID_JUGADORES),
+    fetchSheet(GID_EXTRAS),
+    fetchSheet(GID_PUNTOS),
+    fetchSheet(GID_PRONOS)
+  ]);
+
+  puntosByUser = groupBy(puntos, 0);
+  pronosByUser = groupBy(pronos, 0);
+  extrasByUser = groupBy(extras, 0);
+
+  fillJugadorSelect();
+  initChart();
+});
+
+/* AGRUPAR */
+function groupBy(arr, col) {
+  const map = new Map();
+  arr.forEach(r => {
+    const key = r[col];
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(r);
+  });
+  return map;
+}
+
+/* SELECT */
+function fillJugadorSelect() {
+  const select = document.getElementById("jugadorSelect");
+  const nombres = [...new Set(jugadores.map(r => r[0]))].sort();
+
+  nombres.forEach(n => {
+    const opt = document.createElement("option");
+    opt.value = n;
+    opt.textContent = n;
+    select.appendChild(opt);
+  });
+
+  select.addEventListener("change", () => renderFicha(select.value));
+}
+
+/* CHART */
+let evolChart = null;
+function initChart() {
+  const ctx = document.getElementById("evolChart").getContext("2d");
+  evolChart = new Chart(ctx, {
+    type: "line",
+    data: { labels: [], datasets: [{ label: "Puntos", data: [], borderColor: "#f5c451" }] },
+    options: { responsive: true, plugins: { legend: { display: false } } }
+  });
+}
+
+/* RENDER FICHA */
+function renderFicha(usuario) {
+  renderExtras(usuario);
+  renderEvolucion(usuario);
+  renderPronosticos(usuario);
+}
+
+/* EXTRAS */
+function renderExtras(usuario) {
+  const row = extrasByUser.get(usuario)?.[0] || [];
+  document.getElementById("extraCampeon").textContent = row[1] || "—";
+  document.getElementById("extraSubcampeon").textContent = row[2] || "—";
+  document.getElementById("extraGoleador").textContent = row[3] || "—";
+  document.getElementById("extraSorpresa").textContent = row[4] || "—";
+}
+
+/* EVOLUCIÓN */
+function renderEvolucion(usuario) {
+  const rows = puntosByUser.get(usuario) || [];
+  if (!rows.length) return;
+
+  rows.sort((a,b) => a[1] - b[1]);
+
+  const labels = rows.map(r => "J" + r[1]);
+  const data = rows.map(r => Number(r[2] || 0));
+
+  evolChart.data.labels = labels;
+  evolChart.data.datasets[0].data = data;
+  evolChart.update();
+
+  document.getElementById("totalPoints").textContent = data[data.length - 1];
+  document.getElementById("posicionActual").textContent = rows[rows.length - 1][3];
+}
+
+/* PRONÓSTICOS */
+function renderPronosticos(usuario) {
+  const tbody = document.getElementById("tablaPronosticos");
+  tbody.innerHTML = "";
+
+  const rows = pronosByUser.get(usuario) || [];
+
+  if (!rows.length) {
+    tbody.innerHTML = "<tr><td colspan='4'>Sin pronósticos</td></tr>";
+    return;
+  }
+
+  rows.forEach(r => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${r[1]}</td>
+      <td>${r[2]}</td>
+      <td>${r[3] || "—"}</td>
+      <td>${r[4] || 0}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+</script>
+
+</body>
+</html>
+
 
 
 
