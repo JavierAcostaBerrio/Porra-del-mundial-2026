@@ -190,11 +190,13 @@
 <!-- ============================= -->
 <script>
 /* CONFIGURA AQUÍ TUS DATOS */
-const SHEET_ID = "TU_SHEET_ID";
-const GID_JUGADORES = "111111111";
-const GID_EXTRAS    = "222222222";
-const GID_PUNTOS    = "333333333";
-const GID_PRONOS    = "444444444";
+const SHEET_ID = "TU_SHEET_ID";   // <-- pon aquí tu ID real
+const GID_PUNTOS = "52755414";    // Puntuación_dia
+
+/* OTRAS PESTAÑAS (pon sus gid reales) */
+const GID_EXTRAS    = "GID_EXTRAS_AQUI";
+const GID_JUGADORES = "GID_JUGADORES_AQUI";
+const GID_PRONOS    = "GID_PRONOS_AQUI";
 
 /* FETCH GENÉRICO */
 async function fetchSheet(gid) {
@@ -224,7 +226,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     fetchSheet(GID_PRONOS)
   ]);
 
-  puntosByUser = groupBy(puntos, 0);
+  puntosByUser = groupBy(puntos, 0);  // usuario
   pronosByUser = groupBy(pronos, 0);
   extrasByUser = groupBy(extras, 0);
 
@@ -279,16 +281,29 @@ function renderFicha(usuario) {
 /* EXTRAS */
 function renderExtras(usuario) {
   const row = extrasByUser.get(usuario)?.[0] || [];
+
+  // Columnas reales:
+  // 0 = usuario
+  // 1 = Equipo Campeón Mundo
+  // 2 = MVP Mundial
+  // 3 = Max. Goleador Mundial
+
   document.getElementById("extraCampeon").textContent = row[1] || "—";
-  document.getElementById("extraSubcampeon").textContent = row[2] || "—";
+  document.getElementById("extraSubcampeon").textContent = row[2] || "—"; // MVP
   document.getElementById("extraGoleador").textContent = row[3] || "—";
-  document.getElementById("extraSorpresa").textContent = row[4] || "—";
+  document.getElementById("extraSorpresa").textContent = "—"; // No existe → vacío
 }
 
 /* EVOLUCIÓN */
 function renderEvolucion(usuario) {
   const rows = puntosByUser.get(usuario) || [];
   if (!rows.length) return;
+
+  // Columnas reales de Puntuación_dia:
+  // 0 = usuario
+  // 1 = jornada
+  // 2 = puntos acumulados
+  // 3 = posición
 
   rows.sort((a,b) => a[1] - b[1]);
 
@@ -315,6 +330,13 @@ function renderPronosticos(usuario) {
     return;
   }
 
+  // Columnas reales:
+  // 0 = usuario
+  // 1 = partido
+  // 2 = pronóstico
+  // 3 = real
+  // 4 = puntos
+
   rows.forEach(r => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -327,6 +349,7 @@ function renderPronosticos(usuario) {
   });
 }
 </script>
+
 
 </body>
 </html>
