@@ -195,7 +195,7 @@
 const SHEET_ID = "TU_SHEET_ID_AQUI";
 
 /* Pestañas reales */
-const GID_PUNTOS = "52755414";       // Puntuación_dia (usuarios + extras)
+const GID_PUNTOS = "52755414";       // Puntuación_dia
 const GID_PRONOS = "1517179668";     // Pronósticos
 const GID_HISTORICO = "AQUI_FALTA";  // <-- pásame este gid
 
@@ -219,19 +219,17 @@ let historicoByUser = new Map();
 
 /* INICIO */
 document.addEventListener("DOMContentLoaded", async () => {
-  // Cargamos SOLO las pestañas reales
   [puntos, pronos, historico] = await Promise.all([
     fetchSheet(GID_PUNTOS),
     fetchSheet(GID_PRONOS),
     fetchSheet(GID_HISTORICO)
   ]);
 
-  // Agrupamos por usuario
-  puntosByUser = groupBy(puntos, 0);     // usuario
-  pronosByUser = groupBy(pronos, 0);
-  historicoByUser = groupBy(historico, 0);
+  // USUARIO = columna B = índice 1
+  puntosByUser = groupBy(puntos, 1);
+  pronosByUser = groupBy(pronos, 1);
+  historicoByUser = groupBy(historico, 1);
 
-  // Rellenamos el selector desde Puntuación_dia
   fillJugadorSelect(puntos);
 
   initChart();
@@ -252,10 +250,8 @@ function groupBy(arr, col) {
 function fillJugadorSelect(puntos) {
   const select = document.getElementById("jugadorSelect");
 
-  // AQUÍ ESTABA EL PROBLEMA:
-  // Antes intentábamos leer jugadores de otra pestaña
-  // Ahora los sacamos de Puntuación_dia
-  const usuarios = [...new Set(puntos.map(r => r[0]))]
+  // USUARIO = columna 1
+  const usuarios = [...new Set(puntos.map(r => r[1]))]
     .filter(u => u && u.trim() !== "")
     .sort();
 
@@ -268,7 +264,6 @@ function fillJugadorSelect(puntos) {
 
   select.addEventListener("change", () => renderFicha(select.value));
 }
-
 
 /* CHART */
 let evolChart = null;
@@ -295,9 +290,9 @@ function renderExtras(usuario) {
   const row = puntosByUser.get(usuario)?.[0] || [];
 
   // Columnas reales:
-  // 0 = usuario
-  // 1 = puntos acumulados
-  // 2 = posición
+  // 0 = posición
+  // 1 = usuario
+  // 2 = puntos acumulados
   // 3 = Equipo Campeón Mundo
   // 4 = MVP Mundial
   // 5 = Max. Goleador Mundial
@@ -316,22 +311,22 @@ function renderEvolucion(usuario) {
   if (!rows.length) return;
 
   // Columnas esperadas:
-  // 0 = usuario
-  // 1 = jornada
-  // 2 = puntos acumulados
-  // 3 = posición
+  // 0 = posición
+  // 1 = usuario
+  // 2 = jornada
+  // 3 = puntos acumulados
 
-  rows.sort((a,b) => a[1] - b[1]);
+  rows.sort((a,b) => a[2] - b[2]);
 
-  const labels = rows.map(r => "J" + r[1]);
-  const data = rows.map(r => Number(r[2] || 0));
+  const labels = rows.map(r => "J" + r[2]);
+  const data = rows.map(r => Number(r[3] || 0));
 
   evolChart.data.labels = labels;
   evolChart.data.datasets[0].data = data;
   evolChart.update();
 
   document.getElementById("totalPoints").textContent = data[data.length - 1];
-  document.getElementById("posicionActual").textContent = rows[rows.length - 1][3];
+  document.getElementById("posicionActual").textContent = rows[rows.length - 1][0];
 }
 
 /* ============================
@@ -349,19 +344,19 @@ function renderPronosticos(usuario) {
   }
 
   // Columnas reales:
-  // 0 = usuario
-  // 1 = partido
-  // 2 = pronóstico
-  // 3 = real
-  // 4 = puntos
+  // 1 = usuario
+  // 2 = partido
+  // 3 = pronóstico
+  // 4 = real
+  // 5 = puntos
 
   rows.forEach(r => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${r[1]}</td>
       <td>${r[2]}</td>
-      <td>${r[3] || "—"}</td>
-      <td>${r[4] || 0}</td>
+      <td>${r[3]}</td>
+      <td>${r[4] || "—"}</td>
+      <td>${r[5] || 0}</td>
     `;
     tbody.appendChild(tr);
   });
