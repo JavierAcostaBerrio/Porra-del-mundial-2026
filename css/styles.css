@@ -351,6 +351,75 @@ td {
     background: #181818;
 }
 
+/* ================================
+   ESTILOS SOLO PARA ELIMINATORIAS
+   ================================ */
+/* Contenedor con scroll solo para esta tabla */
+#tabla-eliminatorias-wrapper {
+    width: 100%;
+    max-height: 500px;
+    overflow: auto;
+    position: relative;
+    border: 2px solid #333;
+    font-size: 0.75rem;
+}
+
+/* Tabla específica */
+#tabla-eliminatorias {
+    border-collapse: collapse;
+    width: max-content;
+    background: #111;
+    color: #fff;
+    font-size: 0.75rem;
+}
+
+/* Celdas */
+#tabla-eliminatorias th,
+#tabla-eliminatorias td {
+    padding: 8px 12px;
+    border: 1px solid #333;
+    white-space: nowrap;
+    font-size: 0.75rem;
+}
+
+/* Cabecera fija */
+#tabla-eliminatorias th {
+    position: sticky;
+    top: 0;
+    background: #111;
+    color: #D4AF37;
+    z-index: 30;
+    font-size: 0.75rem;
+}
+
+/* Primera columna fija */
+#tabla-eliminatorias th:nth-child(1),
+#tabla-eliminatorias td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    z-index: 25;
+    background: #111;
+    font-size: 0.75rem;
+}
+
+/* Cabecera de la primera columna */
+#tabla-eliminatorias th:nth-child(1) {
+    background: #111;
+    color: #D4AF37;
+    z-index: 40;
+    font-size: 0.75rem;
+}
+
+#tabla-eliminatorias tbody tr:hover td {
+    background-color: #333333;   /* Color de resaltado */
+    color: #ffffff;              /* Texto blanco */
+    cursor: pointer;             /* Opcional: mano al pasar */
+}
+
+/* Zebra */
+#tabla-eliminatorias tr:nth-child(odd) td {
+    background: #181818;
+}
 
 
 
