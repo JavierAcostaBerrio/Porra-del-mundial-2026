@@ -195,7 +195,7 @@
 const SHEET_ID = "TU_SHEET_ID_AQUI";
 
 /* Pestañas reales */
-const GID_PUNTOS = "52755414";       // Puntuación_dia
+const GID_PUNTOS = "52755414";       // Puntuación_dia (usuarios + extras)
 const GID_PRONOS = "1517179668";     // Pronósticos
 const GID_HISTORICO = "AQUI_FALTA";  // <-- pásame este gid
 
@@ -219,17 +219,21 @@ let historicoByUser = new Map();
 
 /* INICIO */
 document.addEventListener("DOMContentLoaded", async () => {
+  // Cargamos SOLO las pestañas reales
   [puntos, pronos, historico] = await Promise.all([
     fetchSheet(GID_PUNTOS),
     fetchSheet(GID_PRONOS),
     fetchSheet(GID_HISTORICO)
   ]);
 
+  // Agrupamos por usuario
   puntosByUser = groupBy(puntos, 0);     // usuario
-  pronosByUser = groupBy(pronos, 0);     // usuario
+  pronosByUser = groupBy(pronos, 0);
   historicoByUser = groupBy(historico, 0);
 
-  fillJugadorSelect();
+  // Rellenamos el selector desde Puntuación_dia
+  fillJugadorSelect(puntos);
+
   initChart();
 });
 
@@ -244,11 +248,17 @@ function groupBy(arr, col) {
   return map;
 }
 
-/* SELECT */
-function fillJugadorSelect() {
+/* SELECTOR DE JUGADOR */
+function fillJugadorSelect(puntos) {
   const select = document.getElementById("jugadorSelect");
 
-  const usuarios = [...new Set(puntos.map(r => r[0]))].sort();
+  // AQUÍ ESTABA EL PROBLEMA:
+  // Antes intentábamos leer jugadores de otra pestaña
+  // Ahora los sacamos de Puntuación_dia
+  const usuarios = [...new Set(puntos.map(r => r[0]))]
+    .filter(u => u && u.trim() !== "")
+    .sort();
+
   usuarios.forEach(u => {
     const opt = document.createElement("option");
     opt.value = u;
@@ -258,6 +268,7 @@ function fillJugadorSelect() {
 
   select.addEventListener("change", () => renderFicha(select.value));
 }
+
 
 /* CHART */
 let evolChart = null;
