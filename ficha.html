@@ -192,12 +192,12 @@
 /* ============================
    CONFIGURACIÓN DE TUS DATOS
    ============================ */
-const SHEET_ID = "TU_SHEET_ID_AQUI";
+const SHEET_ID = "1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I";
 
 /* Pestañas reales */
 const GID_PUNTOS = "52755414";       // Puntuación_dia
 const GID_PRONOS = "1517179668";     // Pronósticos
-const GID_HISTORICO = "AQUI_FALTA";  // <-- pásame este gid
+const GID_HISTORICO = "AQUI_FALTA";  // <-- cuando me lo pases lo conecto
 
 /* FETCH GENÉRICO */
 async function fetchSheet(gid) {
@@ -252,7 +252,7 @@ function fillJugadorSelect(puntos) {
 
   // USUARIO = columna 1
   const usuarios = [...new Set(puntos.map(r => r[1]))]
-    .filter(u => u && u.trim() !== "")
+    .filter(u => u !== null && u !== "")
     .sort();
 
   usuarios.forEach(u => {
@@ -292,15 +292,18 @@ function renderExtras(usuario) {
   // Columnas reales:
   // 0 = posición
   // 1 = usuario
-  // 2 = puntos acumulados
-  // 12 = Equipo Campeón Mundo
-  // 11 = MVP Mundial
-  // 10 = Max. Goleador Mundial
+  // 3 = puntos acumulados
+  // 11 = Max. Goleador Mundial
+  // 12 = MVP Mundial
+  // 13 = Equipo Campeón Mundo
 
-  document.getElementById("extraCampeon").textContent = row[12] || "—";
-  document.getElementById("extraSubcampeon").textContent = row[11] || "—"; // MVP
-  document.getElementById("extraGoleador").textContent = row[10] || "—";
-  document.getElementById("extraSorpresa").textContent = "—"; // No existe
+  document.getElementById("extraCampeon").textContent = row[13] || "—";
+  document.getElementById("extraSubcampeon").textContent = row[12] || "—"; 
+  document.getElementById("extraGoleador").textContent = row[11] || "—";
+  document.getElementById("extraSorpresa").textContent = "—"; // no existe en tu hoja
+
+  document.getElementById("totalPoints").textContent = row[3] || 0;
+  document.getElementById("posicionActual").textContent = row[0] || "—";
 }
 
 /* ============================
@@ -311,10 +314,10 @@ function renderEvolucion(usuario) {
   if (!rows.length) return;
 
   // Columnas esperadas:
-  // 0 = posición
   // 1 = usuario
   // 2 = jornada
   // 3 = puntos acumulados
+  // 0 = posición
 
   rows.sort((a,b) => a[2] - b[2]);
 
@@ -324,9 +327,6 @@ function renderEvolucion(usuario) {
   evolChart.data.labels = labels;
   evolChart.data.datasets[0].data = data;
   evolChart.update();
-
-  document.getElementById("totalPoints").textContent = data[data.length - 1];
-  document.getElementById("posicionActual").textContent = rows[rows.length - 1][0];
 }
 
 /* ============================
@@ -362,12 +362,6 @@ function renderPronosticos(usuario) {
   });
 }
 </script>
-
-
-</body>
-</html>
-
-
 
 
 </body>
