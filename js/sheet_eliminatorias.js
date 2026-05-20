@@ -2,14 +2,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // URL del JSON de Google Sheets (gviz/tq)
     const SHEET_URL =
-        "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=444190468";
+        "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=1187092306";
 
     // Columnas A–F → índices 0 a 5 (slice no incluye el final)
     const COL_INICIO = 1;
     const COL_FIN = 35;
 
     // Tabla donde se pintarán los datos
-    const tabla = document.getElementById("tabla-pronosticos");
+    const tabla = document.getElementById("tabla-eliminatorias");
 
     fetch(SHEET_URL)
         .then(res => res.text())
