@@ -293,13 +293,13 @@ function renderExtras(usuario) {
   // 0 = posición
   // 1 = usuario
   // 2 = puntos acumulados
-  // 3 = Equipo Campeón Mundo
-  // 4 = MVP Mundial
-  // 5 = Max. Goleador Mundial
+  // 12 = Equipo Campeón Mundo
+  // 11 = MVP Mundial
+  // 10 = Max. Goleador Mundial
 
-  document.getElementById("extraCampeon").textContent = row[3] || "—";
-  document.getElementById("extraSubcampeon").textContent = row[4] || "—"; // MVP
-  document.getElementById("extraGoleador").textContent = row[5] || "—";
+  document.getElementById("extraCampeon").textContent = row[12] || "—";
+  document.getElementById("extraSubcampeon").textContent = row[11] || "—"; // MVP
+  document.getElementById("extraGoleador").textContent = row[10] || "—";
   document.getElementById("extraSorpresa").textContent = "—"; // No existe
 }
 
