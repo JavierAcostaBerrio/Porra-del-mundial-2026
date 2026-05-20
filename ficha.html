@@ -189,14 +189,15 @@
 <!--   JAVASCRIPT DE LA FICHA     -->
 <!-- ============================= -->
 <script>
-/* CONFIGURA AQUÍ TUS DATOS */
-const SHEET_ID = "TU_SHEET_ID";   // <-- pon aquí tu ID real
-const GID_PUNTOS = "52755414";    // Puntuación_dia
+/* ============================
+   CONFIGURACIÓN DE TUS DATOS
+   ============================ */
+const SHEET_ID = "TU_SHEET_ID_AQUI";
 
-/* OTRAS PESTAÑAS (pon sus gid reales) */
-const GID_EXTRAS    = "GID_EXTRAS_AQUI";
-const GID_JUGADORES = "GID_JUGADORES_AQUI";
-const GID_PRONOS    = "GID_PRONOS_AQUI";
+/* Pestañas reales */
+const GID_PUNTOS = "52755414";       // Puntuación_dia
+const GID_PRONOS = "1517179668";     // Pronósticos
+const GID_HISTORICO = "AQUI_FALTA";  // <-- pásame este gid
 
 /* FETCH GENÉRICO */
 async function fetchSheet(gid) {
@@ -208,27 +209,25 @@ async function fetchSheet(gid) {
 }
 
 /* ESTADO */
-let jugadores = [];
-let extras = [];
 let puntos = [];
 let pronos = [];
+let historico = [];
 
 let puntosByUser = new Map();
 let pronosByUser = new Map();
-let extrasByUser = new Map();
+let historicoByUser = new Map();
 
 /* INICIO */
 document.addEventListener("DOMContentLoaded", async () => {
-  [jugadores, extras, puntos, pronos] = await Promise.all([
-    fetchSheet(GID_JUGADORES),
-    fetchSheet(GID_EXTRAS),
+  [puntos, pronos, historico] = await Promise.all([
     fetchSheet(GID_PUNTOS),
-    fetchSheet(GID_PRONOS)
+    fetchSheet(GID_PRONOS),
+    fetchSheet(GID_HISTORICO)
   ]);
 
-  puntosByUser = groupBy(puntos, 0);  // usuario
-  pronosByUser = groupBy(pronos, 0);
-  extrasByUser = groupBy(extras, 0);
+  puntosByUser = groupBy(puntos, 0);     // usuario
+  pronosByUser = groupBy(pronos, 0);     // usuario
+  historicoByUser = groupBy(historico, 0);
 
   fillJugadorSelect();
   initChart();
@@ -248,12 +247,12 @@ function groupBy(arr, col) {
 /* SELECT */
 function fillJugadorSelect() {
   const select = document.getElementById("jugadorSelect");
-  const nombres = [...new Set(jugadores.map(r => r[0]))].sort();
 
-  nombres.forEach(n => {
+  const usuarios = [...new Set(puntos.map(r => r[0]))].sort();
+  usuarios.forEach(u => {
     const opt = document.createElement("option");
-    opt.value = n;
-    opt.textContent = n;
+    opt.value = u;
+    opt.textContent = u;
     select.appendChild(opt);
   });
 
@@ -278,28 +277,34 @@ function renderFicha(usuario) {
   renderPronosticos(usuario);
 }
 
-/* EXTRAS */
+/* ============================
+   EXTRAS (desde Puntuación_dia)
+   ============================ */
 function renderExtras(usuario) {
-  const row = extrasByUser.get(usuario)?.[0] || [];
+  const row = puntosByUser.get(usuario)?.[0] || [];
 
   // Columnas reales:
   // 0 = usuario
-  // 1 = Equipo Campeón Mundo
-  // 2 = MVP Mundial
-  // 3 = Max. Goleador Mundial
+  // 1 = puntos acumulados
+  // 2 = posición
+  // 3 = Equipo Campeón Mundo
+  // 4 = MVP Mundial
+  // 5 = Max. Goleador Mundial
 
-  document.getElementById("extraCampeon").textContent = row[1] || "—";
-  document.getElementById("extraSubcampeon").textContent = row[2] || "—"; // MVP
-  document.getElementById("extraGoleador").textContent = row[3] || "—";
-  document.getElementById("extraSorpresa").textContent = "—"; // No existe → vacío
+  document.getElementById("extraCampeon").textContent = row[3] || "—";
+  document.getElementById("extraSubcampeon").textContent = row[4] || "—"; // MVP
+  document.getElementById("extraGoleador").textContent = row[5] || "—";
+  document.getElementById("extraSorpresa").textContent = "—"; // No existe
 }
 
-/* EVOLUCIÓN */
+/* ============================
+   EVOLUCIÓN (desde Histórico)
+   ============================ */
 function renderEvolucion(usuario) {
-  const rows = puntosByUser.get(usuario) || [];
+  const rows = historicoByUser.get(usuario) || [];
   if (!rows.length) return;
 
-  // Columnas reales de Puntuación_dia:
+  // Columnas esperadas:
   // 0 = usuario
   // 1 = jornada
   // 2 = puntos acumulados
@@ -318,7 +323,9 @@ function renderEvolucion(usuario) {
   document.getElementById("posicionActual").textContent = rows[rows.length - 1][3];
 }
 
-/* PRONÓSTICOS */
+/* ============================
+   PRONÓSTICOS (desde pestaña Pronósticos)
+   ============================ */
 function renderPronosticos(usuario) {
   const tbody = document.getElementById("tablaPronosticos");
   tbody.innerHTML = "";
