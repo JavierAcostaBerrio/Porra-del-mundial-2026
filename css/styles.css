@@ -597,7 +597,7 @@ footer {
 /* Columna Partido más compacta */
 #tablaPronosticos td:nth-child(1),
 #tablaPronosticos th:nth-child(1) {
-    min-width: 140px;     /* Ajusta a tu gusto */
+    min-width: 100px;     /* Ajusta a tu gusto */
     max-width: 160px;
     white-space: normal;  /* Permite salto de línea */
 }
@@ -605,7 +605,7 @@ footer {
 /* Columna Puntos más estrecha */
 #tablaPronosticos td:nth-child(4),
 #tablaPronosticos th:nth-child(4) {
-    width: 60px;
+    width: 40px;
 }
 /* Centrar pronóstico y puntos */
 #tablaPronosticos td:nth-child(2),
