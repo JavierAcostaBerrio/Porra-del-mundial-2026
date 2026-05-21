@@ -594,3 +594,23 @@ footer {
   padding: 20px;
   border-top: 1px solid #222;
 }
+/* Columna Partido más compacta */
+#tablaPronosticos td:nth-child(1),
+#tablaPronosticos th:nth-child(1) {
+    min-width: 140px;     /* Ajusta a tu gusto */
+    max-width: 160px;
+    white-space: normal;  /* Permite salto de línea */
+}
+
+/* Columna Puntos más estrecha */
+#tablaPronosticos td:nth-child(4),
+#tablaPronosticos th:nth-child(4) {
+    width: 60px;
+}
+/* Centrar pronóstico y puntos */
+#tablaPronosticos td:nth-child(2),
+#tablaPronosticos th:nth-child(2),
+#tablaPronosticos td:nth-child(4),
+#tablaPronosticos th:nth-child(4) {
+    text-align: center;
+}
