@@ -164,10 +164,10 @@
         <table>
           <thead>
             <tr>
-              <th>#</th>
               <th>Partido</th>
               <th>Pronóstico</th>
               <th>Puntos</th>
+              <th>-</th>
             </tr>
           </thead>
           <tbody id="tablaPronosticos">
@@ -361,7 +361,7 @@ function renderPronosticos(usuario) {
     const golesLocal = r[4] ?? "";
     const golesVisitante = r[5] ?? "";
     const equipoVisitante = r[6] || "";
-    const puntos = r[7] ?? 0;
+    const puntos = r[18] ?? 0;
 
     const partido = `${equipoLocal} - ${equipoVisitante}`;
     const pronostico = `${golesLocal} - ${golesVisitante}`;
