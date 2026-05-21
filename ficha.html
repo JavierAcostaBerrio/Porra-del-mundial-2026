@@ -197,7 +197,7 @@ const SHEET_ID = "1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I";
 /* Pestañas reales */
 const GID_PUNTOS = "52755414";       // Puntuación_dia
 const GID_PRONOS = "1517179668";     // Pronósticos
-const GID_HISTORICO = "AQUI_FALTA";  // <-- cuando me lo pases lo conecto
+const GID_HISTORICO = "1308917815";  // <-- cuando me lo pases lo conecto
 
 /* FETCH GENÉRICO */
 async function fetchSheet(gid) {
@@ -307,26 +307,39 @@ function renderExtras(usuario) {
 }
 
 /* ============================
-   EVOLUCIÓN (desde Histórico)
+   EVOLUCIÓN (desde Calculo_puntos)
    ============================ */
+
+const HIST_COL_START = 60; // BH
+const HIST_COL_END   = 81; // CC
+
 function renderEvolucion(usuario) {
   const rows = historicoByUser.get(usuario) || [];
   if (!rows.length) return;
 
-  // Columnas esperadas:
-  // 1 = usuario
-  // 2 = jornada
-  // 3 = puntos acumulados
-  // 0 = posición
+  // Solo hay una fila por usuario en Calculo_puntos
+  const row = rows[0];
 
-  rows.sort((a,b) => a[2] - b[2]);
+  // Labels: Día 1, Día 2, Día 3...
+  const labels = [];
+  const data = [];
 
-  const labels = rows.map(r => "J" + r[2]);
-  const data = rows.map(r => Number(r[3] || 0));
+  for (let i = HIST_COL_START; i <= HIST_COL_END; i++) {
+    const value = row[i];
+
+    // Si la celda está vacía, paramos (no mostrar días futuros)
+    if (value === null || value === "") break;
+
+    labels.push("Día " + (i - HIST_COL_START + 1));
+    data.push(Number(value));
+  }
 
   evolChart.data.labels = labels;
   evolChart.data.datasets[0].data = data;
   evolChart.update();
+
+  // Último valor = puntos actuales
+  document.getElementById("totalPoints").textContent = data[data.length - 1] || 0;
 }
 
 /* ============================
