@@ -346,6 +346,13 @@ function renderEvolucion(usuario) {
   evolChart.data.labels = labels;
   evolChart.data.datasets[0].data = data;
   evolChart.update();
+
+  evolChart.options.scales.y.ticks = {
+    stepSize: 1,
+    callback: function(value) {
+        return Number.isInteger(value) ? value : null;
+    }
+};
 }
 
 
