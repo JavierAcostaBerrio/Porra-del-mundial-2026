@@ -313,6 +313,13 @@ function renderExtras(usuario) {
 const HIST_COL_START = 60; // BH
 const HIST_COL_END   = 81; // CC
 
+/* ============================
+   EVOLUCIÓN DEL RANKING
+   ============================ */
+
+const RANK_START = 60; // BH
+const RANK_END   = 81; // CC
+
 function renderEvolucion(usuario) {
   const rows = historicoByUser.get(usuario) || [];
   if (!rows.length) return;
@@ -320,27 +327,27 @@ function renderEvolucion(usuario) {
   // Solo hay una fila por usuario en Calculo_puntos
   const row = rows[0];
 
-  // Labels: Día 1, Día 2, Día 3...
   const labels = [];
   const data = [];
 
-  for (let i = HIST_COL_START; i <= HIST_COL_END; i++) {
+  for (let i = RANK_START; i <= RANK_END; i++) {
     const value = row[i];
 
-    // Si la celda está vacía, paramos (no mostrar días futuros)
+    // Si la celda está vacía, paramos
     if (value === null || value === "") break;
 
-    labels.push("Día " + (i - HIST_COL_START + 1));
+    labels.push("Día " + (i - RANK_START + 1));
     data.push(Number(value));
   }
+
+  // Invertimos el eje Y para que 1º sea arriba
+  evolChart.options.scales.y.reverse = true;
 
   evolChart.data.labels = labels;
   evolChart.data.datasets[0].data = data;
   evolChart.update();
-
-  // Último valor = puntos actuales
-  document.getElementById("totalPoints").textContent = data[data.length - 1] || 0;
 }
+
 
 /* ============================
    PRONÓSTICOS (desde pestaña Pronósticos)
