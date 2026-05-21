@@ -320,7 +320,12 @@ const RANK_START = 60; // BH
 const RANK_END   = 81; // CC
 
 function renderEvolucion(usuario) {
-  const rows = historicoByUser.get(usuario) || [];
+console.log("Fila ranking del usuario:", row);
+console.log("BH (60):", row[60]);
+console.log("BI (61):", row[61]);
+console.log("CC (81):", row[81]);
+    
+    const rows = historicoByUser.get(usuario) || [];
   if (!rows.length) return;
 
   // Solo hay una fila por usuario en Calculo_puntos
