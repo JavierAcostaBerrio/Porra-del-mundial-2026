@@ -356,20 +356,22 @@ function renderPronosticos(usuario) {
     return;
   }
 
-  // Columnas reales:
-  // 1 = usuario
-  // 2 = partido
-  // 3 = pronóstico
-  // 4 = real
-  // 5 = puntos
-
   rows.forEach(r => {
+    const equipoLocal = r[3] || "";
+    const golesLocal = r[4] ?? "";
+    const golesVisitante = r[5] ?? "";
+    const equipoVisitante = r[6] || "";
+    const puntos = r[7] ?? 0;
+
+    const partido = `${equipoLocal} - ${equipoVisitante}`;
+    const pronostico = `${golesLocal} - ${golesVisitante}`;
+
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${r[2]}</td>
-      <td>${r[3]|| "—"r[6]}</td>
-      <td>${r[4] || "—"r[5]}</td>
-      <td>${r[5] || 0}</td>
+      <td>${partido}</td>
+      <td>${pronostico}</td>
+      <td>—</td>
+      <td>${puntos}</td>
     `;
     tbody.appendChild(tr);
   });
