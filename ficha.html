@@ -164,9 +164,9 @@
         <table>
           <thead>
             <tr>
+              <th>#</th>
               <th>Partido</th>
               <th>Pronóstico</th>
-              <th>Real</th>
               <th>Puntos</th>
             </tr>
           </thead>
@@ -367,8 +367,8 @@ function renderPronosticos(usuario) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${r[2]}</td>
-      <td>${r[3]}</td>
-      <td>${r[4] || "—"}</td>
+      <td>${r[3]|| "—"r[6]}</td>
+      <td>${r[4] || "—"r[5]}</td>
       <td>${r[5] || 0}</td>
     `;
     tbody.appendChild(tr);
