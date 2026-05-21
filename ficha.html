@@ -361,21 +361,38 @@ function renderPronosticos(usuario) {
     const golesLocal = r[4] ?? "";
     const golesVisitante = r[5] ?? "";
     const equipoVisitante = r[6] || "";
-    const puntos = r[18] ?? 0;
+    const puntos = Number(r[18] ?? 0);
 
     const partido = `${equipoLocal} - ${equipoVisitante}`;
     const pronostico = `${golesLocal} - ${golesVisitante}`;
 
     const tr = document.createElement("tr");
+
+    // ⭐ Pleno → verde
+    if (puntos === 10 || puntos === 20) {
+      tr.style.backgroundColor = "#1f7a1f";   // verde elegante
+      tr.style.color = "white";
+      tr.style.fontWeight = "600";
+    }
+
+    // ⭐ Acierto de signo → amarillo
+    else if (puntos === 4 || puntos === 5 || puntos === 8) {
+      tr.style.backgroundColor = "#e6c229";   // amarillo cálido
+      tr.style.color = "black";
+      tr.style.fontWeight = "600";
+    }
+
     tr.innerHTML = `
       <td>${partido}</td>
       <td>${pronostico}</td>
       <td>${puntos}</td>
       <td>-</td>
     `;
+
     tbody.appendChild(tr);
   });
 }
+
 </script>
 
 
