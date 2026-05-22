@@ -631,8 +631,8 @@ footer {
   border-bottom: 2px solid #444;
 }
 .tabla-plenos td:first-child {
-    width: 60px;        /* Ajusta a tu gusto */
-    max-width: 60px;
+    width: 90px;        /* Ajusta a tu gusto */
+    max-width: 90px;
     white-space: nowrap; /* Evita que se parta en dos líneas */
     overflow: hidden;    /* Oculta texto sobrante */
     text-overflow: ellipsis; /* Añade "..." si es muy largo */
