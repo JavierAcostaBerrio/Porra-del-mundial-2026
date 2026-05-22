@@ -36,7 +36,11 @@ async function cargarEvolucionTop5() {
 
   // Labels de jornadas
   const jornadas = top5[0].posiciones.length;
-  const labels = Array.from({ length: jornadas }, (_, i) => "J" + (i + 1));
+  // Labels reales desde Google Sheets (columnas B → W)
+const labels = json.table.cols
+  .slice(1)              // quitamos la columna A (jugadores)
+  .map(col => col.label); // usamos "Día 1", "Día 2", etc.
+
 
   // Colores estilo Mundial 2026
   const colores = ["#FFD700", "#00BFFF", "#FF4500", "#32CD32", "#BA55D3"];
