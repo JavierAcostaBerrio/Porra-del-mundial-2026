@@ -674,23 +674,15 @@ footer {
     font-size: 1.1rem;
 }
 
-.ficha-selector {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.1rem;
-}
-
-.ficha-selector label {
-    color: #D4AF37;
-    font-weight: 700;
-}
-
-#selector-jugador {
+/* Bordes dorados para la ficha (manteniendo el diseño anterior) */
+.ficha-bloque,
+.extra-bloque,
+.ficha-contenedor,
+.ficha-header,
+.ficha-stats {
+    border: 1px solid #D4AF37 !important;
+    border-radius: 10px;
     background: #111;
-    color: #fff;
-    border: 1px solid #D4AF37;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 1rem;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(212,175,55,0.15);
 }
