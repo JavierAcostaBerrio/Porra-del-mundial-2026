@@ -5,14 +5,14 @@ async function cargarEvolucionTop5() {
   const resp = await fetch(url);
   const texto = await resp.text();
 
-  // El JSON gviz viene envuelto en basura, hay que limpiarlo
+  // El JSON gviz viene envuelto en basura → lo limpiamos
   const json = JSON.parse(texto.substring(texto.indexOf("{"), texto.lastIndexOf("}") + 1));
 
   const filas = json.table.rows;
 
-  // Convertir a matriz limpia
+  // Convertir filas a matriz limpia
   const datos = filas.map(r =>
-    r.c.map(c => (c ? c.v : ""))
+    r.c.map(c => (c ? c.v : "")) // c.v = valor real
   );
 
   // Primera columna = jugadores
