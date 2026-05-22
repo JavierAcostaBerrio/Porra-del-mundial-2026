@@ -1,3 +1,10 @@
+function obtenerMedalla(pos) {
+    if (pos === 1) return "🥇";
+    if (pos === 2) return "🥈";
+    if (pos === 3) return "🥉";
+    return "";
+}
+
 const columnas = [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=52755414&tqx=out:json")
@@ -20,7 +27,13 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
       const tr = document.createElement("tr");
       columnas.forEach(i => {
         const td = document.createElement("td");
-        td.textContent = row.c[i] ? row.c[i].v : "";
+        if (i === 0) {
+    const pos = Number(row.c[i]?.v ?? "");
+    const medalla = obtenerMedalla(pos);
+    td.textContent = pos + " " + medalla;
+} else {
+    td.textContent = row.c[i] ? row.c[i].v : "";
+}
         tr.appendChild(td);
       });
       table.appendChild(tr);
