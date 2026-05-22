@@ -6,12 +6,23 @@ async function cargarEvolucionTop5() {
   const texto = await resp.text();
 
   // Convertir CSV a matriz
-  const filas = texto
+  let filas = texto
     .split("\n")
     .map(r => r.split(","))
     .filter(f => f.some(v => v.trim() !== "")); // eliminar filas vacías
 
-  // 1) Detectar columna DG (jugadores)
+  // 1) Eliminar columnas completamente vacías
+  const columnasValidas = [];
+  for (let c = 0; c < filas[0].length; c++) {
+    const valores = filas.map(f => f[c].trim());
+    if (valores.some(v => v !== "")) {
+      columnasValidas.push(c);
+    }
+  }
+
+  filas = filas.map(f => columnasValidas.map(c => f[c]));
+
+  // 2) Detectar columna DG (jugadores)
   let colDG = -1;
   for (let c = 0; c < filas[0].length; c++) {
     const valores = filas.map(f => f[c].trim()).filter(v => v !== "");
@@ -27,7 +38,7 @@ async function cargarEvolucionTop5() {
     return;
   }
 
-  // 2) Detectar columnas numéricas consecutivas (jornadas)
+  // 3) Detectar columnas numéricas consecutivas (jornadas)
   let colInicio = -1;
   let colFin = -1;
 
@@ -48,7 +59,7 @@ async function cargarEvolucionTop5() {
     return;
   }
 
-  // 3) Extraer datos limpios
+  // 4) Extraer datos limpios
   const datos = filas
     .filter(f => f[colDG] && f[colDG].trim() !== "")
     .map(f => ({
@@ -57,19 +68,24 @@ async function cargarEvolucionTop5() {
     }))
     .filter(obj => obj.posiciones.every(n => !isNaN(n)));
 
-  // 4) Ordenar por la última jornada
+  if (datos.length === 0) {
+    console.error("No se pudieron extraer datos válidos");
+    return;
+  }
+
+  // 5) Ordenar por la última jornada
   const top5 = datos
     .sort((a, b) => a.posiciones.at(-1) - b.posiciones.at(-1))
     .slice(0, 5);
 
-  // 5) Labels
+  // 6) Labels
   const jornadas = top5[0].posiciones.length;
   const labels = Array.from({ length: jornadas }, (_, i) => "J" + (i + 1));
 
-  // 6) Colores
+  // 7) Colores
   const colores = ["#FFD700", "#00BFFF", "#FF4500", "#32CD32", "#BA55D3"];
 
-  // 7) Datasets
+  // 8) Datasets
   const datasets = top5.map((obj, k) => ({
     label: obj.jugador,
     data: obj.posiciones,
@@ -78,7 +94,7 @@ async function cargarEvolucionTop5() {
     tension: 0.3
   }));
 
-  // 8) Pintar gráfico
+  // 9) Pintar gráfico
   new Chart(document.getElementById("evolucionTop5"), {
     type: "line",
     data: { labels, datasets },
