@@ -1,21 +1,13 @@
-async function cargarJugadores() {
-    const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
+// Esta función se llamará cuando cambies el jugador en el selector
+function cargarFichaJugador(nombreJugador) {
 
-    const resp = await fetch(url);
-    const text = await resp.text();
-    const json = JSON.parse(text.substring(47, text.length - 2));
+    // Actualizar el nombre en la cabecera (si lo usas)
+    const nombreCabecera = document.getElementById("ficha-nombre");
+    if (nombreCabecera) nombreCabecera.textContent = nombreJugador;
 
-    const jugadores = json.table.rows.map(r => r.c[0]?.v).filter(Boolean);
+    // Actualizar el nombre encima del gráfico
+    const tituloEvolucion = document.getElementById("titulo-evolucion");
+    if (tituloEvolucion) tituloEvolucion.textContent = nombreJugador;
 
-    const select = document.getElementById("selector-jugador");
-    select.innerHTML = jugadores.map(j => `<option value="${j}">${j}</option>`).join("");
-
-    // Cargar ficha del primer jugador
-    cargarFichaJugador(jugadores[0]);
-
-    // Cambiar jugador
-    select.addEventListener("change", e => {
-        cargarFichaJugador(e.target.value);
-    });
+    
 }
-cargarJugadores();
