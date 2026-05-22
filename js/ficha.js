@@ -1,14 +1,16 @@
-// Esta función se llamará cuando cambies el jugador en el selector
+/// Actualiza el nombre del jugador en la ficha
 function cargarFichaJugador(nombreJugador) {
 
-    // Actualizar el nombre en la cabecera (si lo usas)
+    // Nombre en la cabecera (si existe)
     const nombreCabecera = document.getElementById("ficha-nombre");
     if (nombreCabecera) nombreCabecera.textContent = nombreJugador;
 
-    // Actualizar el nombre encima del gráfico
+    // Nombre encima del gráfico
     const tituloEvolucion = document.getElementById("titulo-evolucion");
     if (tituloEvolucion) tituloEvolucion.textContent = nombreJugador;
-
-    document.getElementById("selector-jugador").addEventListener("change", function() {
-    cargarFichaJugador(this.value);
 }
+
+// Evento del selector (fuera de la función)
+document.getElementById("selector-jugador").addEventListener("change", function() {
+    cargarFichaJugador(this.value);
+});
