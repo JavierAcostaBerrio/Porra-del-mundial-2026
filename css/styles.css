@@ -693,3 +693,8 @@ footer {
     text-align: center;
     margin-bottom: 15px;
 }
+/* Cabeceras de los extras en dorado */
+.extra-box strong {
+    color: #D4AF37 !important;
+    font-weight: 700;
+}
