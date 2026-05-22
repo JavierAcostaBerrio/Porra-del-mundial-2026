@@ -18,3 +18,4 @@ async function cargarJugadores() {
         cargarFichaJugador(e.target.value);
     });
 }
+cargarJugadores();
