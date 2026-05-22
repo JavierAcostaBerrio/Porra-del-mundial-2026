@@ -7,7 +7,7 @@
 async function cargarEvolucionTop5() {
 
   // URL del CSV (sustituir ID y GID)
-  const url = "const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/pub?gid=1308917815&single=true&output=csv";
+  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/pub?gid=1308917815&single=true&output=csv";
 
 
   // Leer CSV
