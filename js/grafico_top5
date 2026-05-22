@@ -1,91 +1,47 @@
 async function cargarEvolucionTop5() {
 
-  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/pub?gid=1308917815&single=true&output=csv";
+  const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1478160189";
 
   const resp = await fetch(url);
   const texto = await resp.text();
 
-  // Convertir CSV a matriz
-  let filas = texto
-    .split("\n")
-    .map(r => r.split(","))
-    .filter(f => f.some(v => v.trim() !== "")); // eliminar filas vacías
+  // El JSON gviz viene envuelto en basura, hay que limpiarlo
+  const json = JSON.parse(texto.substring(texto.indexOf("{"), texto.lastIndexOf("}") + 1));
 
-  // 1) Eliminar columnas completamente vacías
-  const columnasValidas = [];
-  for (let c = 0; c < filas[0].length; c++) {
-    const valores = filas.map(f => f[c].trim());
-    if (valores.some(v => v !== "")) {
-      columnasValidas.push(c);
-    }
-  }
+  const filas = json.table.rows;
 
-  filas = filas.map(f => columnasValidas.map(c => f[c]));
+  // Convertir a matriz limpia
+  const datos = filas.map(r =>
+    r.c.map(c => (c ? c.v : ""))
+  );
 
-  // 2) Detectar columna DG (jugadores)
-  let colDG = -1;
-  for (let c = 0; c < filas[0].length; c++) {
-    const valores = filas.map(f => f[c].trim()).filter(v => v !== "");
-    const noNumericos = valores.filter(v => isNaN(Number(v)));
-    if (noNumericos.length >= 5) { // hay 5 nombres
-      colDG = c;
-      break;
-    }
-  }
+  // Primera columna = jugadores
+  const jugadores = datos.map(f => f[0]).filter(v => v !== "");
 
-  if (colDG === -1) {
-    console.error("No se encontró la columna DG");
-    return;
-  }
+  // Resto de columnas = posiciones
+  const posiciones = datos.map(f =>
+    f.slice(1).map(v => Number(v))
+  );
 
-  // 3) Detectar columnas numéricas consecutivas (jornadas)
-  let colInicio = -1;
-  let colFin = -1;
+  // Unir jugadores + posiciones
+  const lista = jugadores.map((j, i) => ({
+    jugador: j,
+    posiciones: posiciones[i]
+  }));
 
-  for (let c = colDG + 1; c < filas[0].length; c++) {
-    const valores = filas.map(f => f[c].trim()).filter(v => v !== "");
-    const todosNumeros = valores.every(v => !isNaN(Number(v)));
-
-    if (todosNumeros) {
-      if (colInicio === -1) colInicio = c;
-      colFin = c;
-    } else if (colInicio !== -1) {
-      break;
-    }
-  }
-
-  if (colInicio === -1) {
-    console.error("No se encontraron columnas numéricas de jornadas");
-    return;
-  }
-
-  // 4) Extraer datos limpios
-  const datos = filas
-    .filter(f => f[colDG] && f[colDG].trim() !== "")
-    .map(f => ({
-      jugador: f[colDG].trim(),
-      posiciones: f.slice(colInicio, colFin + 1).map(v => Number(v.trim()))
-    }))
-    .filter(obj => obj.posiciones.every(n => !isNaN(n)));
-
-  if (datos.length === 0) {
-    console.error("No se pudieron extraer datos válidos");
-    return;
-  }
-
-  // 5) Ordenar por la última jornada
-  const top5 = datos
+  // Ordenar por la última jornada
+  const top5 = lista
     .sort((a, b) => a.posiciones.at(-1) - b.posiciones.at(-1))
     .slice(0, 5);
 
-  // 6) Labels
+  // Labels de jornadas
   const jornadas = top5[0].posiciones.length;
   const labels = Array.from({ length: jornadas }, (_, i) => "J" + (i + 1));
 
-  // 7) Colores
+  // Colores estilo Mundial 2026
   const colores = ["#FFD700", "#00BFFF", "#FF4500", "#32CD32", "#BA55D3"];
 
-  // 8) Datasets
+  // Datasets
   const datasets = top5.map((obj, k) => ({
     label: obj.jugador,
     data: obj.posiciones,
@@ -94,7 +50,7 @@ async function cargarEvolucionTop5() {
     tension: 0.3
   }));
 
-  // 9) Pintar gráfico
+  // Pintar gráfico
   new Chart(document.getElementById("evolucionTop5"), {
     type: "line",
     data: { labels, datasets },
@@ -108,4 +64,3 @@ async function cargarEvolucionTop5() {
 }
 
 cargarEvolucionTop5();
-
