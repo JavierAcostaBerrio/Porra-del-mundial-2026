@@ -296,13 +296,20 @@ function initChart() {
 
 /* RENDER FICHA */
 function renderFicha(usuario) {
-  document.getElementById("titulo-evolucion").textContent = usuario;
-    
+
+  // Obtener puntos del usuario
+  const row = puntosByUser.get(usuario)?.[0] || [];
+  const puntosTotales = row[3] || 0;
+
+  // Mostrar nombre + puntos juntos
+  document.getElementById("titulo-evolucion").textContent =
+      `${usuario} — ${puntosTotales} pts`;
+
   renderExtras(usuario);
   renderEvolucion(usuario);
   renderPronosticos(usuario);
-  
 }
+
 
 /* ============================
    EXTRAS (desde Puntuación_dia)
