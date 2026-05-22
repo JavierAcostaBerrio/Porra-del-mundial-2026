@@ -597,8 +597,8 @@ footer {
 /* Partido más compacto */
 #tablaPronosticos td:nth-child(1),
 #tablaPronosticos th:nth-child(1) {
-    min-width: 140px;
-    max-width: 160px;
+    min-width: 90px;
+    max-width: 100px;
     white-space: normal;
 }
 
