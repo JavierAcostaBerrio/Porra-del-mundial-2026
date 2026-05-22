@@ -1,0 +1,37 @@
+// ===============================
+//  Gráfico evolución Top 5
+//  La Porra del Mundial 2026
+//  Lee Calculo_puntos!DG2:EC6
+// ===============================
+
+async function cargarEvolucionTop5() {
+
+  // URL del CSV (sustituir ID y GID)
+  const url = "https://docs.google.com/spreadsheets/d/ID/export?format=csv&gid=GID";
+
+  // Leer CSV
+  const resp = await fetch(url);
+  const texto = await resp.text();
+
+  // Convertir CSV a matriz
+  const filas = texto.trim().split("\n").map(r => r.split(","));
+
+  // Jugadores (columna DG)
+  const jugadores = filas.map(f => f[0]);
+
+  // Posiciones por jornada (DH → EC)
+  const posiciones = filas.map(f => f.slice(1).map(Number));
+
+  // Número de jornadas
+  const jornadas = posiciones[0].length;
+  const labels = Array.from({ length: jornadas }, (_, i) => "J" + (i + 1));
+
+  // Ordenar por la última jornada (posición final)
+  const indicesTop5 = posiciones
+    .map((fila, i) => ({ i, posFinal: fila[fila.length - 1] }))
+    .sort((a, b) => a.posFinal - b.posFinal)
+    .slice(0, 5)
+    .map(obj => obj.i);
+
+  // Colores estilo dorado-Mundial 2026
+  const colores = ["#FFD700", "#00BFFF",
