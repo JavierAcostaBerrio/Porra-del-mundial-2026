@@ -15,7 +15,10 @@ async function cargarTablaPlenos() {
     r.c.map(c => (c ? c.v : ""))
   );
 
-  // Construir tabla HTML
+  // Obtener el máximo de plenos para escalar las barras
+  const maxPlenos = Math.max(...datos.map(f => Number(f[1])));
+
+  // Construir tabla HTML con barras
   let html = `
     <table class="tabla-plenos">
       <thead>
@@ -29,12 +32,18 @@ async function cargarTablaPlenos() {
 
   datos.forEach(fila => {
     const jugador = fila[0];
-    const plenos = fila[1];
+    const plenos = Number(fila[1]);
+    const ancho = (plenos / maxPlenos) * 100; // porcentaje
 
     html += `
       <tr>
         <td>${jugador}</td>
-        <td>${plenos}</td>
+        <td>
+          <div class="barra-contenedor">
+            <div class="barra" style="width:${ancho}%"></div>
+            <span class="barra-num">${plenos}</span>
+          </div>
+        </td>
       </tr>
     `;
   });
@@ -44,7 +53,6 @@ async function cargarTablaPlenos() {
     </table>
   `;
 
-  // Insertar en el div
   document.getElementById("tablaPlenos").innerHTML = html;
 }
 
