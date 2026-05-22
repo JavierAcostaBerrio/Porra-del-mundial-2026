@@ -2,428 +2,133 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>La Porra del Mundial 2026</title>
+    <title>Ficha del jugador · Porra Mundial 2026</title>
 
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-
-    <!-- Chart.js SOLO para esta página -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- ESTILOS ESPECÍFICOS DE LA FICHA -->
-    <style>
-      /* CONTENEDOR GENERAL */
-      .ficha-container {
-        max-width: 1200px;
-        margin: 40px auto;
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        gap: 20px;
-      }
-      @media (max-width: 900px) {
-        .ficha-container {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* PANEL LATERAL */
-      .ficha-panel {
-        background: #111;
-        border: 1px solid #333;
-        border-radius: 10px;
-        padding: 16px;
-        color: #eee;
-      }
-      .ficha-panel h3 {
-        margin-bottom: 10px;
-        color: #f5c451;
-      }
-      .ficha-panel select {
-        width: 100%;
-        padding: 8px;
-        border-radius: 6px;
-        border: 1px solid #444;
-        background: #000;
-        color: #fff;
-      }
-
-      .extra-box {
-        margin-top: 20px;
-        padding: 10px;
-        background: #000;
-        border: 1px solid #333;
-        border-radius: 8px;
-      }
-      .extra-box div {
-        margin-bottom: 6px;
-      }
-
-      /* ZONA PRINCIPAL */
-      .ficha-main {
-        display: grid;
-        gap: 20px;
-      }
-      .ficha-card {
-        background: #111;
-        border: 1px solid #333;
-        border-radius: 10px;
-        padding: 16px;
-        color: #eee;
-      }
-      .ficha-card h3 {
-        margin-bottom: 10px;
-        color: #f5c451;
-      }
-
-      /* TABLA */
-      .tabla-wrapper {
-        max-height: 350px;
-        overflow-y: auto;
-        border: 1px solid #333;
-        border-radius: 8px;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        color: #eee;
-      }
-      th, td {
-        padding: 8px;
-        border-bottom: 1px solid #333;
-      }
-      th {
-        background: #000;
-        color: #f5c451;
-        position: sticky;
-        top: 0;
-      }
-/* Cabeceras de los extras en dorado */
-.extra-titulo {
-    color: #D4AF37 !important;
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-/* Aplicar estilo de tarjeta dorada a la ficha */
-.ficha-bloque,
-.extra-bloque,
-.ficha-contenedor {
-    border: 1px solid #D4AF37 !important;
-    border-radius: 10px;
-    background: #111;
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(212,175,55,0.15);
-}
-    </style>
 </head>
 
 <body>
+    <!-- CABECERA -->
+    <header class="cabecera-mundial"></header>
 
-<!-- HEADER -->
-<header class="cabecera-mundial"></header>
-<nav class="menu">
-  <ul>
-    <li><a href="index.html">Clasificación</a></li>
-    <li><a href="pronosticos.html">Pronósticos</a></li>
-    <li><a href="eliminatorias.html">Eliminatorias</a></li>
-    <li><a href="estadisticas.html">Estadísticas</a></li>
-    <li><a href="ficha.html">Ficha</a></li>
-    <li><a href="comentarios.html">Comentarios</a></li>
-    <li><a href="chat.html">Chat</a></li>
-    <li><a href="base.html">Bases participación</a></li>
-    <li><a href="#mundial">Mundial</a></li>
-  </ul>
-</nav>
+    <!-- MENÚ -->
+    <nav class="menu">
+        <ul>
+            <li><a href="index.html">Clasificación</a></li>
+            <li><a href="pronosticos.html">Pronósticos</a></li>
+            <li><a href="eliminatorias.html">Eliminatorias</a></li>
+            <li><a href="estadisticas.html">Estadísticas</a></li>
+            <li><a href="ficha.html" class="activo">Ficha</a></li>
+            <li><a href="comentarios.html">Comentarios</a></li>
+            <li><a href="chat.html">Chat</a></li>
+            <li><a href="base.html">Bases participación</a></li>
+            <li><a href="#mundial">Mundial</a></li>
+        </ul>
+    </nav>
 
-<!-- SECCIÓN BIENVENIDA -->
-<section>
-  <h2>Ficha de jugador/a de la porra del Mundial 2026</h2>
-  <p>Mira la ficha de cada participante de la porra del Mundial 2026.</p>
-</section>
+    <!-- INTRO -->
+    <section>
+        <h2>Ficha del jugador</h2>
+        <p>
+            Aquí puedes ver el detalle de tus pronósticos, extras y evolución en la porra del Mundial 2026.
+        </p>
+    </section>
 
-<!-- ============================= -->
-<!--   AQUI VA LA FICHA COMPLETA   -->
-<!-- ============================= -->
+    <!-- CABECERA JUGADOR -->
+    <section class="card ficha-header">
+        <img src="images/avatar.png" alt="Avatar jugador" class="ficha-avatar">
+        <div class="ficha-info">
+            <h2 id="ficha-nombre">Nombre del jugador</h2>
+            <p class="ficha-puntos">
+                Puntos totales: <span id="ficha-puntos">0</span>
+            </p>
+            <p class="ficha-medalla">
+                <span id="ficha-medalla"></span>
+            </p>
+        </div>
+    </section>
 
-<div class="ficha-container">
+    <!-- STATS RÁPIDAS -->
+    <section class="card ficha-stats">
+        <div class="stat">
+            <div class="stat-titulo">Plenos</div>
+            <div class="stat-valor" id="stat-plenos">0</div>
+        </div>
+        <div class="stat">
+            <div class="stat-titulo">Aciertos</div>
+            <div class="stat-valor" id="stat-aciertos">0</div>
+        </div>
+        <div class="stat">
+            <div class="stat-titulo">Media puntos</div>
+            <div class="stat-valor" id="stat-media">0</div>
+        </div>
+    </section>
 
-  <!-- PANEL LATERAL -->
-  <aside class="ficha-panel">
-    <h3>Selecciona jugador</h3>
-    <select id="jugadorSelect">
-      <option value="">Elige un jugador...</option>
-    </select>
+    <!-- EXTRAS -->
+    <section class="card">
+        <h3>Extras del jugador</h3>
+        <div class="extras-grid">
+            <div class="extra-bloque">
+                <div class="extra-titulo">Campeón</div>
+                <div class="extra-valor" id="extra-campeon">–</div>
+            </div>
+            <div class="extra-bloque">
+                <div class="extra-titulo">Subcampeón</div>
+                <div class="extra-valor" id="extra-subcampeon">–</div>
+            </div>
+            <div class="extra-bloque">
+                <div class="extra-titulo">MVP</div>
+                <div class="extra-valor" id="extra-mvp">–</div>
+            </div>
+            <div class="extra-bloque">
+                <div class="extra-titulo">Pichichi</div>
+                <div class="extra-valor" id="extra-pichichi">–</div>
+            </div>
+            <div class="extra-bloque">
+                <div class="extra-titulo">Pichichi España</div>
+                <div class="extra-valor" id="extra-pichichi-espana">–</div>
+            </div>
+            <div class="extra-bloque">
+                <div class="extra-titulo">Capitán España</div>
+                <div class="extra-valor" id="extra-capitan-espana">–</div>
+            </div>
+            <div class="extra-bloque">
+                <div class="extra-titulo">Primera tarjeta España</div>
+                <div class="extra-valor" id="extra-tarjeta-espana">–</div>
+            </div>
+            <div class="extra-bloque">
+                <div class="extra-titulo">Estrategia España</div>
+                <div class="extra-valor" id="extra-estrategia-espana">–</div>
+            </div>
+            <!-- Aquí puedes seguir añadiendo más extras -->
+        </div>
+    </section>
 
-    <div class="extra-box">
-      <h4>Extras</h4>
-      <div><strong>Campeón:</strong> <span id="extraCampeon">—</span></div>
-      <div><strong>MVP:</strong> <span id="extraSubcampeon">—</span></div>
-      <div><strong>Máx. goleador Mundial:</strong> <span id="extraGoleador">—</span></div>
-      <div><strong>Máx. goleador español:</strong> <span id="extraSorpresa">—</span></div>
-    </div>
-  </aside>
+    <!-- GRÁFICO EVOLUCIÓN -->
+    <section class="card">
+        <h3>Evolución del jugador</h3>
+        <canvas id="graficoEvolucionJugador"></canvas>
+    </section>
 
-  <!-- ZONA PRINCIPAL -->
-  <main class="ficha-main">
+    <!-- PRONÓSTICOS DEL JUGADOR -->
+    <section class="card">
+        <h3>Pronósticos del jugador</h3>
+        <div class="tabla-scroll">
+            <table id="tabla-pronosticos-jugador">
+                <!-- Se rellena por JS -->
+            </table>
+        </div>
+    </section>
 
-    <!-- EVOLUCIÓN -->
-    <div class="ficha-card">
-      <h3>Evolución en la clasificación</h3>
-      <canvas id="evolChart" height="120"></canvas>
-      <p><strong>Puntos totales:</strong> <span id="totalPoints">—</span></p>
-      <p><strong>Posición actual:</strong> <span id="posicionActual">—</span></p>
-    </div>
+    <!-- FOOTER -->
+    <footer>
+        La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
+    </footer>
 
-    <!-- PRONÓSTICOS -->
-    <div class="ficha-card">
-      <h3>Pronósticos del jugador</h3>
-      <div class="tabla-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Partido</th>
-              <th>Pronóstico</th>
-              <th>Puntos</th>
-            </tr>
-          </thead>
-          <tbody id="tablaPronosticos">
-            <tr><td colspan="4">Selecciona un jugador...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </main>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
-</footer>
-
-<!-- ============================= -->
-<!--   JAVASCRIPT DE LA FICHA     -->
-<!-- ============================= -->
-<script>
-/* ============================
-   CONFIGURACIÓN DE TUS DATOS
-   ============================ */
-const SHEET_ID = "1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I";
-
-/* Pestañas reales */
-const GID_PUNTOS = "52755414";       // Puntuación_dia
-const GID_PRONOS = "1517179668";     // Pronósticos
-const GID_HISTORICO = "1308917815";  // <-- cuando me lo pases lo conecto
-
-/* FETCH GENÉRICO */
-async function fetchSheet(gid) {
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${gid}`;
-  const res = await fetch(url);
-  const text = await res.text();
-  const json = JSON.parse(text.substr(47).slice(0, -2));
-  return json.table.rows.map(r => r.c.map(c => c ? c.v : null));
-}
-
-/* ESTADO */
-let puntos = [];
-let pronos = [];
-let historico = [];
-
-let puntosByUser = new Map();
-let pronosByUser = new Map();
-let historicoByUser = new Map();
-
-/* INICIO */
-document.addEventListener("DOMContentLoaded", async () => {
-  [puntos, pronos, historico] = await Promise.all([
-    fetchSheet(GID_PUNTOS),
-    fetchSheet(GID_PRONOS),
-    fetchSheet(GID_HISTORICO)
-  ]);
-
-  // USUARIO = columna B = índice 1
-  puntosByUser = groupBy(puntos, 1);
-  pronosByUser = groupBy(pronos, 1);
-  historicoByUser = groupBy(historico, 0);
-
-  fillJugadorSelect(puntos);
-
-  initChart();
-});
-
-/* AGRUPAR */
-function groupBy(arr, col) {
-  const map = new Map();
-  arr.forEach(r => {
-    const key = r[col];
-    if (!map.has(key)) map.set(key, []);
-    map.get(key).push(r);
-  });
-  return map;
-}
-
-/* SELECTOR DE JUGADOR */
-function fillJugadorSelect(puntos) {
-  const select = document.getElementById("jugadorSelect");
-
-  // USUARIO = columna 1
-  const usuarios = [...new Set(puntos.map(r => r[1]))]
-    .filter(u => u !== null && u !== "")
-    .sort();
-
-  usuarios.forEach(u => {
-    const opt = document.createElement("option");
-    opt.value = u;
-    opt.textContent = u;
-    select.appendChild(opt);
-  });
-
-  select.addEventListener("change", () => renderFicha(select.value));
-}
-
-/* CHART */
-let evolChart = null;
-function initChart() {
-  const ctx = document.getElementById("evolChart").getContext("2d");
-  evolChart = new Chart(ctx, {
-    type: "line",
-    data: { labels: [], datasets: [{ label: "Puntos", data: [], borderColor: "#f5c451" }] },
-    options: { responsive: true, plugins: { legend: { display: false } } }
-  });
-}
-
-/* RENDER FICHA */
-function renderFicha(usuario) {
-  renderExtras(usuario);
-  renderEvolucion(usuario);
-  renderPronosticos(usuario);
-}
-
-/* ============================
-   EXTRAS (desde Puntuación_dia)
-   ============================ */
-function renderExtras(usuario) {
-  const row = puntosByUser.get(usuario)?.[0] || [];
-
-  // Columnas reales:
-  // 0 = posición
-  // 1 = usuario
-  // 3 = puntos acumulados
-  // 11 = Max. Goleador Mundial
-  // 12 = MVP Mundial
-  // 13 = Equipo Campeón Mundo
-
-  document.getElementById("extraCampeon").textContent = row[13] || "—";
-  document.getElementById("extraSubcampeon").textContent = row[12] || "—"; 
-  document.getElementById("extraGoleador").textContent = row[11] || "—";
-  document.getElementById("extraSorpresa").textContent = "—"; // no existe en tu hoja
-
-  document.getElementById("totalPoints").textContent = row[3] || 0;
-  document.getElementById("posicionActual").textContent = row[0] || "—";
-}
-
-/* ============================
-   EVOLUCIÓN (desde Calculo_puntos)
-   ============================ */
-
-const HIST_COL_START = 60; // BH
-const HIST_COL_END   = 81; // CC
-
-/* ============================
-   EVOLUCIÓN DEL RANKING
-   ============================ */
-
-const RANK_START = 60; // BH
-const RANK_END   = 81; // CC
-
-function renderEvolucion(usuario) {
-   
-    const rows = historicoByUser.get(usuario) || [];
-  if (!rows.length) return;
-
-  // Solo hay una fila por usuario en Calculo_puntos
-  const row = rows[0];
-
-  const labels = [];
-  const data = [];
-
-  for (let i = RANK_START; i <= RANK_END; i++) {
-    const value = row[i];
-
-    // Si la celda está vacía, paramos
-    if (value === null || value === "") break;
-
-    labels.push("Día " + (i - RANK_START + 1));
-    data.push(Number(value));
-  }
-
-  // Invertimos el eje Y para que 1º sea arriba
-  evolChart.options.scales.y.reverse = true;
-
-  evolChart.data.labels = labels;
-  evolChart.data.datasets[0].data = data;
-  evolChart.update();
-
-  evolChart.options.scales.y.ticks = {
-    stepSize: 1,
-    callback: function(value) {
-        return Number.isInteger(value) ? value : null;
-    }
-};
-}
-
-
-/* ============================
-   PRONÓSTICOS (desde pestaña Pronósticos)
-   ============================ */
-function renderPronosticos(usuario) {
-  const tbody = document.getElementById("tablaPronosticos");
-  tbody.innerHTML = "";
-
-  const rows = pronosByUser.get(usuario) || [];
-
-  if (!rows.length) {
-    tbody.innerHTML = "<tr><td colspan='4'>Sin pronósticos</td></tr>";
-    return;
-  }
-
-  rows.forEach(r => {
-    const equipoLocal = r[3] || "";
-    const golesLocal = r[4] ?? "";
-    const golesVisitante = r[5] ?? "";
-    const equipoVisitante = r[6] || "";
-    const puntos = Number(r[18] ?? 0);
-
-    const partido = `${equipoLocal} - ${equipoVisitante}`;
-    const pronostico = `${golesLocal} - ${golesVisitante}`;
-
-    const tr = document.createElement("tr");
-
-    // ⭐ Pleno → verde
-    if (puntos === 10 || puntos === 20) {
-      tr.style.backgroundColor = "#1f7a1f";   // verde elegante
-      tr.style.color = "white";
-      tr.style.fontWeight = "600";
-    }
-
-    // ⭐ Acierto de signo → amarillo
-    else if (puntos === 4 || puntos === 5 || puntos === 8) {
-      tr.style.backgroundColor = "#e6c229";   // amarillo cálido
-      tr.style.color = "black";
-      tr.style.fontWeight = "600";
-    }
-
-    tr.innerHTML = `
-      <td>${partido}</td>
-      <td>${pronostico}</td>
-      <td>${puntos}</td>
-      `;
-
-    tbody.appendChild(tr);
-  });
-}
-tr.classList.add("filaPronostico");
-</script>
-
-
+    <!-- SCRIPTS -->
+    <script src="js/ficha.js"></script>
 </body>
 </html>
+
