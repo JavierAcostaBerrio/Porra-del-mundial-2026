@@ -615,3 +615,48 @@ footer {
 #tablaPronosticos th:nth-child(3) {
     width: 60px;
 }
+
+.tabla-plenos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #111;
+  color: #fff;
+}
+
+.tabla-plenos th {
+  background: #222;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #444;
+}
+
+.tabla-plenos td {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.barra-contenedor {
+  position: relative;
+  background: #222;
+  height: 20px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barra {
+  height: 100%;
+  background: linear-gradient(90deg, #D4AF37, #b38a2e);
+}
+
+.barra-num {
+  position: absolute;
+  right: 8px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 4px #000;
+}
