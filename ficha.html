@@ -295,9 +295,12 @@ function initChart() {
 
 /* RENDER FICHA */
 function renderFicha(usuario) {
+  document.getElementById("titulo-evolucion").textContent = usuario;
+    
   renderExtras(usuario);
   renderEvolucion(usuario);
   renderPronosticos(usuario);
+  
 }
 
 /* ============================
