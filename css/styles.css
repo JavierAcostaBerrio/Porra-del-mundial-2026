@@ -632,7 +632,7 @@ footer {
 }
 .tabla-plenos td:first-child {
     width: 60px;        /* Ajusta a tu gusto */
-    max-width: 120px;
+    max-width: 60px;
     white-space: nowrap; /* Evita que se parta en dos líneas */
     overflow: hidden;    /* Oculta texto sobrante */
     text-overflow: ellipsis; /* Añade "..." si es muy largo */
