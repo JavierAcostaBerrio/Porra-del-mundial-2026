@@ -303,8 +303,14 @@ function renderFicha(usuario) {
   const puntosTotales = row[3] || 0;
   const posicion = row[0] || "—";
 
+  // Determinar medalla
+  let medalla = "";
+  if (posicion === 1) medalla = "🥇 ";
+  else if (posicion === 2) medalla = "🥈 ";
+  else if (posicion === 3) medalla = "🥉 ";
+
   // Construir texto del título
-  const titulo = `${usuario} — ${puntosTotales} pts — ${posicion}º puesto`;
+  const titulo = `${medalla}${usuario} — ${puntosTotales} pts — ${posicion}º puesto`;
 
   // Mostrarlo encima del gráfico
   document.getElementById("titulo-evolucion").textContent = titulo;
@@ -314,6 +320,7 @@ function renderFicha(usuario) {
   renderEvolucion(usuario);
   renderPronosticos(usuario);
 }
+
 
 
 
