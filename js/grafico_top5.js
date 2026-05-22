@@ -47,7 +47,11 @@ async function cargarEvolucionTop5() {
     data: obj.posiciones,
     borderColor: colores[k],
     borderWidth: 3,
-    tension: 0.3
+    tension: 0.3,
+    pointRadius: 5,
+    pointHoverRadius: 8,
+    pointBackgroundColor: "#fff",
+    pointBorderWidth: 2
   }));
 
   // Pintar gráfico
@@ -57,7 +61,22 @@ async function cargarEvolucionTop5() {
     options: {
       responsive: true,
       scales: {
-        y: { reverse: true, ticks: { stepSize: 1 } }
+        y: { 
+          reverse: true, 
+          ticks: { stepSize: 1 } 
+        }
+      },
+      plugins: {
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: function(context) {
+              const jugador = context.dataset.label;
+              const valor = context.parsed.y;
+              return jugador + ": posición " + valor;
+            }
+          }
+        }
       }
     }
   });
