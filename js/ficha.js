@@ -11,6 +11,6 @@ function cargarFichaJugador(nombreJugador) {
 }
 
 // Evento del selector (fuera de la función)
-document.getElementById("selector-jugador").addEventListener("change", function() {
+document.getElementById("jugadorSelect").addEventListener("change", function() {
     cargarFichaJugador(this.value);
 });
