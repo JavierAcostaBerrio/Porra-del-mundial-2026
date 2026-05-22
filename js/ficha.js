@@ -9,5 +9,6 @@ function cargarFichaJugador(nombreJugador) {
     const tituloEvolucion = document.getElementById("titulo-evolucion");
     if (tituloEvolucion) tituloEvolucion.textContent = nombreJugador;
 
-    
+    document.getElementById("selector-jugador").addEventListener("change", function() {
+    cargarFichaJugador(this.value);
 }
