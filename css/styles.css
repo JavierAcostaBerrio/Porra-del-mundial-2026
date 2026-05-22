@@ -630,7 +630,13 @@ footer {
   text-align: left;
   border-bottom: 2px solid #444;
 }
-
+.tabla-plenos td:first-child {
+    width: 60px;        /* Ajusta a tu gusto */
+    max-width: 120px;
+    white-space: nowrap; /* Evita que se parta en dos líneas */
+    overflow: hidden;    /* Oculta texto sobrante */
+    text-overflow: ellipsis; /* Añade "..." si es muy largo */
+}
 .tabla-plenos td {
   padding: 10px;
   vertical-align: middle;
