@@ -297,18 +297,24 @@ function initChart() {
 /* RENDER FICHA */
 function renderFicha(usuario) {
 
-  // Obtener puntos del usuario
+  // Obtener datos del usuario
   const row = puntosByUser.get(usuario)?.[0] || [];
+
   const puntosTotales = row[3] || 0;
+  const posicion = row[0] || "—";
 
-  // Mostrar nombre + puntos juntos
-  document.getElementById("titulo-evolucion").textContent =
-      `${usuario} — ${puntosTotales} pts`;
+  // Construir texto del título
+  const titulo = `${usuario} — ${puntosTotales} pts — ${posicion}º puesto`;
 
+  // Mostrarlo encima del gráfico
+  document.getElementById("titulo-evolucion").textContent = titulo;
+
+  // Resto de renderizados
   renderExtras(usuario);
   renderEvolucion(usuario);
   renderPronosticos(usuario);
 }
+
 
 
 /* ============================
