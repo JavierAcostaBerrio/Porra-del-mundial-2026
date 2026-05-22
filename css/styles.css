@@ -674,3 +674,23 @@ footer {
     font-size: 1.1rem;
 }
 
+.ficha-selector {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+}
+
+.ficha-selector label {
+    color: #D4AF37;
+    font-weight: 700;
+}
+
+#selector-jugador {
+    background: #111;
+    color: #fff;
+    border: 1px solid #D4AF37;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+}
