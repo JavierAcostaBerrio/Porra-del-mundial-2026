@@ -23,7 +23,7 @@ async function cargarTablaPlenos() {
     <table class="tabla-plenos">
       <thead>
         <tr>
-          <th>Jugador</th>
+          <th>Participante</th>
           <th>Plenos</th>
         </tr>
       </thead>
