@@ -7,7 +7,7 @@
 async function cargarEvolucionTop5() {
 
   // URL del CSV (sustituir ID y GID)
-  const url = "https://docs.google.com/spreadsheets/d/ID/export?format=csv&gid=GID";
+  const url = "https://docs.google.com/spreadsheets/d/ID/export?format=csv&gid=1308917815";
 
   // Leer CSV
   const resp = await fetch(url);
