@@ -28,6 +28,12 @@ async function cargarCSV(url) {
         .map(fila => fila.split(","));
 }
 
+function obtenerMedalla(pos) {
+    if (pos === 1) return "🥇"; // Oro
+    if (pos === 2) return "🥈"; // Plata
+    if (pos === 3) return "🥉"; // Bronce
+    return "";
+}
 // -------------------------------
 // Crear tabla de clasificación
 // -------------------------------
@@ -85,7 +91,8 @@ async function generarTablaClasificacion(datos) {
 
         html += "<tr>";
 
-        html += `<td><span class="badge badge-azul">${posicionActual}</span></td>`;
+        const medalla = obtenerMedalla(posicionActual);
+        html += `<td><span class="badge badge-azul">${posicionActual} ${medalla}</span></td>`;
         html += `<td>${jugador}</td>`;
         html += `<td>${puntos}</td>`;
 
