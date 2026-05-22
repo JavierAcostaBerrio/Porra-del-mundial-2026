@@ -1,38 +1,102 @@
-// ===============================
-//  Gráfico evolución Top 5
-//  La Porra del Mundial 2026
-//  Lee Calculo_puntos!DG2:EC6
-// ===============================
+// ===============================================
+//  Gráfico evolución Top 5 (detección automática)
+//  Lee toda la hoja publicada y extrae DG2:EC6
+// ===============================================
 
 async function cargarEvolucionTop5() {
 
-  // URL del CSV (sustituir ID y GID)
+  // Tu URL publicada (CSV)
   const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/pub?gid=1308917815&single=true&output=csv";
 
-
-  // Leer CSV
   const resp = await fetch(url);
   const texto = await resp.text();
 
   // Convertir CSV a matriz
-  const filas = texto.trim().split("\n").map(r => r.split(","));
+  const filas = texto
+    .trim()
+    .split("\n")
+    .map(r => r.split(","));
 
-  // Jugadores (columna DG)
-  const jugadores = filas.map(f => f[0]);
+  // 1) Buscar la columna DG (jugadores)
+  // DG es la primera columna que contiene nombres no vacíos y NO números
+  let colDG = -1;
+  for (let c = 0; c < filas[0].length; c++) {
+    const valores = filas.map(f => f[c]).filter(v => v.trim() !== "");
+    const noNumericos = valores.filter(v => isNaN(Number(v)));
+    if (noNumericos.length >= 5) { // hay 5 jugadores
+      colDG = c;
+      break;
+    }
+  }
 
-  // Posiciones por jornada (DH → EC)
-  const posiciones = filas.map(f => f.slice(1).map(Number));
+  if (colDG === -1) {
+    console.error("No se encontró la columna DG automáticamente");
+    return;
+  }
 
-  // Número de jornadas
-  const jornadas = posiciones[0].length;
+  // 2) Detectar columnas de jornadas (DH → EC)
+  // Son columnas numéricas consecutivas a partir de DG+1
+  let colInicio = colDG + 1;
+  let colFin = colInicio;
+
+  for (let c = colInicio; c < filas[0].length; c++) {
+    const valores = filas.map(f => f[c]).filter(v => v.trim() !== "");
+    const todosNumeros = valores.every(v => !isNaN(Number(v)));
+    if (todosNumeros) {
+      colFin = c;
+    } else {
+      break;
+    }
+  }
+
+  // 3) Extraer solo las filas válidas (jugadores + posiciones)
+  const datos = filas
+    .filter(f => f[colDG] && f[colDG].trim() !== "") // jugador no vacío
+    .map(f => ({
+      jugador: f[colDG],
+      posiciones: f.slice(colInicio, colFin + 1).map(Number)
+    }))
+    .filter(obj => obj.posiciones.length > 0);
+
+  // 4) Ordenar por la última jornada
+  const top5 = datos
+    .sort((a, b) => a.posiciones[a.posiciones.length - 1] - b.posiciones[b.posiciones.length - 1])
+    .slice(0, 5);
+
+  // 5) Labels de jornadas
+  const jornadas = top5[0].posiciones.length;
   const labels = Array.from({ length: jornadas }, (_, i) => "J" + (i + 1));
 
-  // Ordenar por la última jornada (posición final)
-  const indicesTop5 = posiciones
-    .map((fila, i) => ({ i, posFinal: fila[fila.length - 1] }))
-    .sort((a, b) => a.posFinal - b.posFinal)
-    .slice(0, 5)
-    .map(obj => obj.i);
+  // 6) Colores estilo Mundial 2026
+  const colores = ["#FFD700", "#00BFFF", "#FF4500", "#32CD32", "#BA55D3"];
 
-  // Colores estilo dorado-Mundial 2026
-  const colores = ["#FFD700", "#00BFFF",
+  // 7) Construir datasets
+  const datasets = top5.map((obj, k) => ({
+    label: obj.jugador,
+    data: obj.posiciones,
+    borderColor: colores[k],
+    borderWidth: 3,
+    tension: 0.3
+  }));
+
+  // 8) Pintar gráfico
+  new Chart(document.getElementById("evolucionTop5"), {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          reverse: true,
+          ticks: { stepSize: 1 }
+        }
+      },
+      plugins: {
+        legend: { position: "bottom" }
+      }
+    }
+  });
+}
+
+cargarEvolucionTop5();
+
