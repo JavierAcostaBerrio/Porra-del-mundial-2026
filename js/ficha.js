@@ -24,12 +24,18 @@ async function cargarAlineacion(usuarioSeleccionado) {
     try {
         const res = await fetch(url);
         const text = await res.text();
-        const json = JSON.parse(text.substring(47, text.length - 2));
+
+        // Seguridad: evitar errores si Google cambia el offset
+        const jsonText = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
+        const json = JSON.parse(jsonText);
 
         const rows = json.table.rows;
 
         // Buscar la fila del usuario seleccionado
-        const fila = rows.find(r => (r.c[0]?.v || "").trim() === usuarioSeleccionado);
+        const fila = rows.find(r => {
+            const nombre = r.c[0]?.v;
+            return nombre && nombre.trim() === usuarioSeleccionado;
+        });
 
         if (!fila) {
             document.getElementById("alineacionUsuario").textContent =
@@ -39,8 +45,14 @@ async function cargarAlineacion(usuarioSeleccionado) {
         }
 
         const celdas = fila.c;
+
         const usuario = celdas[0]?.v || usuarioSeleccionado;
-        const jugadores = celdas.slice(1).map(c => c?.v || "-");
+
+        // Rellenar huecos si faltan columnas
+        const jugadores = [];
+        for (let i = 1; i <= 11; i++) {
+            jugadores.push(celdas[i]?.v || "-");
+        }
 
         // Mostrar usuario
         document.getElementById("alineacionUsuario").textContent =
@@ -63,3 +75,4 @@ async function cargarAlineacion(usuarioSeleccionado) {
         console.error("Error cargando alineación:", error);
     }
 }
+
