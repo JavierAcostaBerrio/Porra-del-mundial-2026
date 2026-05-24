@@ -210,12 +210,12 @@ function renderExtras(usuario) {
   // 13 = Equipo Campeón Mundo
 
   document.getElementById("extraCampeon").textContent = row[13] || "—";
-  document.getElementById("extraSubcampeon").textContent = row[12] || "—"; 
+  document.getElementById("extraMVP").textContent = row[12] || "—"; 
   document.getElementById("extraGoleador").textContent = row[11] || "—";
   document.getElementById("extraGoleadorEspana").textContent = row[7] || "—";
   document.getElementById("extraGoles1fase").textContent = row[6] || "—";
-    document.getElementById("extraGolesGoleadorEspana").textContent = row[8] || "—";
-    document.getElementById("extraTarjetEspana").textContent = row[9] || "—";
+  document.getElementById("extraGolesGoleadorEspana").textContent = row[8] || "—";
+  document.getElementById("extraTarjetaEspana").textContent = row[9] || "—";
 
   
 }
