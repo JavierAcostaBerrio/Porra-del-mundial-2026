@@ -319,16 +319,17 @@ function renderPronosticos(usuario) {
   });
 }
 // ===============================
-// CAMPO TÁCTICO (4-3-3 estándar)
+// CAMPO TÁCTICO (1-3-4-3)
 // ===============================
 
 // Limpiar campo
 document.querySelectorAll("#campoTactico .linea").forEach(l => l.innerHTML = "");
 
-// Distribución 4-3-3
-const defensa = jugadores.slice(0, 4);
-const medio   = jugadores.slice(4, 7);
-const ataque  = jugadores.slice(7, 11);
+// Distribución real según tus 11 jugadores
+const portero   = jugadores.slice(0, 1);   // 1 portero
+const defensa   = jugadores.slice(1, 4);   // 3 defensas
+const medio     = jugadores.slice(4, 8);   // 4 medios
+const ataque    = jugadores.slice(8, 11);  // 3 delanteros
 
 // Pintar líneas
 function pintarLinea(selector, lista) {
@@ -339,9 +340,9 @@ function pintarLinea(selector, lista) {
         div.textContent = j;
         linea.appendChild(div);
     });
+}
 
+pintarLinea("#campoTactico .portero", portero);
 pintarLinea("#campoTactico .defensa", defensa);
 pintarLinea("#campoTactico .medio", medio);
 pintarLinea("#campoTactico .ataque", ataque);
-
-}
