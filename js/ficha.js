@@ -65,33 +65,7 @@ async function cargarAlineacion(usuarioSeleccionado) {
             tbody.appendChild(tr);
         });
 
-        // ============================
-        // CAMPO TÁCTICO (1-3-4-3)
-        // ============================
-
-        // Limpiar campo
-        document.querySelectorAll("#campoTactico .linea").forEach(l => l.innerHTML = "");
-
-        // Distribución real
-        const portero = jugadores.slice(0, 1);   // 1
-        const defensa = jugadores.slice(1, 4);   // 3
-        const medio   = jugadores.slice(4, 8);   // 4
-        const ataque  = jugadores.slice(8, 11);  // 3
-
-        function pintarLinea(selector, lista) {
-            const linea = document.querySelector(selector);
-            lista.forEach(j => {
-                const div = document.createElement("div");
-                div.className = "jugador-tactico";
-                div.textContent = j;
-                linea.appendChild(div);
-            });
-        }
-
-        pintarLinea("#campoTactico .portero", portero);
-        pintarLinea("#campoTactico .defensa", defensa);
-        pintarLinea("#campoTactico .medio", medio);
-        pintarLinea("#campoTactico .ataque", ataque);
+        
 
     } catch (error) {
         console.error("Error cargando alineación:", error);
