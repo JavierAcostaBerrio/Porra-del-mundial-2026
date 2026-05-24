@@ -750,7 +750,7 @@ footer {
 #campoTactico {
     position: relative;
     width: 100%;
-    height: 320px;
+    height: 360px;
     background: linear-gradient(#0a0a0a, #111);
     border: 2px solid #c9a23f;
     border-radius: 10px;
@@ -766,9 +766,10 @@ footer {
     justify-content: space-around;
 }
 
-#campoTactico .defensa { top: 60px; }
-#campoTactico .medio   { top: 150px; }
-#campoTactico .ataque  { top: 240px; }
+#campoTactico .portero { top: 40px; }
+#campoTactico .defensa { top: 120px; }
+#campoTactico .medio   { top: 200px; }
+#campoTactico .ataque  { top: 280px; }
 
 .jugador-tactico {
     background: #222;
