@@ -301,8 +301,12 @@ function fillJugadorSelect(puntos) {
     select.appendChild(opt);
   });
 
-  select.addEventListener("change", () => renderFicha(select.value));
-        cargarAlineacion(usuario);   // ← NUEVO
+  select.addEventListener("change", () => {
+    const usuario = select.value;
+    renderFicha(usuario);
+    cargarAlineacion(usuario);
+});
+
 }
 
 /* CHART */
