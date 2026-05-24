@@ -321,4 +321,30 @@ function renderPronosticos(usuario) {
     tbody.appendChild(tr);
   });
 }
+// ===============================
+// CAMPO TÁCTICO (4-3-3 estándar)
+// ===============================
 
+// Limpiar campo
+document.querySelectorAll("#campoTactico .linea").forEach(l => l.innerHTML = "");
+
+// Distribución 4-3-3
+const defensa = jugadores.slice(0, 4);
+const medio   = jugadores.slice(4, 7);
+const ataque  = jugadores.slice(7, 11);
+
+// Pintar líneas
+function pintarLinea(selector, lista) {
+    const linea = document.querySelector(selector);
+    lista.forEach(j => {
+        const div = document.createElement("div");
+        div.className = "jugador-tactico";
+        div.textContent = j;
+        linea.appendChild(div);
+    });
+
+pintarLinea("#campoTactico .defensa", defensa);
+pintarLinea("#campoTactico .medio", medio);
+pintarLinea("#campoTactico .ataque", ataque);
+
+}
