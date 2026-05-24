@@ -213,6 +213,7 @@ function renderExtras(usuario) {
   document.getElementById("extraSubcampeon").textContent = row[12] || "—"; 
   document.getElementById("extraGoleador").textContent = row[11] || "—";
   document.getElementById("extraSorpresa").textContent = "—"; // no existe en tu hoja
+  document.getElementById("extraGoles1fase").textContent = row[11] || "—";  
 
   
 }
