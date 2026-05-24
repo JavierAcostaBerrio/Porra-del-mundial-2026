@@ -214,8 +214,7 @@ function renderExtras(usuario) {
   document.getElementById("extraGoleador").textContent = row[11] || "—";
   document.getElementById("extraSorpresa").textContent = "—"; // no existe en tu hoja
 
-  document.getElementById("totalPoints").textContent = row[3] || 0;
-  document.getElementById("posicionActual").textContent = row[0] || "—";
+  
 }
 
 /* ============================
