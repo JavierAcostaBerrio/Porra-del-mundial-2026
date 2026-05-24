@@ -25,7 +25,7 @@ async function cargarAlineacion(usuarioSeleccionado) {
         const res = await fetch(url);
         const text = await res.text();
 
-        // Seguridad: evitar errores si Google cambia el offset
+        // Extraer JSON de forma segura
         const jsonText = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
         const json = JSON.parse(jsonText);
 
@@ -38,24 +38,21 @@ async function cargarAlineacion(usuarioSeleccionado) {
         });
 
         if (!fila) {
-            document.getElementById("alineacionUsuario").textContent =
-                `No hay alineación para ${usuarioSeleccionado}`;
             document.querySelector("#tablaAlineacion tbody").innerHTML = "";
             return;
         }
 
         const celdas = fila.c;
 
-        const usuario = celdas[0]?.v || usuarioSeleccionado;
-
-        // Rellenar huecos si faltan columnas
+        // FORZAR 11 JUGADORES (1 portero, 3 defensas, 4 medios, 3 delanteros)
         const jugadores = [];
         for (let i = 1; i <= 11; i++) {
             jugadores.push(celdas[i]?.v || "-");
         }
 
-        
-        // Rellenar tabla
+        // ============================
+        // RELLENAR TABLA
+        // ============================
         const tbody = document.querySelector("#tablaAlineacion tbody");
         tbody.innerHTML = "";
 
@@ -68,10 +65,39 @@ async function cargarAlineacion(usuarioSeleccionado) {
             tbody.appendChild(tr);
         });
 
+        // ============================
+        // CAMPO TÁCTICO (1-3-4-3)
+        // ============================
+
+        // Limpiar campo
+        document.querySelectorAll("#campoTactico .linea").forEach(l => l.innerHTML = "");
+
+        // Distribución real
+        const portero = jugadores.slice(0, 1);   // 1
+        const defensa = jugadores.slice(1, 4);   // 3
+        const medio   = jugadores.slice(4, 8);   // 4
+        const ataque  = jugadores.slice(8, 11);  // 3
+
+        function pintarLinea(selector, lista) {
+            const linea = document.querySelector(selector);
+            lista.forEach(j => {
+                const div = document.createElement("div");
+                div.className = "jugador-tactico";
+                div.textContent = j;
+                linea.appendChild(div);
+            });
+        }
+
+        pintarLinea("#campoTactico .portero", portero);
+        pintarLinea("#campoTactico .defensa", defensa);
+        pintarLinea("#campoTactico .medio", medio);
+        pintarLinea("#campoTactico .ataque", ataque);
+
     } catch (error) {
         console.error("Error cargando alineación:", error);
     }
 }
+
 
 /* ============================
    CONFIGURACIÓN DE TUS DATOS
@@ -318,31 +344,3 @@ function renderPronosticos(usuario) {
     tbody.appendChild(tr);
   });
 }
-// ===============================
-// CAMPO TÁCTICO (1-3-4-3)
-// ===============================
-
-// Limpiar campo
-document.querySelectorAll("#campoTactico .linea").forEach(l => l.innerHTML = "");
-
-// Distribución real según tus 11 jugadores
-const portero   = jugadores.slice(0, 1);   // 1 portero
-const defensa   = jugadores.slice(1, 4);   // 3 defensas
-const medio     = jugadores.slice(4, 8);   // 4 medios
-const ataque    = jugadores.slice(8, 11);  // 3 delanteros
-
-// Pintar líneas
-function pintarLinea(selector, lista) {
-    const linea = document.querySelector(selector);
-    lista.forEach(j => {
-        const div = document.createElement("div");
-        div.className = "jugador-tactico";
-        div.textContent = j;
-        linea.appendChild(div);
-    });
-}
-
-pintarLinea("#campoTactico .portero", portero);
-pintarLinea("#campoTactico .defensa", defensa);
-pintarLinea("#campoTactico .medio", medio);
-pintarLinea("#campoTactico .ataque", ataque);
