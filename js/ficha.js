@@ -212,8 +212,10 @@ function renderExtras(usuario) {
   document.getElementById("extraCampeon").textContent = row[13] || "—";
   document.getElementById("extraSubcampeon").textContent = row[12] || "—"; 
   document.getElementById("extraGoleador").textContent = row[11] || "—";
-  document.getElementById("extraGoleadorEspana").textContent = row[6] || "—";
-  document.getElementById("extraGoles1fase").textContent = row[7] || "—";  
+  document.getElementById("extraGoleadorEspana").textContent = row[7] || "—";
+  document.getElementById("extraGoles1fase").textContent = row[6] || "—";
+    document.getElementById("extraGolesGoleadorEspana").textContent = row[8] || "—";
+    document.getElementById("extraTarjetEspana").textContent = row[9] || "—";
 
   
 }
