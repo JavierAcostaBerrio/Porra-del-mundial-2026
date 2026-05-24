@@ -747,37 +747,3 @@ footer {
     border: 1px solid #c9a23f;
     color: #fff;
 }
-#campoTactico {
-    position: relative;
-    width: 100%;
-    height: 360px;
-    background: linear-gradient(#0a0a0a, #111);
-    border: 2px solid #c9a23f;
-    border-radius: 10px;
-    margin-top: 20px;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-#campoTactico .linea {
-    position: absolute;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-#campoTactico .portero { top: 40px; }
-#campoTactico .defensa { top: 120px; }
-#campoTactico .medio   { top: 200px; }
-#campoTactico .ataque  { top: 280px; }
-
-.jugador-tactico {
-    background: #222;
-    border: 1px solid #c9a23f;
-    color: #e8d28b;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 12px;
-    text-align: center;
-    min-width: 70px;
-}
