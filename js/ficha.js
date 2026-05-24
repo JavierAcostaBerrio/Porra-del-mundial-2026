@@ -15,7 +15,7 @@ document.getElementById("jugadorSelect").addEventListener("change", function() {
     cargarFichaJugador(this.value);
 });
 
-async function cargarAlineacion() {
+async function cargarAlineacion(usuarioSeleccionado) {
     const sheetID = "1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I";
     const gid = "1503492419";
 
@@ -28,12 +28,19 @@ async function cargarAlineacion() {
 
         const rows = json.table.rows;
 
-        // Tomamos SOLO la fila del usuario actual
-        // (si quieres filtrar por usuario logueado, dímelo)
-        const fila = rows[0].c;
+        // Buscar la fila del usuario seleccionado
+        const fila = rows.find(r => (r.c[0]?.v || "").trim() === usuarioSeleccionado);
 
-        const usuario = fila[0]?.v || "Usuario";
-        const jugadores = fila.slice(1).map(c => c?.v || "-");
+        if (!fila) {
+            document.getElementById("alineacionUsuario").textContent =
+                `No hay alineación para ${usuarioSeleccionado}`;
+            document.querySelector("#tablaAlineacion tbody").innerHTML = "";
+            return;
+        }
+
+        const celdas = fila.c;
+        const usuario = celdas[0]?.v || usuarioSeleccionado;
+        const jugadores = celdas.slice(1).map(c => c?.v || "-");
 
         // Mostrar usuario
         document.getElementById("alineacionUsuario").textContent =
@@ -56,6 +63,3 @@ async function cargarAlineacion() {
         console.error("Error cargando alineación:", error);
     }
 }
-
-// Ejecutar al cargar la página
-document.addEventListener("DOMContentLoaded", cargarAlineacion);
