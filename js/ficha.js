@@ -216,6 +216,10 @@ function renderExtras(usuario) {
   document.getElementById("extraGoles1fase").textContent = row[6] || "—";
   document.getElementById("extraGolesGoleadorEspana").textContent = row[8] || "—";
   document.getElementById("extraTarjetaEspana").textContent = row[9] || "—";
+  document.getElementById("extraEstrategiaEspana").textContent = row[15] || "—";
+  document.getElementById("extraCapitanEspana").textContent = row[10] || "—";
+  document.getElementById("extraGolesFEspana").textContent = row[16] || "—";
+  document.getElementById("extraGolesCEspana").textContent = row[17] || "—";  
 
   
 }
