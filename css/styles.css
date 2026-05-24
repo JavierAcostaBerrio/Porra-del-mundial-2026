@@ -699,17 +699,37 @@ footer {
     font-weight: 700;
 }
 
-.card-dark-gold {
+#cardAlineacion {
     background: #111;
     border: 1px solid #c9a23f;
-    color: #e8d28b;
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%;
 }
 
-.card-dark-gold .card-header {
-    background: #1a1a1a;
+#cardAlineacion .card-header {
+    background: transparent;
     border-bottom: 1px solid #c9a23f;
+    margin-bottom: 10px;
 }
 
-.text-gold {
+#cardAlineacion h3 {
     color: #e8d28b;
+    margin: 0;
+}
+
+#tablaAlineacion {
+    width: 100%;
+    font-size: 14px;
+}
+
+#tablaAlineacion th {
+    background: #222;
+    color: #e8d28b;
+    border: 1px solid #c9a23f;
+}
+
+#tablaAlineacion td {
+    border: 1px solid #c9a23f;
+    color: #fff;
 }
