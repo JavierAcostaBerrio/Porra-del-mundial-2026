@@ -54,10 +54,7 @@ async function cargarAlineacion(usuarioSeleccionado) {
             jugadores.push(celdas[i]?.v || "-");
         }
 
-        // Mostrar usuario
-        document.getElementById("alineacionUsuario").textContent =
-            `Usuario: ${usuario}`;
-
+        
         // Rellenar tabla
         const tbody = document.querySelector("#tablaAlineacion tbody");
         tbody.innerHTML = "";
