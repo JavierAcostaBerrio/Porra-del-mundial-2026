@@ -698,3 +698,18 @@ footer {
     color: #D4AF37 !important;
     font-weight: 700;
 }
+
+.card-dark-gold {
+    background: #111;
+    border: 1px solid #c9a23f;
+    color: #e8d28b;
+}
+
+.card-dark-gold .card-header {
+    background: #1a1a1a;
+    border-bottom: 1px solid #c9a23f;
+}
+
+.text-gold {
+    color: #e8d28b;
+}
