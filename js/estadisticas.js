@@ -137,11 +137,93 @@ iniciarClasificacion();
 
 
 async function cargarEstadisticas() {
+    const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
+
+    const respuesta = await fetch(url);
+    const texto = await respuesta.text();
+    const json = JSON.parse(texto.substring(47, texto.length - 2));
+
+    const filas = json.table.rows.map(fila => ({
+        colA: fila.c[0]?.v ?? "",
+        colB: fila.c[1]?.v ?? 0,
+        colC: fila.c[2]?.v ?? "",
+        colD: fila.c[3]?.v ?? 0,
+        colE: fila.c[4]?.v ?? "",
+        colF: fila.c[5]?.v ?? 0,
+        colG: fila.c[6]?.v ?? "",
+        colH: fila.c[7]?.v ?? 0,
+        colI: fila.c[8]?.v ?? "",
+        colJ: fila.c[9]?.v ?? 0,
+        colK: fila.c[10]?.v ?? "",
+        colL: fila.c[11]?.v ?? 0,
+        colM: fila.c[12]?.v ?? "",
+        colN: fila.c[13]?.v ?? 0,
+        colO: fila.c[14]?.v ?? "",
+        colP: fila.c[15]?.v ?? 0,
+        colQ: fila.c[16]?.v ?? "",
+        colR: fila.c[17]?.v ?? 0
+    }));
+
+    return filas;
 }
 // -------------------------------
 // Grafico goles
 // -------------------------------
 async function dibujarGraficoGoles() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colA);
+    const values = datos.map(f => Number(f.colB));
+
+    const ctx = document.getElementById("golesChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37", // se sobrescribe con el degradado
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
 }
 
 
@@ -149,43 +231,475 @@ async function dibujarGraficoGoles() {
 // Grafico campeon
 // -------------------------------
 async function dibujarGraficoCampeon() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colC);
+    const values = datos.map(f => Number(f.colD));
+
+    const ctx = document.getElementById("campeonChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
 }
 
 // -------------------------------
 // Grafico MVP
 // -------------------------------
 async function dibujarGraficoMVP() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colE);
+    const values = datos.map(f => Number(f.colF));
+
+    const ctx = document.getElementById("MVPChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
 }
 // -------------------------------
 // Grafico Pichichi
 // -------------------------------
 async function dibujarGraficoPichichi() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colG);
+    const values = datos.map(f => Number(f.colH));
+
+    const ctx = document.getElementById("PichichiChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
 }
 // -------------------------------
 // Grafico Pichichi España
 // -------------------------------
 async function dibujarGraficoPichichiEspana() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colI);
+    const values = datos.map(f => Number(f.colJ));
+
+    const ctx = document.getElementById("PichichiEspanaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
 }
 
 // -------------------------------
 // Grafico Goles Pichichi España
 // -------------------------------
 async function dibujarGraficoGolesPichichiEspana() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colK);
+    const values = datos.map(f => Number(f.colL));
+
+    const ctx = document.getElementById("GolesPichichiEspanaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
 }
 
 // -------------------------------
 // Grafico Primera Tarjeta España
 // -------------------------------
 async function dibujarGraficoTarjeta() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colM);
+    const values = datos.map(f => Number(f.colN));
+
+    const ctx = document.getElementById("TarjetaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
 }
 
 // -------------------------------
 // Grafico Capitan España
 // -------------------------------
 async function dibujarGraficoCapitanEspana() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colO);
+    const values = datos.map(f => Number(f.colP));
+
+    const ctx = document.getElementById("CapitanEspanaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
 }
 // -------------------------------
 // Grafico Estrategia España
 // -------------------------------
 async function dibujarGraficoEstrategiaEspana() {
+    const datos = await cargarEstadisticas();
+
+    const labels = datos.map(f => f.colQ);
+    const values = datos.map(f => Number(f.colR));
+
+    const ctx = document.getElementById("EstrategiaEspanaChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#D4AF37",
+                borderRadius: 8              // 👈 BORDES REDONDEADOS
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { ticks: { color: "#D4AF37" } },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#D4AF37",
+                        stepSize: 1,
+                        precision: 0,
+                        callback: v => v
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: "goldGradient",
+            beforeDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+
+                const gradient = ctx.createLinearGradient(
+                    0, chartArea.bottom,
+                    0, chartArea.top
+                );
+
+                gradient.addColorStop(0, "#B8860B");
+                gradient.addColorStop(0.5, "#D4AF37");
+                gradient.addColorStop(1, "#F7E7A1");
+
+                chart.data.datasets[0].backgroundColor = gradient;
+            }
+        }]
+    });
 }
