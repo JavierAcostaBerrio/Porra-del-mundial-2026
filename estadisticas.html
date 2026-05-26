@@ -30,7 +30,7 @@
   <section>
     <h2>Estadísticas de los pronósticos de la porra del Mundial 2026</h2>
     <p>
-      Echad un vistazo a las estadísticas generales de los pronósticos realizados por los participantes de la porra del Mundial 2026.
+      Echa un vistazo a las estadísticas generales de los pronósticos realizados por los participantes de la porra del Mundial 2026.
     </p>
   </section>
 
@@ -99,6 +99,18 @@
 
 
 <!-- Tus scripts -->
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.menu a').forEach(link => {
+    const linkPage = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+    if (linkPage === currentPage) {
+      link.classList.add('activo');
+    }
+  });
+});
+</script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/sheet.js"></script>
     <script src="js/estadisticas.js"></script>
