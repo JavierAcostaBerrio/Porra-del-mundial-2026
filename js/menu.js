@@ -1,4 +1,3 @@
-<script>
 document.querySelectorAll('.menu a').forEach(link => {
   const linkPage = link.getAttribute('href');
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
@@ -7,4 +6,4 @@ document.querySelectorAll('.menu a').forEach(link => {
     link.classList.add('active');
   }
 });
-</script>
+
