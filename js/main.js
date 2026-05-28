@@ -101,13 +101,7 @@ async function generarTablaClasificacion(datos) {
 
     //document.getElementById("tabla-clasificacion").innerHTML = html;
 
-    // Guardar nuevas posiciones
-    fetch("data/posiciones.json", {
-        method: "PUT",
-        body: JSON.stringify(nuevasPosiciones),
-        headers: { "Content-Type": "application/json" }
-    }).catch(() => {});
-}
+    
 
 
 
