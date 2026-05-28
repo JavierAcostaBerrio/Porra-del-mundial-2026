@@ -27,12 +27,7 @@ async function cargarCSV(url) {
         .map(fila => fila.split(","));
 }
 
-function obtenerMedalla(pos) {
-    if (pos === 1) return "🥇"; // Oro
-    if (pos === 2) return "🥈"; // Plata
-    if (pos === 3) return "🥉"; // Bronce
-    return "";
-}
+
 // -------------------------------
 // Crear tabla de clasificación
 // -------------------------------
