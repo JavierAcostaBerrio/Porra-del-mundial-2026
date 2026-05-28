@@ -15,17 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 console.log("Porra Mundial 2026 iniciada correctamente");
-// -------------------------------
-// Cargar CSV desde /data/
-// -------------------------------
-async function cargarCSV(url) {
-    const respuesta = await fetch(url);
-    const texto = await respuesta.text();
-    return texto
-        .trim()
-        .split("\n")
-        .map(fila => fila.split(","));
-}
+
 
 
 // -------------------------------
