@@ -74,3 +74,16 @@ async function cargarEstadisticas() {
 
     return filas;
 }
+
+const ahora = new Date();
+const fechaFormateada = ahora.toLocaleString("es-ES", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit"
+});
+
+document.getElementById("fecha-actualizacion").textContent =
+    `Datos actualizados: ${fechaFormateada}`;
+}
