@@ -75,14 +75,24 @@ async function cargarEstadisticas() {
     return filas;
 }
 
-const ahora = new Date();
-const fechaFormateada = ahora.toLocaleString("es-ES", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit"
-});
+async function obtenerFechaActualizacion() {
+    const url = "https://spreadsheets.google.com/feeds/worksheets/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/public/basic?alt=json";
 
-document.getElementById("fecha-actualizacion").textContent =
-    `Datos actualizados: ${fechaFormateada}`;
+    const res = await fetch(url);
+    const json = await res.json();
+
+    const fechaISO = json.feed.updated.$t; // Ej: "2026-05-28T17:42:31.123Z"
+    const fecha = new Date(fechaISO);
+
+    const fechaFormateada = fecha.toLocaleString("es-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+    document.getElementById("fecha-actualizacion").textContent =
+        `Datos actualizados: ${fechaFormateada}`;
+}
+obtenerFechaActualizacion();
