@@ -59,19 +59,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Tus scripts -->
-    <script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.menu a').forEach(link => {
-    const linkPage = link.getAttribute('href');
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
-    if (linkPage === currentPage) {
-      link.classList.add('activo');
-    }
-  });
-});
-</script>
-    
+    <script src="js/menu.js"></script>    
     <script src="js/sheet.js"></script>
     <script src="js/main.js"></script>
     <script src="js/grafico_top5.js"></script>
