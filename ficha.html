@@ -233,7 +233,18 @@
 <!-- ============================= -->
 <!--   JAVASCRIPT DE LA FICHA     -->
 <!-- ============================= -->
-<script src="js/menu.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.menu a').forEach(link => {
+    const linkPage = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+    if (linkPage === currentPage) {
+      link.classList.add('activo');
+    }
+  });
+});
+</script>
 <script src="js/ficha.js" defer></script>
 </body>
 </html>
