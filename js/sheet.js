@@ -75,24 +75,18 @@ async function cargarEstadisticas() {
     return filas;
 }
 
-async function obtenerFechaActualizacion() {
-    const url = "https://spreadsheets.google.com/feeds/worksheets/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/public/basic?alt=json";
+// Buscar la última fila que tenga fecha en la columna Y (índice 24)
+let fechaActualizacion = null;
 
-    const res = await fetch(url);
-    const json = await res.json();
+json.table.rows.forEach(row => {
+    const celdaFecha = row.c[24]; // Columna Y
+    if (celdaFecha && celdaFecha.f) {
+        fechaActualizacion = celdaFecha.f; // Ej: "29/05/2026 0:20:03"
+    }
+});
 
-    const fechaISO = json.feed.updated.$t; // Ej: "2026-05-28T17:42:31.123Z"
-    const fecha = new Date(fechaISO);
-
-    const fechaFormateada = fecha.toLocaleString("es-ES", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit"
-    });
-
+// Pintar la fecha si existe
+if (fechaActualizacion) {
     document.getElementById("fecha-actualizacion").textContent =
-        `Datos actualizados: ${fechaFormateada}`;
+        `Datos actualizados: ${fechaActualizacion}`;
 }
-obtenerFechaActualizacion();
