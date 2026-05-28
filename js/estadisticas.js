@@ -98,16 +98,7 @@ async function generarTablaClasificacion(datos) {
     //document.getElementById("tabla-clasificacion").innerHTML = html;
 
     
-// -------------------------------
-// Inicializar clasificación
-// -------------------------------
-async function iniciarClasificacion() {
-    const datos = await cargarCSV("data/clasificacion.csv");
-    generarTablaClasificacion(datos);
-}
 
-// Ejecutar
-iniciarClasificacion();
 
 
 
