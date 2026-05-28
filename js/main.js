@@ -99,7 +99,7 @@ async function generarTablaClasificacion(datos) {
 
     html += "</table>";
 
-    document.getElementById("tabla-clasificacion").innerHTML = html;
+    //document.getElementById("tabla-clasificacion").innerHTML = html;
 
     // Guardar nuevas posiciones
     fetch("data/posiciones.json", {
