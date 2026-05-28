@@ -57,32 +57,18 @@
   </footer>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const secciones = document.querySelectorAll("section[id]");
-    const enlacesMenu = document.querySelectorAll(".menu a");
+  document.querySelectorAll('.menu a').forEach(link => {
+    const linkPage = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
-    function activarEnlace() {
-        let scrollPos = window.scrollY + 150; // margen para activar antes
-
-        secciones.forEach(sec => {
-            const top = sec.offsetTop;
-            const height = sec.offsetHeight;
-            const id = sec.getAttribute("id");
-
-            if (scrollPos >= top && scrollPos < top + height) {
-                enlacesMenu.forEach(a => a.classList.remove("activo"));
-                const enlaceActivo = document.querySelector(`.menu a[href="#${id}"]`);
-                if (enlaceActivo) enlaceActivo.classList.add("activo");
-            }
-        });
+    if (linkPage === currentPage) {
+      link.classList.add('activo');
     }
-
-    window.addEventListener("scroll", activarEnlace);
-    activarEnlace(); // activar al cargar
+  });
 });
 </script>
-
 <!-- Tus scripts -->
-    <script src="js/menu.js"></script>
+    
     <script src="js/sheet_eliminatorias.js"></script>
     <script src="js/main.js"></script>
 </body>
