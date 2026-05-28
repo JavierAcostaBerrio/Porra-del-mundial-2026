@@ -1,3 +1,8 @@
+// ===============================
+//   Porra Mundial 2026 - sheet.js
+// ===============================
+
+// Medallas
 function obtenerMedalla(pos) {
     if (pos === 1) return "🥇";
     if (pos === 2) return "🥈";
@@ -5,15 +10,25 @@ function obtenerMedalla(pos) {
     return "";
 }
 
+// Columnas que quieres mostrar en la tabla
 const columnas = [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
-fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=52755414&tqx=out:json")
+// URL de Google Sheets (clasificación)
+const URL_CLASIFICACION =
+  "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=52755414&tqx=out:json";
+
+fetch(URL_CLASIFICACION)
   .then(res => res.text())
   .then(text => {
+
+    // Google devuelve basura antes y después del JSON → limpiamos
     const json = JSON.parse(text.substring(47, text.length - 2));
+
     const table = document.getElementById("tabla");
 
-    // Cabecera
+    // ===============================
+    // CABECERA
+    // ===============================
     const header = document.createElement("tr");
     columnas.forEach(i => {
       const th = document.createElement("th");
@@ -22,37 +37,63 @@ fetch("https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7m
     });
     table.appendChild(header);
 
-    // Filas
+    // ===============================
+    // FILAS
+    // ===============================
     json.table.rows.forEach(row => {
       const tr = document.createElement("tr");
+
       columnas.forEach(i => {
         const td = document.createElement("td");
+
         if (i === 0) {
-    const pos = Number(row.c[i]?.v ?? "");
-    const medalla = obtenerMedalla(pos);
-    td.textContent = pos + " " + medalla;
-} else {
-    td.textContent = row.c[i] ? row.c[i].v : "";
-}
+          // Posición + medalla
+          const pos = Number(row.c[i]?.v ?? "");
+          const medalla = obtenerMedalla(pos);
+          td.textContent = pos + " " + medalla;
+        } else {
+          td.textContent = row.c[i] ? row.c[i].v : "";
+        }
+
         tr.appendChild(td);
       });
+
       table.appendChild(tr);
     });
+
+    // ===============================
+    // FECHA REAL DE ACTUALIZACIÓN
+    // ===============================
+    let fechaActualizacion = null;
+
+    json.table.rows.forEach(row => {
+      const celda = row.c[24]; // Columna Y
+      if (celda && celda.f) {
+        fechaActualizacion = celda.f; // Ej: "29/05/2026 0:20:03"
+      }
+    });
+
+    if (fechaActualizacion) {
+      document.getElementById("fecha-actualizacion").textContent =
+        `Datos actualizados: ${fechaActualizacion}`;
+    } else {
+      console.warn("No se encontró fecha en la columna Y");
+    }
   });
 
-// -------------------------------
-// Crea grafico goles primera fase
-// -------------------------------
+
+// ===============================
+// Cargar estadísticas (Top 5, etc.)
+// ===============================
 async function cargarEstadisticas() {
-    const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
+    const url =
+      "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
 
     const respuesta = await fetch(url);
     const texto = await respuesta.text();
 
-    // Google devuelve basura antes y después del JSON → limpiamos
     const json = JSON.parse(texto.substring(47, texto.length - 2));
 
-    // Convertimos filas en objetos {colA, colB}
     const filas = json.table.rows.map(fila => ({
         colA: fila.c[0]?.v ?? "",
         colB: fila.c[1]?.v ?? 0,
@@ -73,20 +114,4 @@ async function cargarEstadisticas() {
     }));
 
     return filas;
-}
-
-// Buscar la última fila que tenga fecha en la columna Y (índice 24)
-let fechaActualizacion = null;
-
-json.table.rows.forEach(row => {
-    const celdaFecha = row.c[24]; // Columna Y
-    if (celdaFecha && celdaFecha.f) {
-        fechaActualizacion = celdaFecha.f; // Ej: "29/05/2026 0:20:03"
-    }
-});
-
-// Pintar la fecha si existe
-if (fechaActualizacion) {
-    document.getElementById("fecha-actualizacion").textContent =
-        `Datos actualizados: ${fechaActualizacion}`;
 }
