@@ -113,6 +113,7 @@ const fechaFormateada = ahora.toLocaleString("es-ES", {
 
 document.getElementById("fecha-actualizacion").textContent =
     `Datos actualizados: ${fechaFormateada}`;
+}
 
 // -------------------------------
 // Inicializar clasificación
