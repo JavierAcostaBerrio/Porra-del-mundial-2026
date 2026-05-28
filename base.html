@@ -51,6 +51,18 @@
     La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
   </footer>
 <!-- Tus scripts -->
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.menu a').forEach(link => {
+    const linkPage = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+    if (linkPage === currentPage) {
+      link.classList.add('activo');
+    }
+  });
+});
+</script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/sheet.js"></script>
     <script src="js/main.js"></script>
