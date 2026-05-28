@@ -234,6 +234,18 @@ p {
 /* ===========================
    TABLAS
 =========================== */
+
+#tabla-clasificacion th {
+  color: #D4AF37;
+}
+
+#tabla-clasificacion thead th {
+  background-color: #111;
+  color: #D4AF37;
+  padding: 12px;
+  border-bottom: 2px solid #D4AF37;
+}
+
 .table-wrapper {
   margin-top: 20px;
   overflow-x: auto;
