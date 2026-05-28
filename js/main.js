@@ -1,18 +1,6 @@
 // ===============================
 //   Porra Mundial 2026 - main.js
 // ===============================
-document.addEventListener("DOMContentLoaded", () => {
-    dibujarGraficoGoles();
-    dibujarGraficoCampeon();
-    dibujarGraficoMVP();
-    dibujarGraficoPichichi();
-    dibujarGraficoPichichiEspana();
-    dibujarGraficoGolesPichichiEspana();
-    dibujarGraficoTarjeta();
-    dibujarGraficoCapitanEspana();
-    dibujarGraficoEstrategiaEspana();
-    
-});
 
 console.log("Porra Mundial 2026 iniciada correctamente");
 
@@ -134,35 +122,3 @@ async function iniciarClasificacion() {
 
 // Ejecutar
 iniciarClasificacion();
-
-
-async function cargarEstadisticas() {
-    const url = "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?tqx=out:json&gid=1371661770";
-
-    const respuesta = await fetch(url);
-    const texto = await respuesta.text();
-    const json = JSON.parse(texto.substring(47, texto.length - 2));
-
-    const filas = json.table.rows.map(fila => ({
-        colA: fila.c[0]?.v ?? "",
-        colB: fila.c[1]?.v ?? 0,
-        colC: fila.c[2]?.v ?? "",
-        colD: fila.c[3]?.v ?? 0,
-        colE: fila.c[4]?.v ?? "",
-        colF: fila.c[5]?.v ?? 0,
-        colG: fila.c[6]?.v ?? "",
-        colH: fila.c[7]?.v ?? 0,
-        colI: fila.c[8]?.v ?? "",
-        colJ: fila.c[9]?.v ?? 0,
-        colK: fila.c[10]?.v ?? "",
-        colL: fila.c[11]?.v ?? 0,
-        colM: fila.c[12]?.v ?? "",
-        colN: fila.c[13]?.v ?? 0,
-        colO: fila.c[14]?.v ?? "",
-        colP: fila.c[15]?.v ?? 0,
-        colQ: fila.c[16]?.v ?? "",
-        colR: fila.c[17]?.v ?? 0
-    }));
-
-    return filas;
-}
