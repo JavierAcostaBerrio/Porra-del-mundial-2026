@@ -750,3 +750,11 @@ footer {
     border: 1px solid #c9a23f;
     color: #fff;
 }
+
+.fecha-actualizacion {
+    color: #D4AF37;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    opacity: 0.85;
+}
