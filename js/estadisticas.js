@@ -1,5 +1,5 @@
 // ===============================
-//   Porra Mundial 2026 - main.js
+//   Porra Mundial 2026 - estadisticas.js
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
     dibujarGraficoGoles();
