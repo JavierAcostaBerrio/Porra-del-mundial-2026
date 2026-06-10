@@ -630,6 +630,7 @@ footer {
   margin-top: 20px;
   background: #111;
   color: #fff;
+  overflow-y: auto;    /* Scroll vertical */
 }
 
 .tabla-plenos th {
@@ -637,7 +638,7 @@ footer {
   padding: 10px;
   text-align: left;
   border-bottom: 2px solid #444;
-  overflow-y: auto;    /* Scroll vertical */
+  
 }
 .tabla-plenos td:first-child {
     width: 120px;        /* Ajusta a tu gusto */
