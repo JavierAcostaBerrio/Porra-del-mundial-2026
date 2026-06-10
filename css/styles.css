@@ -549,10 +549,7 @@ canvas {
     overflow-y: auto; 
    overflow-x: auto;
     padding-bottom: 10px;
-   position: sticky;
-    top: 0;
-    z-index: 10;
-}
+   }
 
 .tabla-scroll table {
     width: max-content;
