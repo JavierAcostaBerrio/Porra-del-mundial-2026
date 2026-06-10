@@ -266,9 +266,7 @@ table {
   color: #D4AF37;
   padding: 12px;
   border-bottom: 2px solid #D4AF37;
-   position: sticky;
-    top: 0;
-    z-index: 10;
+   
 }
 
 #tabla tr:hover td {
@@ -546,31 +544,26 @@ canvas {
 /* ===========================
    SCROLL EN TABLA CLASIFICACION
 =========================== */
-/* Scroll vertical */
 .tabla-scroll {
-    max-height: 500px;
-    overflow-y: auto;
-    overflow-x: auto;
+   max-height: 500px;   /* o la altura que quieras */
+    overflow-y: auto; 
+   overflow-x: auto;
     padding-bottom: 10px;
-}
-
-/* Tabla clasificación */
-.tabla-scroll table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-/* Cabecera fija */
-.tabla-scroll thead th {
-    position: sticky;
+   position: sticky;
     top: 0;
-    background: #111;
-    color: #D4AF37;
-    z-index: 20;
-    padding: 12px;
-    border-bottom: 2px solid #D4AF37;
+    z-index: 10;
 }
+
+.tabla-scroll table {
+    width: max-content;
+    border-collapse: collapse;
+}
+
+.tabla-scroll th,
+.tabla-scroll td {
+    white-space: nowrap;
+}
+
 
 
 /* ===========================
