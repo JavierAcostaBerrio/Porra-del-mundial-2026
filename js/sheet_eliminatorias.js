@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Columnas A–F → índices 0 a 5 (slice no incluye el final)
     const COL_INICIO = 1;
-    const COL_FIN = 38;
+    const COL_FIN = 59;
 
     // Tabla donde se pintarán los datos
     const tabla = document.getElementById("tabla-eliminatorias");
