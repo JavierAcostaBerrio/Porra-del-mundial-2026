@@ -765,3 +765,7 @@ footer {
     margin-bottom: 15px;
     opacity: 0.85;
 }
+.dorado-negrita {
+    color: #D4AF37;      /* Dorado clásico */
+    font-weight: bold;   /* Negrita */
+}
