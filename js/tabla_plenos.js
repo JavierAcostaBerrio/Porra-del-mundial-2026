@@ -8,7 +8,7 @@ async function cargarTablaPlenos() {
   // Limpiar el JSON gviz
   const json = JSON.parse(texto.substring(texto.indexOf("{"), texto.lastIndexOf("}") + 1));
 
-  const filas = json.table.rows -1;
+  const filas = json.table.rows;
 
   // Convertir filas a matriz limpia
   const datos = filas.map(r =>
