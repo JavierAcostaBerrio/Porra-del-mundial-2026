@@ -48,12 +48,14 @@ h2 {
 .mensaje .texto {
     color: #fff;
 }
+
 /* Fecha y hora del mensaje */
 .mensaje .fecha {
     color: #888;
     font-size: 12px;
     margin-left: 8px;
 }
+
 /* Input + botón */
 .chat-input {
     display: flex;
@@ -133,12 +135,12 @@ button:hover {
     La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
 </footer>
 
-<!-- ⭐ SCRIPT COMPLETO DEL CHAT -->
+<!-- ⭐ SCRIPT COMPLETO DEL CHAT (ACTUALIZADO) -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
 
-// Tu configuración de Firebase
+// Configuración Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBR2oAJfKqsEoa__LbrC4O5av1qPoYEjBU",
     authDomain: "porra-mundial-2026-chat.firebaseapp.com",
@@ -153,13 +155,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Enviar mensaje
+// ⭐ Obtener o pedir nombre del usuario
+let usuario = localStorage.getItem("usuario");
+
+if (!usuario) {
+    usuario = prompt("Introduce tu nombre para el chat:");
+    if (!usuario || !usuario.trim()) usuario = "Anónimo";
+    localStorage.setItem("usuario", usuario);
+}
+
+// ⭐ Enviar mensaje
 window.enviarMensaje = function () {
     const texto = document.getElementById("msg").value;
     if (!texto.trim()) return;
 
     push(ref(db, "chat"), {
-        usuario: "Javier",
+        usuario: usuario,
         mensaje: texto,
         fecha: Date.now()
     });
@@ -167,13 +178,12 @@ window.enviarMensaje = function () {
     document.getElementById("msg").value = "";
 };
 
-// Recibir mensajes en tiempo real
+// ⭐ Recibir mensajes en tiempo real
 onChildAdded(ref(db, "chat"), (snapshot) => {
     const data = snapshot.val();
     const div = document.createElement("div");
     div.className = "mensaje";
 
-    // Convertir timestamp a fecha legible
     const fecha = new Date(data.fecha);
     const horaFormateada = fecha.toLocaleString("es-ES", {
         day: "2-digit",
@@ -195,7 +205,6 @@ onChildAdded(ref(db, "chat"), (snapshot) => {
     const cont = document.getElementById("mensajes");
     cont.scrollTop = cont.scrollHeight;
 });
-
 </script>
 
 </body>
