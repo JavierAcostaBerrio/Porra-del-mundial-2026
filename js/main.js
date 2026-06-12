@@ -2,6 +2,36 @@
 //   Porra Mundial 2026 - main.js
 // ===============================
 
+// 🔵 NUEVO: obtener fecha real de actualización del Google Sheets
+async function cargarFechaActualizacionReal() {
+    const sheetId = "1d0k7uB8xq3t9xq0xJp0m0k8x8t0Qw3p9"; // tu ID real
+
+    const url = `https://spreadsheets.google.com/feeds/worksheets/${sheetId}/public/basic?alt=json`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const fechaISO = data.feed.updated.$t;
+        const fecha = new Date(fechaISO);
+
+        const opciones = { 
+            day: "2-digit", month: "2-digit", year: "2-digit",
+            hour: "2-digit", minute: "2-digit"
+        };
+
+        document.getElementById("fecha-actualizacion").textContent =
+            "Datos actualizados: " + fecha.toLocaleString("es-ES", opciones);
+
+    } catch (error) {
+        console.error("Error obteniendo fecha real:", error);
+        document.getElementById("fecha-actualizacion").textContent =
+            "No se pudo obtener la fecha de actualización";
+    }
+}
+
+
+
 // Esta función la llama sheet.js cuando recibe los datos de Google Sheets
 function pintarClasificacion(datos) {
 
@@ -50,16 +80,8 @@ function pintarClasificacion(datos) {
     // Pintar tabla en el ID correcto
     document.getElementById("tabla").innerHTML = html;
 
-    // Mostrar fecha de actualización
-    const ahora = new Date();
-    const fechaFormateada = ahora.toLocaleString("es-ES", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit"
-    });
-
-    document.getElementById("fecha-actualizacion").textContent =
-        `Datos actualizados: ${fechaFormateada}`;
+    // 🔵 NUEVO: mostrar fecha REAL del documento
+    cargarFechaActualizacionReal();
+}
+`Datos actualizados: ${fechaFormateada}`;
 }
