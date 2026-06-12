@@ -2,8 +2,8 @@
 //   Porra Mundial 2026 - main.js
 // ===============================
 
-// 🔵 NUEVO: obtener fecha real de actualización del Google Sheets
-async function cargarFechaActualizacionReal() {
+// 🔵 Obtener fecha REAL de actualización de la pestaña concreta
+async function cargarFechaActualizacionPestana(nombrePestana) {
     const sheetId = "1d0k7uB8xq3t9xq0xJp0m0k8x8t0Qw3p9"; // tu ID real
 
     const url = `https://spreadsheets.google.com/feeds/worksheets/${sheetId}/public/basic?alt=json`;
@@ -12,7 +12,17 @@ async function cargarFechaActualizacionReal() {
         const response = await fetch(url);
         const data = await response.json();
 
-        const fechaISO = data.feed.updated.$t;
+        // Buscar la pestaña concreta por nombre exacto
+        const entry = data.feed.entry.find(e => e.title.$t === nombrePestana);
+
+        if (!entry) {
+            document.getElementById("fecha-actualizacion").textContent =
+                "Pestaña no encontrada";
+            return;
+        }
+
+        // Fecha REAL de modificación de esa pestaña
+        const fechaISO = entry["gs$modified"]["$t"];
         const fecha = new Date(fechaISO);
 
         const opciones = { 
@@ -32,7 +42,10 @@ async function cargarFechaActualizacionReal() {
 
 
 
-// Esta función la llama sheet.js cuando recibe los datos de Google Sheets
+// ===============================
+//   Pintar clasificación
+// ===============================
+
 function pintarClasificacion(datos) {
 
     const encabezados = datos[0];
@@ -80,8 +93,6 @@ function pintarClasificacion(datos) {
     // Pintar tabla en el ID correcto
     document.getElementById("tabla").innerHTML = html;
 
-    // 🔵 NUEVO: mostrar fecha REAL del documento
-    cargarFechaActualizacionReal();
-}
-`Datos actualizados: ${fechaFormateada}`;
+    // 🔵 Mostrar fecha REAL de la pestaña "Puntuacion_dia"
+    cargarFechaActualizacionPestana("Puntuacion_dia");
 }
