@@ -114,12 +114,8 @@ async function cargarDatos() {
 
     } catch (error) {
     console.error("Error cargando datos:", error);
-
-    // Si la tabla ya tiene contenido, NO lo borres
-    const tabla = document.getElementById("tabla");
-    if (!tabla.innerHTML.trim()) {
-        tabla.innerHTML = "<p>No se pudieron cargar los datos.</p>";
-    }
+    // No mostramos nada al usuario
+}
 }
 
 }
