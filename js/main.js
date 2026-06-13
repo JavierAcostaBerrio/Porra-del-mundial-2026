@@ -2,56 +2,52 @@
 //   Porra Mundial 2026 - main.js
 // ===============================
 
-// 🔵 Obtener fecha REAL de actualización de la pestaña concreta
-async function cargarFechaActualizacionPestana(nombrePestana) {
-    const sheetId = "1d0k7uB8xq3t9xq0xJp0m0k8x8t0Qw3p9"; // tu ID real
 
-    const url = `https://spreadsheets.google.com/feeds/worksheets/${sheetId}/public/basic?alt=json`;
+// ======================================================
+//   🔵 Obtener fecha REAL desde Puntuacion_dia!Y2
+// ======================================================
+async function cargarFechaDesdePuntuacionDia() {
+    const sheetId = "1d0k7uB8xq3t9xq0xJp0m0k8x8t0Qw3p9";
+    const gid = "52755414"; // gid real de la pestaña Puntuacion_dia
+
+    const url = `https://spreadsheets.google.com/feeds/cells/${sheetId}/${gid}/public/basic?alt=json`;
 
     try {
         const response = await fetch(url);
         const data = await response.json();
 
-        // Buscar la pestaña concreta por nombre exacto
-        const entry = data.feed.entry.find(e => e.title.$t === nombrePestana);
+        // Buscar la celda Y2
+        const celdaY2 = data.feed.entry.find(e => e.title.$t === "Y2");
 
-        if (!entry) {
+        if (!celdaY2) {
             document.getElementById("fecha-actualizacion").textContent =
-                "Pestaña no encontrada";
+                "No se encontró Y2";
             return;
         }
 
-        // Fecha REAL de modificación de esa pestaña
-        const fechaISO = entry["gs$modified"]["$t"];
-        const fecha = new Date(fechaISO);
-
-        const opciones = { 
-            day: "2-digit", month: "2-digit", year: "2-digit",
-            hour: "2-digit", minute: "2-digit"
-        };
+        const fechaTexto = celdaY2.content.$t;
 
         document.getElementById("fecha-actualizacion").textContent =
-            "Datos actualizados: " + fecha.toLocaleString("es-ES", opciones);
+            "Datos actualizados: " + fechaTexto;
 
     } catch (error) {
-        console.error("Error obteniendo fecha real:", error);
+        console.error("Error leyendo Puntuacion_dia!Y2:", error);
         document.getElementById("fecha-actualizacion").textContent =
-            "No se pudo obtener la fecha de actualización";
+            "No se pudo obtener la fecha";
     }
 }
 
 
 
-// ===============================
-//   Pintar clasificación
-// ===============================
-
+// ======================================================
+//   🟦 Pintar clasificación
+// ======================================================
 function pintarClasificacion(datos) {
 
     const encabezados = datos[0];
     const filas = datos.slice(1);
 
-    // Ordenar por puntos
+    // Ordenar por puntos (columna 1)
     filas.sort((a, b) => Number(b[1]) - Number(a[1]));
 
     // Puntos máximos para barra de progreso
@@ -93,6 +89,36 @@ function pintarClasificacion(datos) {
     // Pintar tabla en el ID correcto
     document.getElementById("tabla").innerHTML = html;
 
-    // 🔵 Mostrar fecha REAL de la pestaña "Puntuacion_dia"
-    cargarFechaActualizacionPestana("Puntuacion_dia");
+    // 🔵 Mostrar fecha REAL desde Y2
+    cargarFechaDesdePuntuacionDia();
 }
+
+
+
+// ======================================================
+//   🟢 Cargar datos desde tu JSON publicado
+// ======================================================
+async function cargarDatos() {
+    const url = "https://docs.google.com/spreadsheets/d/1d0k7uB8xq3t9xq0xJp0m0k8x8t0Qw3p9/gviz/tq?tqx=out:json&gid=52755414";
+
+    try {
+        const response = await fetch(url);
+        const text = await response.text();
+
+        // El JSON de gviz viene con basura delante: "/*O_o*/\ngoogle.visualization.Query.setResponse(...)"
+        const json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
+
+        const rows = json.table.rows.map(r => r.c.map(c => c ? c.v : ""));
+
+        pintarClasificacion(rows);
+
+    } catch (error) {
+        console.error("Error cargando datos:", error);
+        document.getElementById("tabla").innerHTML =
+            "<p>No se pudieron cargar los datos.</p>";
+    }
+}
+
+
+// Ejecutar al cargar la página
+cargarDatos();
