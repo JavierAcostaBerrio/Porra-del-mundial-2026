@@ -228,14 +228,14 @@ function renderExtras(usuario) {
    EVOLUCIÓN (desde Calculo_puntos)
    ============================ */
 
-const HIST_COL_START = 61; // BH
+const HIST_COL_START = 62; // BH
 const HIST_COL_END   = 84; // CC
 
 /* ============================
    EVOLUCIÓN DEL RANKING
    ============================ */
 
-const RANK_START = 61; // BH
+const RANK_START = 62; // BH
 const RANK_END   = 84; // CC
 
 function renderEvolucion(usuario) {
