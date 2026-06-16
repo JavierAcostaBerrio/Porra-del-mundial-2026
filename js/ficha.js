@@ -160,7 +160,7 @@ function initChart() {
   const ctx = document.getElementById("evolChart").getContext("2d");
   evolChart = new Chart(ctx, {
     type: "line",
-    data: { labels: [], datasets: [{ label: "Puntos", data: [], borderColor: "#f5c451" }] },
+    data: { labels: [], datasets: [{ label: "Puesto", data: [], borderColor: "#f5c451" }] },
     options: { responsive: true, plugins: { legend: { display: false } } }
   });
 }
