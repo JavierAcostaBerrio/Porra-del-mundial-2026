@@ -235,8 +235,8 @@ const HIST_COL_END   = 87; // CC
    EVOLUCIÓN DEL RANKING
    ============================ */
 
-const RANK_START = 62; // BH
-const RANK_END   = 84; // CC
+const RANK_START = 64; // BH
+const RANK_END   = 86; // CC
 
 function renderEvolucion(usuario) {
    
