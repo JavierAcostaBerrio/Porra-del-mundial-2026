@@ -1,6 +1,3 @@
-// ===============================
-//   Leer hoja publicada en HTML
-// ===============================
 async function fetchSheetHTML(gid) {
     const url = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/pubhtml?gid=${gid}&single=true`;
 
@@ -10,11 +7,24 @@ async function fetchSheetHTML(gid) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
 
-    const tabla = doc.querySelector("table");
-    if (!tabla) return [];
+    // Google publica varias tablas → elegimos la más grande
+    const tablas = Array.from(doc.querySelectorAll("table"));
+
+    if (tablas.length === 0) return [];
+
+    let tablaReal = tablas[0];
+    let maxFilas = 0;
+
+    tablas.forEach(t => {
+        const filas = t.querySelectorAll("tr").length;
+        if (filas > maxFilas) {
+            maxFilas = filas;
+            tablaReal = t;
+        }
+    });
 
     const filas = [];
-    tabla.querySelectorAll("tr").forEach(tr => {
+    tablaReal.querySelectorAll("tr").forEach(tr => {
         const celdas = Array.from(tr.querySelectorAll("td, th"))
             .map(td => td.textContent.trim());
         filas.push(celdas);
@@ -22,3 +32,4 @@ async function fetchSheetHTML(gid) {
 
     return filas;
 }
+
