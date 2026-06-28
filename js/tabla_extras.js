@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Cabeceras (A–F)
     const headers = [
         "Usuario",
-        "Goles 1ª fase",
-        "Máx. goleador español",
-        "Goles pichichi España",
-        "Primera amarilla España",
-        "Total"
+        "Puntos goles totales 1ª fase",
+        "Puntos goles favor/contra España",
+        "Puntos equipos goleadores/goleados",
+        "Puntos clasificacion grupos",
+        "Total extras primera fase"
     ];
 
     // THEAD
