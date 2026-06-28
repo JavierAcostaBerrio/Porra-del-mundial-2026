@@ -1,3 +1,4 @@
+console.log("sheet_html.js SE EJECUTA");
 async function fetchSheetHTML(gid) {
     const url = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/pubhtml?gid=${gid}&single=true`;
 
