@@ -769,40 +769,72 @@ footer {
     color: #D4AF37;      /* Dorado clásico */
     font-weight: bold;   /* Negrita */
 }
-#tabla th.asc::after {
-    content: " ↑";
-    color: #d4af37;
+/* ================================
+   ESTILOS SOLO PARA PRONÓSTICOS
+   ================================ */
+/* Contenedor con scroll solo para esta tabla */
+#tabla-extras-wrapper {
+    width: 100%;
+    max-height: 500px;
+    overflow: auto;
+    position: relative;
+    border: 2px solid #333;
+    font-size: 0.75rem;
 }
 
-#tabla th.desc::after {
-    content: " ↓";
-    color: #d4af37;
-}
-#extras .tabla-scroll {
-    overflow: auto !important;
-    max-height: none !important;
-}
-
-#extras table {
-    width: 100% !important;
-}
-#tabla_extras th {
-    background-color: #111;
-    color: #D4AF37;
-    padding: 12px;
-    border-bottom: 2px solid #D4AF37;
-}
-
-#tabla_extras td {
-    padding: 10px;
-    border-top: 1px solid #222;
-}
-
-#tabla_extras tr:nth-child(odd) td {
-    background: #181818;
-}
-
-#tabla_extras tr:hover td {
-    background-color: #333 !important;
+/* Tabla específica */
+#tabla-extras {
+    border-collapse: collapse;
+    width: max-content;
+    background: #111;
     color: #fff;
+    font-size: 0.75rem;
+}
+
+/* Celdas */
+#tabla-extras th,
+#tabla-extras td {
+    padding: 8px 12px;
+    border: 1px solid #333;
+    white-space: nowrap;
+    font-size: 0.75rem;
+}
+
+/* Cabecera fija */
+#tabla-extras th {
+    position: sticky;
+    top: 0;
+    background: #111;
+    color: #D4AF37;
+    z-index: 30;
+    font-size: 0.75rem;
+}
+
+/* Primera columna fija */
+#tabla-extras th:nth-child(1),
+#tabla-pextras td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    z-index: 25;
+    background: #111;
+    font-size: 0.75rem;
+}
+
+/* Cabecera de la primera columna */
+#tabla-extras th:nth-child(1) {
+    background: #111;
+    color: #D4AF37;
+    z-index: 40;
+    font-size: 0.75rem;
+}
+
+#tabla-extras tbody tr:hover td {
+    background-color: #333333;   /* Color de resaltado */
+    color: #ffffff;              /* Texto blanco */
+    cursor: pointer;             /* Opcional: mano al pasar */
+}
+
+/* Zebra */
+#tabla-extras tr:nth-child(odd) td {
+    background: #181818;
 }
