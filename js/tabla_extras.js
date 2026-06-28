@@ -7,24 +7,14 @@ async function fetchSheetHTML(gid) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
 
-    // Google publica varias tablas → elegimos la más grande
-    const tablas = Array.from(doc.querySelectorAll("table"));
-    if (tablas.length === 0) return [];
+    // Google coloca la tabla dentro de #sheets-viewport
+    const tablaReal = doc.querySelector("#sheets-viewport table");
 
-    let tablaReal = null;
-    let maxFilas = 0;
+    if (!tablaReal) {
+        console.warn("No se encontró la tabla dentro de #sheets-viewport");
+        return [];
+    }
 
-    tablas.forEach(t => {
-        const filas = t.querySelectorAll("tr").length;
-        if (filas > maxFilas) {
-            maxFilas = filas;
-            tablaReal = t;
-        }
-    });
-
-    if (!tablaReal) return [];
-
-    // Convertir la tabla real en matriz
     const filas = [];
     tablaReal.querySelectorAll("tr").forEach(tr => {
         const celdas = Array.from(tr.querySelectorAll("td, th"))
@@ -32,10 +22,8 @@ async function fetchSheetHTML(gid) {
         filas.push(celdas);
     });
 
-    // Eliminar filas completamente vacías
-    const filasLimpias = filas.filter(fila =>
+    // Eliminar filas vacías
+    return filas.filter(fila =>
         fila.some(celda => celda.trim() !== "")
     );
-
-    return filasLimpias;
 }
