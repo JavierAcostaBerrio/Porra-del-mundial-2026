@@ -778,3 +778,31 @@ footer {
     content: " ↓";
     color: #d4af37;
 }
+#extras .tabla-scroll {
+    overflow: auto !important;
+    max-height: none !important;
+}
+
+#extras table {
+    width: 100% !important;
+}
+#tabla_extras th {
+    background-color: #111;
+    color: #D4AF37;
+    padding: 12px;
+    border-bottom: 2px solid #D4AF37;
+}
+
+#tabla_extras td {
+    padding: 10px;
+    border-top: 1px solid #222;
+}
+
+#tabla_extras tr:nth-child(odd) td {
+    background: #181818;
+}
+
+#tabla_extras tr:hover td {
+    background-color: #333 !important;
+    color: #fff;
+}
