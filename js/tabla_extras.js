@@ -1,4 +1,6 @@
-console.log("sheet_html.js SE EJECUTA");
+console.log("tabla_extras.js SE EJECUTA");
+
+// Lee la tabla publicada en HTML
 async function fetchSheetHTML(gid) {
     const url = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/pubhtml?gid=${gid}&single=true`;
 
@@ -23,8 +25,26 @@ async function fetchSheetHTML(gid) {
         filas.push(celdas);
     });
 
-    // Eliminar filas vacías
-    return filas.filter(fila =>
-        fila.some(celda => celda.trim() !== "")
-    );
+    return filas;
 }
+
+// Pinta la tabla en el HTML
+async function pintarTablaExtras() {
+    const datos = await fetchSheetHTML(311091473);
+    console.log("DATOS:", datos);
+
+    const tabla = document.getElementById("tabla_extras");
+
+    datos.forEach(fila => {
+        const tr = document.createElement("tr");
+        fila.forEach(celda => {
+            const td = document.createElement("td");
+            td.textContent = celda;
+            tr.appendChild(td);
+        });
+        tabla.appendChild(tr);
+    });
+}
+
+pintarTablaExtras();
+
