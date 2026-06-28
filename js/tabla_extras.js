@@ -52,3 +52,44 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     tabla.appendChild(tbody);
 });
+// --- ORDENACIÓN POR COLUMNAS ---
+function ordenarTablaPorColumna(tabla, columnaIndex) {
+    const tbody = tabla.querySelector("tbody");
+    const filas = Array.from(tbody.querySelectorAll("tr"));
+
+    // Detectar si ya estaba ordenado ascendente
+    const th = tabla.querySelectorAll("th")[columnaIndex];
+    const asc = !th.classList.contains("asc");
+
+    // Limpiar clases de todos los th
+    tabla.querySelectorAll("th").forEach(th => th.classList.remove("asc", "desc"));
+
+    // Aplicar clase al th actual
+    th.classList.add(asc ? "asc" : "desc");
+
+    // Ordenar filas
+    filas.sort((a, b) => {
+        const A = a.children[columnaIndex].textContent.trim();
+        const B = b.children[columnaIndex].textContent.trim();
+
+        // Si es número, ordenar como número
+        const numA = parseFloat(A.replace(",", "."));
+        const numB = parseFloat(B.replace(",", "."));
+
+        if (!isNaN(numA) && !isNaN(numB)) {
+            return asc ? numA - numB : numB - numA;
+        }
+
+        // Si es texto, ordenar como texto
+        return asc ? A.localeCompare(B) : B.localeCompare(A);
+    });
+
+    // Pintar filas ordenadas
+    filas.forEach(f => tbody.appendChild(f));
+}
+
+// Activar ordenación al hacer click en las cabeceras
+tabla.querySelectorAll("th").forEach((th, index) => {
+    th.style.cursor = "pointer";
+    th.addEventListener("click", () => ordenarTablaPorColumna(tabla, index));
+});
