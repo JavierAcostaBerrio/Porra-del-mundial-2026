@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const GID_EXTRAS = "311091473"; // Resumen_extras
+    const GID_EXTRAS = "311091473";
     const tabla = document.getElementById("tabla_extras");
 
-    // Obtener datos de Google Sheets
+    // Obtener datos reales del feed HTML
     const datos = await fetchSheetHTML(GID_EXTRAS);
 
     if (!datos || datos.length === 0) {
@@ -11,15 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // Cabeceras (A–F)
-    const headers = [
-        "Usuario",
-        "Puntos goles totales 1ª fase",
-        "Puntos goles favor/contra España",
-        "Puntos equipos goleadores/goleados",
-        "Puntos clasificacion grupos",
-        "Total extras primera fase"
-    ];
+    // Cabeceras reales de la hoja (fila 0)
+    const headers = datos[0];
 
     // THEAD
     const thead = document.createElement("thead");
@@ -34,17 +27,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     thead.appendChild(trHead);
     tabla.appendChild(thead);
 
-    // TBODY
+    // TBODY (solo filas de datos)
     const tbody = document.createElement("tbody");
 
-    datos.forEach(row => {
+    datos.slice(1).forEach(row => {
         const tr = document.createElement("tr");
 
-        for (let i = 0; i < 6; i++) {
+        row.forEach(cell => {
             const td = document.createElement("td");
-            td.textContent = row[i] || "0";
+            td.textContent = cell;
             tr.appendChild(td);
-        }
+        });
 
         tbody.appendChild(tr);
     });
@@ -79,7 +72,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         filas.forEach(f => tbody.appendChild(f));
     }
 
-    // Activar ordenación al hacer click en las cabeceras
     tabla.querySelectorAll("th").forEach((th, index) => {
         th.style.cursor = "pointer";
         th.addEventListener("click", () => ordenarTablaPorColumna(tabla, index));
