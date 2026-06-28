@@ -46,7 +46,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('.menu a').forEach(link => {
     const linkPage = link.getAttribute('href');
-    const currentPage = window.location.pathname.split('/').pop() || 'detalle_extras.html';
+    const currentPage = window.location.pathname.split('/').pop() || 'detalle-extras.html';
 
     if (linkPage === currentPage) {
       link.classList.add('activo');
