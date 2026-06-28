@@ -13,16 +13,19 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(SHEET_URL)
         .then(res => res.text())
         .then(texto => {
+
             const json = JSON.parse(texto.substring(47, texto.length - 2));
 
-            const cols = json.table.cols;   // 👈 cabeceras
+            const cols = json.table.cols;   // 👈 CABECERAS REALES
             const rows = json.table.rows;
 
             tabla.innerHTML = "";
             const thead = document.createElement("thead");
             const tbody = document.createElement("tbody");
 
-            // CABECERAS
+            /* ============================
+               CABECERAS DESDE json.table.cols
+               ============================ */
             const trHead = document.createElement("tr");
             const cabeceras = cols.slice(COL_INICIO, COL_FIN);
 
@@ -34,7 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             thead.appendChild(trHead);
 
-            // CUERPO
+            /* ============================
+               CUERPO DE LA TABLA
+               ============================ */
             rows.forEach(row => {
                 const tr = document.createElement("tr");
                 const celdas = row.c.slice(COL_INICIO, COL_FIN);
