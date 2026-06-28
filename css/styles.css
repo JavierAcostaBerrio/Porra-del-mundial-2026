@@ -838,3 +838,13 @@ footer {
 #tabla-extras tr:nth-child(odd) td {
     background: #181818;
 }
+.link-dorado {
+    color: #D4AF37;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-dorado:hover {
+    color: #fff;
+    text-decoration: underline;
+}
