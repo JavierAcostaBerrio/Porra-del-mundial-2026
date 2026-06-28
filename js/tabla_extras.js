@@ -1,79 +1,54 @@
 console.log("tabla_extras.js SE EJECUTA");
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>La Porra del Mundial 2026</title>
+document.addEventListener("DOMContentLoaded", function () {
 
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-</head>
+    // URL del JSON de Google Sheets (gviz/tq)
+    const SHEET_URL =
+        "https://docs.google.com/spreadsheets/d/1jsO5-D11KrtCsL8PRP7-iUuDbTDrt_V7mO8Upogea7I/gviz/tq?gid=311091473";
 
-<body>
+    // Columnas A–F → índices 0 a 5 (slice no incluye el final)
+    const COL_INICIO = 1;
+    const COL_FIN = 6;
 
-<!-- HEADER -->
-<header class="cabecera-mundial"></header>
-<nav class="menu">
-  <ul>
-    <li><a href="index.html">Clasificación</a></li>
-    <li><a href="pronosticos.html">Pronósticos</a></li>
-    <li><a href="eliminatorias.html">Eliminatorias</a></li>
-    <li><a href="estadisticas.html">Estadísticas</a></li>
-    <li><a href="ficha.html">Ficha</a></li>
-    <li><a href="comentarios.html">Comentarios</a></li>
-    <li><a href="chat.html">Chat</a></li>
-    <li><a href="base.html">Bases participación</a></li>
-    <li><a href="https://www.fifa.com/es/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures?country=ES&wtw-filter=ALL" target="_blank">Mundial</a></li>
-  </ul>
-</nav>
+    // Tabla donde se pintarán los datos
+    const tabla = document.getElementById("tabla-extras");
 
-<!-- SECCIÓN BIENVENIDA -->
-  <section>
-    <h2>Revisa tus pronósticos y los del resto de participantes en la porra del Mundial 2026</h2>
-    <p>
-      ¿Quieres recordar que has pronósticado en el conjunto de partidos? ¿Quieres ver cómo lo han hecho el resto de jugadores?.
-    </p>
-  </section>
+    fetch(SHEET_URL)
+        .then(res => res.text())
+        .then(texto => {
 
-    <!-- PRONOSTICOS PRIMERA FASE -->
-    <section class="card" id="pronosticos">
-        <h2>Pronósticos partidos primera fase</h2>
+            // Google envuelve el JSON, hay que limpiarlo
+            const json = JSON.parse(texto.substring(47, texto.length - 2));
 
-        <!-- AQUÍ SE PINTA LA TABLA -->
-        
-        <div id="tabla-pronosticos-wrapper">
-        <table id="tabla-pronosticos"></table>
-        </div>
-       
-    </section>
+            const rows = json.table.rows;
 
-    <!-- PRONOSTICOS ELIMINATORIAS -->
-    
+            // Crear thead y tbody
+            tabla.innerHTML = "";
+            const thead = document.createElement("thead");
+            const tbody = document.createElement("tbody");
 
-    
+            rows.forEach((row, index) => {
+                const tr = document.createElement("tr");
 
-    <!-- FOOTER -->
-  <footer>
-    La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
-  </footer>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.menu a').forEach(link => {
-    const linkPage = link.getAttribute('href');
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                // Extraer columnas A–F
+                const celdas = row.c.slice(COL_INICIO, COL_FIN);
 
-    if (linkPage === currentPage) {
-      link.classList.add('activo');
-    }
-  });
+                celdas.forEach(celda => {
+                    const valor = celda ? celda.v : "";
+                    const el = document.createElement(index === 0 ? "th" : "td");
+                    el.textContent = valor;
+                    tr.appendChild(el);
+                });
+
+                if (index === 0) {
+                    thead.appendChild(tr);   // Primera fila → cabecera real
+                } else {
+                    tbody.appendChild(tr);   // Resto → cuerpo
+                }
+            });
+
+            tabla.appendChild(thead);
+            tabla.appendChild(tbody);
+        })
+        .catch(err => console.error("Error cargando datos:", err));
 });
-</script>
-
-<!-- Tus scripts -->
-    
-    <script src="js/sheet_pronosticos.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/menu.js"></script>
-</body>
-</html>
