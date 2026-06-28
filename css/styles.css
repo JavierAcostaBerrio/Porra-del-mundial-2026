@@ -812,7 +812,7 @@ footer {
 
 /* Primera columna fija */
 #tabla-extras th:nth-child(1),
-#tabla-pextras td:nth-child(1) {
+#tabla-extras td:nth-child(1) {
     position: sticky;
     left: 0;
     z-index: 25;
