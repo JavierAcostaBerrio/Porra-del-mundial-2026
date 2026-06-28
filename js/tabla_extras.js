@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
     const GID_EXTRAS = "311091473"; // Resumen_extras
-    const tabla = document.getElementById("tabla");
+    const tabla = document.getElementById("tabla_extras");
 
     // Obtener datos de Google Sheets
     const datos = await fetchSheet(GID_EXTRAS);
