@@ -1,3 +1,5 @@
+console.log("tabla_extras.js SE EJECUTA");
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,30 +30,50 @@
 
 <!-- SECCIÓN BIENVENIDA -->
   <section>
-    <h2>Detalle de los puntos extras obtenidos en la primera fase</h2>
-    
+    <h2>Revisa tus pronósticos y los del resto de participantes en la porra del Mundial 2026</h2>
+    <p>
+      ¿Quieres recordar que has pronósticado en el conjunto de partidos? ¿Quieres ver cómo lo han hecho el resto de jugadores?.
+    </p>
   </section>
 
-    <!-- DETALLES PUNTOS EXTRA DE LA PRIMERA FASE -->
-   
-        <h2>Puntos extras 1ª fase</h2>
-        <!-- AQUÍ SE PINTA LA TABLA -->
-       
-       <table id="tabla_extras" border="1"></table>
+    <!-- PRONOSTICOS PRIMERA FASE -->
+    <section class="card" id="pronosticos">
+        <h2>Pronósticos partidos primera fase</h2>
 
+        <!-- AQUÍ SE PINTA LA TABLA -->
+        
+        <div id="tabla-pronosticos-wrapper">
+        <table id="tabla-pronosticos"></table>
+        </div>
        
     </section>
 
-    <!-- Tus scripts -->
-        
-    <script src="js/detalle_extras.js"></script>
+    <!-- PRONOSTICOS ELIMINATORIAS -->
     
+
+    
+
     <!-- FOOTER -->
   <footer>
     La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
   </footer>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.menu a').forEach(link => {
+    const linkPage = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
+    if (linkPage === currentPage) {
+      link.classList.add('activo');
+    }
+  });
+});
+</script>
 
-
+<!-- Tus scripts -->
+    
+    <script src="js/sheet_pronosticos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 </html>
