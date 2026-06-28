@@ -769,3 +769,12 @@ footer {
     color: #D4AF37;      /* Dorado clásico */
     font-weight: bold;   /* Negrita */
 }
+#tabla th.asc::after {
+    content: " ↑";
+    color: #d4af37;
+}
+
+#tabla th.desc::after {
+    content: " ↓";
+    color: #d4af37;
+}
