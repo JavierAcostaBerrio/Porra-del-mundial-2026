@@ -1,50 +1,79 @@
 console.log("tabla_extras.js SE EJECUTA");
 
-// Lee la tabla publicada en HTML
-async function fetchSheetHTML(gid) {
-    const url = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTyE_EmllyYW1HTSoqqYfX1Porlca7ONGjK5uBLl45v4dGPtcRxuvihtZHW5uPoNyOlF9gqOYWRgYW-/pubhtml?gid=${gid}&single=true`;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>La Porra del Mundial 2026</title>
 
-    const respuesta = await fetch(url);
-    const html = await respuesta.text();
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
 
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
+<body>
 
-    // Google coloca la tabla dentro de #sheets-viewport
-    const tablaReal = doc.querySelector("#sheets-viewport table");
+<!-- HEADER -->
+<header class="cabecera-mundial"></header>
+<nav class="menu">
+  <ul>
+    <li><a href="index.html">Clasificación</a></li>
+    <li><a href="pronosticos.html">Pronósticos</a></li>
+    <li><a href="eliminatorias.html">Eliminatorias</a></li>
+    <li><a href="estadisticas.html">Estadísticas</a></li>
+    <li><a href="ficha.html">Ficha</a></li>
+    <li><a href="comentarios.html">Comentarios</a></li>
+    <li><a href="chat.html">Chat</a></li>
+    <li><a href="base.html">Bases participación</a></li>
+    <li><a href="https://www.fifa.com/es/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures?country=ES&wtw-filter=ALL" target="_blank">Mundial</a></li>
+  </ul>
+</nav>
 
-    if (!tablaReal) {
-        console.warn("No se encontró la tabla dentro de #sheets-viewport");
-        return [];
+<!-- SECCIÓN BIENVENIDA -->
+  <section>
+    <h2>Revisa tus pronósticos y los del resto de participantes en la porra del Mundial 2026</h2>
+    <p>
+      ¿Quieres recordar que has pronósticado en el conjunto de partidos? ¿Quieres ver cómo lo han hecho el resto de jugadores?.
+    </p>
+  </section>
+
+    <!-- PRONOSTICOS PRIMERA FASE -->
+    <section class="card" id="pronosticos">
+        <h2>Pronósticos partidos primera fase</h2>
+
+        <!-- AQUÍ SE PINTA LA TABLA -->
+        
+        <div id="tabla-pronosticos-wrapper">
+        <table id="tabla-pronosticos"></table>
+        </div>
+       
+    </section>
+
+    <!-- PRONOSTICOS ELIMINATORIAS -->
+    
+
+    
+
+    <!-- FOOTER -->
+  <footer>
+    La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
+  </footer>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.menu a').forEach(link => {
+    const linkPage = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+    if (linkPage === currentPage) {
+      link.classList.add('activo');
     }
+  });
+});
+</script>
 
-    const filas = [];
-    tablaReal.querySelectorAll("tr").forEach(tr => {
-        const celdas = Array.from(tr.querySelectorAll("td, th"))
-            .map(td => td.textContent.trim());
-        filas.push(celdas);
-    });
-
-    return filas;
-}
-
-// Pinta la tabla en el HTML
-async function pintarTablaExtras() {
-    const datos = await fetchSheetHTML(311091473);
-    console.log("DATOS:", datos);
-
-    const tabla = document.getElementById("tabla_extras");
-
-    datos.forEach(fila => {
-        const tr = document.createElement("tr");
-        fila.forEach(celda => {
-            const td = document.createElement("td");
-            td.textContent = celda;
-            tr.appendChild(td);
-        });
-        tabla.appendChild(tr);
-    });
-}
-
-pintarTablaExtras();
-
+<!-- Tus scripts -->
+    
+    <script src="js/sheet_pronosticos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>
