@@ -37,26 +37,16 @@
         <h2>Puntos extras 1ª fase</h2>
         <!-- AQUÍ SE PINTA LA TABLA -->
         <div class="tabla-scroll">
-        <table id="tabla_extras"></table>
+       <table id="tabla_extras" border="1"></table>
+
+<script src="tabla_extras.js"></script>
         </div>
     </section>
 
     <!-- Tus scripts -->
-    <script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.menu a').forEach(link => {
-    const linkPage = link.getAttribute('href');
-    const currentPage = window.location.pathname.split('/').pop() || 'detalle-extras.html';
-
-    if (linkPage === currentPage) {
-      link.classList.add('activo');
-    }
-  });
-});
-</script>
+        
+    <script src="tabla_extras.js"></script>
     
-    <script src="js/sheet_html.js"></script>
-    <script src="js/tabla_extras.js"></script>
     <!-- FOOTER -->
   <footer>
     La porra del Mundial 2026 · Creada para disfrutar del fútbol entre amigos
