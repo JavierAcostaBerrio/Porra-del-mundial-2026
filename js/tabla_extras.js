@@ -5,7 +5,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Obtener datos reales del feed HTML
     const datos = await fetchSheetHTML(GID_EXTRAS);
+console.log("DATOS EXTRAS:", datos);
+    console.log("NÚMERO DE FILAS:", datos ? datos.length : 0);
+    if (datos && datos[0]) console.log("PRIMERA FILA:", datos[0]);
 
+    if (!datos || datos.length === 0) {
+        tabla.innerHTML = "<tr><td>No hay datos disponibles</td></tr>";
+        return;
+    }
     if (!datos || datos.length === 0) {
         tabla.innerHTML = "<tr><td>No hay datos disponibles</td></tr>";
         return;
