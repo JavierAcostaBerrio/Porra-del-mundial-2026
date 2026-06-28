@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tabla = document.getElementById("tabla_extras");
 
     // Obtener datos de Google Sheets
-    const datos = await fetchSheet(GID_EXTRAS);
+    const datos = await fetchSheetHTML(GID_EXTRAS);
 
     if (!datos || datos.length === 0) {
         tabla.innerHTML = "<tr><td>No hay datos disponibles</td></tr>";
